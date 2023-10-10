@@ -7,10 +7,10 @@ Features:
 2. Light/Dark mode toggle with theme wrapper
 3. Side Navigation
 
-![Desktop](/doc/desktop.png)
-![Desktop](/doc/mobile.png)
-
 ```shell
 npm i
 npm run dev
 ```
+
+![Desktop](/doc/desktop.png)
+![Desktop](/doc/mobile.png)
