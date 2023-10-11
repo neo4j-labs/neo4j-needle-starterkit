@@ -18,6 +18,7 @@ npm run dev
 
 ## What it looks like
 ### Desktop
-![Desktop](/doc/desktop.png)
+![Desktop](/doc/Desktop-light.png)
+![Desktop](/doc/Desktop-dark.png)
 ### Mobile
-![Mobile](/doc/mobile.png)
+![Mobile](/doc/Mobile-dark.png)
