@@ -7,17 +7,17 @@ Features:
 2. Light/Dark mode toggle with theme wrapper
 3. Side Navigation
 
-<<<<<<< HEAD
-![Architecture](doc/ComponentArchitecture.png)
-![Desktop](/doc/desktop.png)
-![Mobile](/doc/mobile.png)
-
-=======
->>>>>>> d692ab994df0db36cae5ad8783bb46c7286ee939
+Installation:
 ```shell
 npm i
 npm run dev
 ```
 
+## Components layout architecture
+![Architecture](doc/ComponentArchitecture.png)
+
+## What it looks like
+### Desktop
 ![Desktop](/doc/desktop.png)
-![Desktop](/doc/mobile.png)
+### Mobile
+![Mobile](/doc/mobile.png)
