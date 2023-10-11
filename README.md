@@ -7,8 +7,9 @@ Features:
 2. Light/Dark mode toggle with theme wrapper
 3. Side Navigation
 
+![Architecture](doc/ComponentArchitecture.png)
 ![Desktop](/doc/desktop.png)
-![Desktop](/doc/mobile.png)
+![Mobile](/doc/mobile.png)
 
 ```shell
 npm i
