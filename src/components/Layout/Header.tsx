@@ -1,21 +1,15 @@
 import React from "react";
-import Neo4jLogo from "../../logo.svg";
+import Neo4jLogoBW from "../../logo.svg";
+import Neo4jLogoColor from "../../logo-color.svg";
 import { ThemeWrapperContext } from "../../context/ThemeWrapper";
 import User from "./User";
-import {
-  AppBar,
-  Box,
-  IconButton,
-  Toolbar,
-  useTheme,
-  Container,
-} from "@mui/material";
+import { AppBar, Box, Toolbar, useTheme, Container } from "@mui/material";
 import {
   MoonIconOutline,
   SunIconOutline,
-  Cog8ToothIconOutline
+  Cog8ToothIconOutline,
 } from "@neo4j-ndl/react/icons";
-import { Typography } from "@neo4j-ndl/react";
+import { Typography, IconButton } from "@neo4j-ndl/react";
 
 export default function Header() {
   const theme = useTheme();
@@ -24,7 +18,9 @@ export default function Header() {
   const toolbarStyle = {};
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="inherit" sx={{
+        borderBottom: "1px solid rgb(var(--theme-palette-neutral-border-weak))",
+    }}>
       <Container maxWidth="100vh" sx={{ margin: 0 }}>
         <Toolbar style={toolbarStyle} disableGutters>
           <Typography
@@ -34,8 +30,8 @@ export default function Header() {
             sx={{}}
           >
             <img
-              src={Neo4jLogo}
-              style={{ minHeight: "32px", minWidth: "32px" }}
+              src={theme.palette.mode==="dark" ? Neo4jLogoBW : Neo4jLogoColor}
+              style={{ height: "32px", minHeight: "32px", minWidth: "32px" }}
               alt="Neo4j Logo"
             />
           </Typography>
@@ -44,8 +40,22 @@ export default function Header() {
             <Typography variant="h6">Quick Starter</Typography>
           </Box>
 
-          <Box sx={{ display: "flex", flexGrow: 0 }}>
-            <User />
+          <Box sx={{ display: "flex", flexGrow: 0, alignItems:"center", gap: "4px" }}>
+            <IconButton clean size="large" onClick={themeUtils.toggleColorMode}>
+              {theme.palette.mode === "dark" ? (
+                <span role="img" aria-label="sun">
+                  <SunIconOutline />
+                </span>
+              ) : (
+                <span role="img" aria-label="moon">
+                  <MoonIconOutline />
+                </span>
+              )}
+            </IconButton>
+
+            <IconButton size="large" clean aria-label="settings">
+              <Cog8ToothIconOutline />
+            </IconButton>
 
             <Typography
               variant="subheading-large"
@@ -58,27 +68,7 @@ export default function Header() {
               }}
             ></Typography>
 
-            <IconButton
-              sx={{ ml: "16px", fontSize: "1rem" }}
-              onClick={themeUtils.toggleColorMode}
-              color="inherit"
-            >
-              {theme.palette.mode === "dark" ? (
-                <span role="img" aria-label="sun">
-                  <SunIconOutline className="n-w-6 n-h-6" />
-                </span>
-              ) : (
-                <span role="img" aria-label="moon">
-                  <MoonIconOutline className="n-w-6 n-h-6" />
-                </span>
-              )}
-            </IconButton>
-
-            <IconButton sx={{ ml: "16px", fontSize: "1rem" }} color="inherit">
-              <span role="img" aria-label="settings">
-                <Cog8ToothIconOutline className="n-w-6 n-h-6" />
-              </span>
-            </IconButton>
+            <User />
           </Box>
         </Toolbar>
       </Container>

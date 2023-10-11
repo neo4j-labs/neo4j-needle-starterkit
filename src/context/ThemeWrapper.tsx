@@ -26,6 +26,9 @@ export default function ThemeWrapper({
       createTheme({
         palette: {
           mode,
+          primary: {
+            main: "rgb(var(--theme-palette-primary-bg-strong))" ,
+          },
         },
       }),
     [mode]
