@@ -15,12 +15,21 @@ export default function ThemeWrapper({
   const themeWrapperUtils = useMemo(
     () => ({
       toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
-      },
+        setMode((prevMode) => {
+            themeBodyInjection(prevMode);
+            return prevMode === "light" ? "dark" : "light"
+        });
+        },
     }),
     []
   );
-
+  const themeBodyInjection = (mode: string) => {
+      if (mode === 'light') {
+          document.body.classList.add('ndl-theme-dark');
+      } else {
+          document.body.classList.remove('ndl-theme-dark');
+      }
+  }
   const theme = useMemo(
     () =>
       createTheme({
