@@ -19,7 +19,7 @@ export default function Content() {
         gap: 1,
       }}
     >
-      <ConnectionModal open={openConnection} />
+      <ConnectionModal open={openConnection} setOpenConnection={setOpenConnection} />
       <div>
         Your content goes here.
       </div>

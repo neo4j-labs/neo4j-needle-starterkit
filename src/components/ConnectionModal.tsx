@@ -1,10 +1,6 @@
-import React, { useEffect } from 'react';
-import { Button, Dialog, Switch, TextInput, Dropdown, TextLink } from '@neo4j-ndl/react';
-import { PlayIconOutline } from '@neo4j-ndl/react/icons';
-/**
- * Configures setting the current Neo4j database connection for the dashboard.
- */
-export default function ConnectionModal({open}) {
+import { Button, Dialog, TextInput, Dropdown } from '@neo4j-ndl/react';
+
+export default function ConnectionModal({open, setOpenConnection}) {
   const protocols = ['neo4j', 'neo4j+s', 'neo4j+ssc', 'bolt', 'bolt+s', 'bolt+ssc'];
 
   return (
@@ -60,6 +56,9 @@ export default function ConnectionModal({open}) {
             placeholder='neo4j'
             fluid
           />
+          <Button onClick={() => setOpenConnection(false)}>
+            Submit
+          </Button>
         </Dialog.Content>
       </Dialog>
     </>
