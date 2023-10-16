@@ -1,4 +1,4 @@
-import { createTheme, PaletteMode, ThemeProvider } from "@mui/material";
+import { createTheme, PaletteMode, ThemeProvider, useMediaQuery } from "@mui/material";
 import { createContext, useMemo, useState } from "react";
 import { NeedleThemeProvider } from "@neo4j-ndl/react";
 
@@ -11,7 +11,8 @@ export default function ThemeWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const [mode, setMode] = useState<PaletteMode>("light");
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const [mode, setMode] = useState<PaletteMode>(prefersDarkMode ? 'dark' : 'light');
   const themeWrapperUtils = useMemo(
     () => ({
       toggleColorMode: () => {
