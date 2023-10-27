@@ -6,6 +6,7 @@ Features:
 1. Responsive App bar
 2. Light/Dark mode toggle with theme wrapper
 3. Side Navigation
+4. Neo4j connection modal
 
 Installation:
 ```shell
