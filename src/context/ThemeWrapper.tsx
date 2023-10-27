@@ -13,10 +13,12 @@ export default function ThemeWrapper({
 }) {
   const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
   const [mode, setMode] = useState<PaletteMode>(prefersDarkMode ? 'dark' : 'light');
+  const [usingPreferredMode, setUsingPreferredMode] = useState<boolean>(true);
   const themeWrapperUtils = useMemo(
     () => ({
       toggleColorMode: () => {
         setMode((prevMode) => {
+            setUsingPreferredMode(false);
             themeBodyInjection(prevMode);
             return prevMode === "light" ? "dark" : "light"
         });
@@ -43,6 +45,10 @@ export default function ThemeWrapper({
       }),
     [mode]
   );
+
+  if(usingPreferredMode) {
+    prefersDarkMode ? themeBodyInjection('light') : themeBodyInjection('dark');
+  }
 
   return (
     <ThemeWrapperContext.Provider value={themeWrapperUtils}>
