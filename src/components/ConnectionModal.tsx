@@ -85,15 +85,6 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
               />
             </div>
           </div>
-          <TextInput
-            id='database'
-            value={database}
-            disabled={false}
-            label='Database (optional)'
-            placeholder='neo4j'
-            fluid
-            onChange={e => setDatabase(e.target.value)}
-          />
           <div className='n-flex n-flex-row n-flex-wrap'>
             <div style={{width: '48.5%', marginRight: '1.5%', display: 'inline-block' }}>
               <TextInput
@@ -119,6 +110,15 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
               />
             </div>
           </div>
+          <TextInput
+            id='database'
+            value={database}
+            disabled={false}
+            label='Database (optional)'
+            placeholder='neo4j'
+            fluid
+            onChange={e => setDatabase(e.target.value)}
+          />
           <Button onClick={() => submitConnection()}>
             Submit
           </Button>
