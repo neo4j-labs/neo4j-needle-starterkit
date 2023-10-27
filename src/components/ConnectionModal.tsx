@@ -1,7 +1,41 @@
 import { Button, Dialog, TextInput, Dropdown } from '@neo4j-ndl/react';
+import {useState} from "react";
+import neo4j from "neo4j-driver";
 
-export default function ConnectionModal({open, setOpenConnection}) {
+export default function ConnectionModal({open, setOpenConnection, setConnectionStatus}) {
   const protocols = ['neo4j', 'neo4j+s', 'neo4j+ssc', 'bolt', 'bolt+s', 'bolt+ssc'];
+  const [selectedProtocol, setSelectedProtocol] = useState<string>('neo4j');
+  const [hostname, setHostname] = useState<string>('localhost');
+  const [port, setPort] = useState<number>(7687);
+  const [database, setDatabase] = useState<string>('neo4j');
+  const [username, setUsername] = useState<string>('neo4j');
+  const [password, setPassword] = useState<string>('password');
+
+  function onSelectProtocol(selectedProtocol:string){
+    setSelectedProtocol(selectedProtocol);
+}
+
+  function submitConnection(){
+    const connectionURI = selectedProtocol + "://" + hostname + ":" + port;
+    setDriver(connectionURI, database, username, password)
+    .then((msg) => {
+      setConnectionStatus(msg);
+    })
+    setOpenConnection(false) ;
+  }
+
+  async function setDriver (connectionURI, database, username, password){
+    let driver;
+
+    try{
+      driver = neo4j.driver(connectionURI,  neo4j.auth.basic(username, password))
+      const serverInfo = await driver.getServerInfo()
+      return "Connection succeed"
+    } catch (err){
+      console.log(`Connection error\n${err}\nCause: ${err.cause}`)
+      return "Connection failed"
+    }
+  }
 
   return (
     <>
@@ -20,8 +54,9 @@ export default function ConnectionModal({open, setOpenConnection}) {
               type='select'
               disabled={false}
               selectProps={{
+                onChange: (newValue) => newValue && setSelectedProtocol(newValue.value),
                 options: protocols.map((option) => ({ label: option, value: option })),
-                value: { label: 'protocol', value: 'protocol' },
+                value: { label: selectedProtocol, value: selectedProtocol },
               }}
               style={{ width: '25%', display: 'inline-block' }}
               fluid
@@ -29,34 +64,62 @@ export default function ConnectionModal({open, setOpenConnection}) {
             <div style={{ marginLeft: '2.5%', width: '55%', marginRight: '2.5%', display: 'inline-block' }}>
               <TextInput
                 id='url'
-                value=''
+                value={hostname}
                 disabled={false}
                 label='Hostname'
                 placeholder='localhost'
                 autoFocus
                 fluid
+                onChange={e => setHostname(e.target.value)}
               />
             </div>
             <div style={{ width: '15%', display: 'inline-block' }}>
               <TextInput
                 id='port'
-                value=''
+                value={port}
                 disabled={false}
                 label='Port'
                 placeholder='7687'
                 fluid
+                onChange={e => setPort(Number(e.target.value))}
               />
             </div>
           </div>
           <TextInput
             id='database'
-            value=''
+            value={database}
             disabled={false}
             label='Database (optional)'
             placeholder='neo4j'
             fluid
+            onChange={e => setDatabase(e.target.value)}
           />
-          <Button onClick={() => setOpenConnection(false)}>
+          <div className='n-flex n-flex-row n-flex-wrap'>
+            <div style={{width: '48.5%', marginRight: '1.5%', display: 'inline-block' }}>
+              <TextInput
+                id='username'
+                value={username}
+                disabled={false}
+                label='Username'
+                placeholder='neo4j'
+                fluid
+                onChange={e => setUsername(e.target.value)}
+              />
+            </div>
+            <div style={{width: '48.5%', marginLeft: '1.5%', display: 'inline-block' }}>
+              <TextInput
+                id='password'
+                value={password}
+                disabled={false}
+                label='Password'
+                placeholder='password'
+                type='password'
+                fluid
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+          </div>
+          <Button onClick={() => submitConnection()}>
             Submit
           </Button>
         </Dialog.Content>
