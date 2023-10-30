@@ -1,6 +1,6 @@
 import { Button, Dialog, TextInput, Dropdown } from '@neo4j-ndl/react';
 import {useState} from "react";
-import neo4j from "neo4j-driver";
+import {setDriver} from '../utils/Driver';
 
 export default function ConnectionModal({open, setOpenConnection, setConnectionStatus}) {
   const protocols = ['neo4j', 'neo4j+s', 'neo4j+ssc', 'bolt', 'bolt+s', 'bolt+ssc'];
@@ -11,30 +11,13 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
   const [username, setUsername] = useState<string>('neo4j');
   const [password, setPassword] = useState<string>('password');
 
-  function onSelectProtocol(selectedProtocol:string){
-    setSelectedProtocol(selectedProtocol);
-}
-
   function submitConnection(){
     const connectionURI = selectedProtocol + "://" + hostname + ":" + port;
-    setDriver(connectionURI, database, username, password)
-    .then((msg) => {
-      setConnectionStatus(msg);
+    setDriver(connectionURI, username, password)
+    .then((isSuccessful) => {
+      setConnectionStatus(isSuccessful);
     })
     setOpenConnection(false) ;
-  }
-
-  async function setDriver (connectionURI, database, username, password){
-    let driver;
-
-    try{
-      driver = neo4j.driver(connectionURI,  neo4j.auth.basic(username, password))
-      const serverInfo = await driver.getServerInfo()
-      return "Connection succeed"
-    } catch (err){
-      console.log(`Connection error\n${err}\nCause: ${err.cause}`)
-      return "Connection failed"
-    }
   }
 
   return (
@@ -85,6 +68,15 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
               />
             </div>
           </div>
+          <TextInput
+            id='database'
+            value={database}
+            disabled={false}
+            label='Database (optional)'
+            placeholder='neo4j'
+            fluid
+            onChange={e => setDatabase(e.target.value)}
+          />
           <div className='n-flex n-flex-row n-flex-wrap'>
             <div style={{width: '48.5%', marginRight: '1.5%', display: 'inline-block' }}>
               <TextInput
@@ -110,15 +102,6 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
               />
             </div>
           </div>
-          <TextInput
-            id='database'
-            value={database}
-            disabled={false}
-            label='Database (optional)'
-            placeholder='neo4j'
-            fluid
-            onChange={e => setDatabase(e.target.value)}
-          />
           <Button onClick={() => submitConnection()}>
             Submit
           </Button>
