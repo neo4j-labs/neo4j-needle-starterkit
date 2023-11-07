@@ -3,7 +3,7 @@
 
 Reactjs Responsive Starter Kit for building an app using [Neo4j Needle](https://www.neo4j.design/) for accelerating TTV.
 
-Features:
+## Features
 🚀 Responsive: Adapts to different screen sizes for optimal user experience.
 🌚 Dark/Light Mode Theme 🌞: Includes a theme wrapper to switch between light and dark modes without having to reinvent the wheel!
 ⚙️ Neo4j Integration: A simple example for connecting to a Neo4j database.
@@ -12,7 +12,7 @@ Features:
 🛠️️ Modular approach: Facilitates easy customization.
 
 
-Installation:
+## Installation:
 ```shell
 npm i
 npm run dev
