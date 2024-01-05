@@ -14,8 +14,8 @@ Reactjs Responsive Starter Kit for building an app using [Neo4j Needle](https://
 
 ## Installation:
 ```shell
-npm i
-npm run dev
+yarn i
+yarn run dev
 ```
 
 ## Components layout architecture

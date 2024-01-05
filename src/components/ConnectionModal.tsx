@@ -1,8 +1,8 @@
 import { Button, Dialog, TextInput, Dropdown } from '@neo4j-ndl/react';
-import {useState} from "react";
-import {setDriver} from '../utils/Driver';
+import { useState } from 'react';
+import { setDriver } from '../utils/Driver';
 
-export default function ConnectionModal({open, setOpenConnection, setConnectionStatus}) {
+export default function ConnectionModal({ open, setOpenConnection, setConnectionStatus }) {
   const protocols = ['neo4j', 'neo4j+s', 'neo4j+ssc', 'bolt', 'bolt+s', 'bolt+ssc'];
   const [selectedProtocol, setSelectedProtocol] = useState<string>('neo4j');
   const [hostname, setHostname] = useState<string>('localhost');
@@ -11,23 +11,17 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
   const [username, setUsername] = useState<string>('neo4j');
   const [password, setPassword] = useState<string>('password');
 
-  function submitConnection(){
-    const connectionURI = selectedProtocol + "://" + hostname + ":" + port;
-    setDriver(connectionURI, username, password)
-    .then((isSuccessful) => {
+  function submitConnection() {
+    const connectionURI = `${selectedProtocol}://${hostname}:${port}`;
+    setDriver(connectionURI, username, password).then((isSuccessful) => {
       setConnectionStatus(isSuccessful);
-    })
-    setOpenConnection(false) ;
+    });
+    setOpenConnection(false);
   }
 
   return (
     <>
-      <Dialog
-        size='small'
-        open={open}
-        aria-labelledby='form-dialog-title'
-        disableCloseButton
-      >
+      <Dialog size='small' open={open} aria-labelledby='form-dialog-title' disableCloseButton>
         <Dialog.Header id='form-dialog-title'>Connect to Neo4j</Dialog.Header>
         <Dialog.Content className='n-flex n-flex-col n-gap-token-4'>
           <div className='n-flex n-flex-row n-flex-wrap'>
@@ -53,7 +47,7 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
                 placeholder='localhost'
                 autoFocus
                 fluid
-                onChange={e => setHostname(e.target.value)}
+                onChange={(e) => setHostname(e.target.value)}
               />
             </div>
             <div style={{ width: '15%', display: 'inline-block' }}>
@@ -64,7 +58,7 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
                 label='Port'
                 placeholder='7687'
                 fluid
-                onChange={e => setPort(Number(e.target.value))}
+                onChange={(e) => setPort(Number(e.target.value))}
               />
             </div>
           </div>
@@ -75,10 +69,10 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
             label='Database (optional)'
             placeholder='neo4j'
             fluid
-            onChange={e => setDatabase(e.target.value)}
+            onChange={(e) => setDatabase(e.target.value)}
           />
           <div className='n-flex n-flex-row n-flex-wrap'>
-            <div style={{width: '48.5%', marginRight: '1.5%', display: 'inline-block' }}>
+            <div style={{ width: '48.5%', marginRight: '1.5%', display: 'inline-block' }}>
               <TextInput
                 id='username'
                 value={username}
@@ -86,10 +80,10 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
                 label='Username'
                 placeholder='neo4j'
                 fluid
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            <div style={{width: '48.5%', marginLeft: '1.5%', display: 'inline-block' }}>
+            <div style={{ width: '48.5%', marginLeft: '1.5%', display: 'inline-block' }}>
               <TextInput
                 id='password'
                 value={password}
@@ -98,13 +92,11 @@ export default function ConnectionModal({open, setOpenConnection, setConnectionS
                 placeholder='password'
                 type='password'
                 fluid
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
-          <Button onClick={() => submitConnection()}>
-            Submit
-          </Button>
+          <Button onClick={() => submitConnection()}>Submit</Button>
         </Dialog.Content>
       </Dialog>
     </>

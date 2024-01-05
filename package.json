@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write \"**/*.{ts,tsx}\"",
+    "lint": "eslint --ext .ts --ext .tsx . --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,6 +17,7 @@
     "@mui/material": "^5.14.12",
     "@neo4j-ndl/base": "^2.0.0",
     "@neo4j-ndl/react": "^2.0.2",
+    "eslint-plugin-react": "^7.33.2",
     "neo4j-driver": "^5.14.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -27,8 +29,10 @@
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
     "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "prettier": "^2.7.1",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }
