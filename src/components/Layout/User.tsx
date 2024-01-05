@@ -1,7 +1,6 @@
-import { Box, Avatar } from '@mui/material';
 import React, { useState } from 'react';
 import { Menu, Typography, IconButton } from '@neo4j-ndl/react';
-import { ChevronDownIconOutline } from '@neo4j-ndl/react/icons';
+import { ChevronDownIconOutline, UserIconOutline } from '@neo4j-ndl/react/icons';
 import { tokens } from '@neo4j-ndl/base';
 
 const settings = ['Profile', 'Logout'];
@@ -23,8 +22,8 @@ export default function User() {
   const open = Boolean(anchorEl);
 
   return (
-    <Box
-      sx={{
+    <div
+      style={{
         display: 'flex',
         borderWidth: '1px',
         borderRadius: tokens.borderRadius['3xl'],
@@ -34,17 +33,18 @@ export default function User() {
         alignItems: 'center',
       }}
     >
-      <Avatar
-        alt='John Doe'
-        src='/static/images/avatar/johndoe.jpg'
+      <Typography
+        variant='h6'
         sx={{
           display: { xs: 'none', md: 'flex' },
           borderRadius: '12px',
           bgcolor: 'rgb(var(--theme-palette-primary-bg-strong))',
         }}
-      />
+      >
+        <UserIconOutline className='n-w-6 n-h-6' />
+      </Typography>
 
-      <Box sx={{ display: { xs: 'none', md: 'grid' }, flexGrow: 1 }}>
+      <div style={{ display: 'grid', flexGrow: 1 }}>
         <Typography
           variant='body-large'
           component='a'
@@ -76,10 +76,10 @@ export default function User() {
             ))}
           </Menu.Items>
         </Menu>
-      </Box>
+      </div>
       <IconButton aria-label='settings' clean onClick={handleClick} open={open}>
         <ChevronDownIconOutline />
       </IconButton>
-    </Box>
+    </div>
   );
 }

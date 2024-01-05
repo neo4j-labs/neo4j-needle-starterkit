@@ -1,17 +1,19 @@
-import { createTheme, PaletteMode, ThemeProvider, useMediaQuery } from '@mui/material';
 import { createContext, useMemo, useState } from 'react';
 import { NeedleThemeProvider } from '@neo4j-ndl/react';
+import QuickStarter from '../components/QuickStarter';
 
 export const ThemeWrapperContext = createContext({
   toggleColorMode: () => {},
+  colorMode: 'light' as string,
 });
 
-export default function ThemeWrapper({ children }: { children: React.ReactNode }) {
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-  const [mode, setMode] = useState<PaletteMode>(prefersDarkMode ? 'dark' : 'light');
+export default function ThemeWrapper() {
+  const prefersDarkMode = true; // To change once Needle support useMediaQuery
+  const [mode, setMode] = useState<string>(prefersDarkMode ? 'dark' : 'light');
   const [usingPreferredMode, setUsingPreferredMode] = useState<boolean>(true);
   const themeWrapperUtils = useMemo(
     () => ({
+      colorMode: mode,
       toggleColorMode: () => {
         setMode((prevMode) => {
           setUsingPreferredMode(false);
@@ -29,18 +31,6 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
       document.body.classList.remove('ndl-theme-dark');
     }
   };
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode,
-          primary: {
-            main: 'rgb(var(--theme-palette-primary-bg-strong))',
-          },
-        },
-      }),
-    [mode]
-  );
 
   if (usingPreferredMode) {
     prefersDarkMode ? themeBodyInjection('light') : themeBodyInjection('dark');
@@ -48,8 +38,8 @@ export default function ThemeWrapper({ children }: { children: React.ReactNode }
 
   return (
     <ThemeWrapperContext.Provider value={themeWrapperUtils}>
-      <NeedleThemeProvider theme={mode} wrapperProps={{ isWrappingChildren: true }}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <NeedleThemeProvider theme={mode as 'light' | 'dark' | undefined} wrapperProps={{ isWrappingChildren: true }}>
+        <QuickStarter />
       </NeedleThemeProvider>
     </ThemeWrapperContext.Provider>
   );
