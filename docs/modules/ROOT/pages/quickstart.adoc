@@ -2,11 +2,11 @@
 
 
 ## Prerequisites
-Running the starter kit requires you have to have **NodeJS** and **yarn** installed.
+Running the starter kit requires you have to have **node.js** and **yarn** installed.
 
 If you do not have these installed:
 
-1. https://nodejs.org/en/download[Install NodeJS] for your operating system. The node installation will include `npm`. 
+1. https://nodejs.org/en/download[Install node.js] for your operating system. The node installation will include `npm`. 
 2. Use `npm` to install `yarn` as described https://classic.yarnpkg.com/lang/en/docs/install/[here]. 
 
 
