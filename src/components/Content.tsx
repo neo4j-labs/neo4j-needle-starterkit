@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import ConnectionModal from './ConnectionModal';
 import { Button, Label, Typography } from '@neo4j-ndl/react';
@@ -23,12 +22,11 @@ export default function Content() {
   });
 
   return (
-    <Box
-      sx={{
+    <div
+      className='n-bg-palette-neutral-bg-default'
+      style={{
         width: '100%',
-        bgcolor: 'background.default',
-        color: 'text.primary',
-        p: 3,
+        padding: 3,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -55,6 +53,6 @@ export default function Content() {
       ) : (
         <Button onClick={() => disconnect().then(() => setConnectionStatus(false))}>Disconnect</Button>
       )}
-    </Box>
+    </div>
   );
 }
