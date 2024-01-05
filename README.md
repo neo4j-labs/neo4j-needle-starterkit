@@ -1,5 +1,5 @@
 # Neo4j Needle StarterKit
-![Header](doc/FeaturedImg.jpg)
+![Header](docs/modules/ROOT/images/FeaturedImg.jpg)
 
 Reactjs Responsive Starter Kit for building an app using [Neo4j Needle](https://www.neo4j.design/) for accelerating TTV.
 
@@ -14,16 +14,16 @@ Reactjs Responsive Starter Kit for building an app using [Neo4j Needle](https://
 
 ## Installation:
 ```shell
-npm i
-npm run dev
+yarn i
+yarn run dev
 ```
 
 ## Components layout architecture
-![Architecture](doc/ComponentArchitecture.png)
+![Architecture](docs/modules/ROOT/images/ComponentArchitecture.png)
 
 ## What it looks like
 ### Desktop
-![Desktop](/doc/Desktop-light.png)
-![Desktop](/doc/Desktop-dark.png)
+![Desktop](/docs/modules/ROOT/images/Desktop-light.png)
+![Desktop](/docs/modules/ROOT/images/Desktop-dark.png)
 ### Mobile
-![Mobile](/doc/Mobile-dark.png)
+![Mobile](/docs/modules/ROOT/images/Mobile-dark.png)
