@@ -1,6 +1,6 @@
 # Neo4j Needle StarterKit
 
-Reactjs Responsive Starter Kit for building an app using [Neo4j Needle](https://www.neo4j.design/) for accelerating your Neo4j-powered front-end tools.
+Reactjs Responsive Starter Kit for building an app using https://www.neo4j.design/[Neo4j Needle] for accelerating your Neo4j-powered front-end tools.
 
 image::FeaturedImg.jpg[Featured Image]
 
