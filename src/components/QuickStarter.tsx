@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { ThemeWrapperContext } from '../context/ThemeWrapper';
 
 export default function QuickStarter() {
-  const [themeMode, setThemeMode] = useState<string>('dark');
   const themeUtils = React.useContext(ThemeWrapperContext);
+  const [themeMode, setThemeMode] = useState<string>(themeUtils.colorMode);
 
   const toggleColorMode = () => {
     setThemeMode((prevThemeMode) => {

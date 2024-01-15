@@ -14,7 +14,7 @@ export default function SideNav() {
   return (
     <div
       style={{
-        height: 'calc(100vh - 92px)',
+        height: 'calc(100vh - 68px)',
         minHeight: '700px',
         display: 'flex',
       }}

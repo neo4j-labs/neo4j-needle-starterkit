@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
 import Neo4jLogoBW from '../../logo.svg';
 import Neo4jLogoColor from '../../logo-color.svg';
-import { ThemeWrapperContext } from '../../context/ThemeWrapper';
 import User from './User';
 import { MoonIconOutline, SunIconOutline, Cog8ToothIconOutline } from '@neo4j-ndl/react/icons';
 import { Typography, IconButton } from '@neo4j-ndl/react';
@@ -10,7 +8,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
   return (
     <div
       className='n-bg-palette-neutral-bg-weak'
-      style={{ padding: '16px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))' }}
+      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))' }}
     >
       <nav
         className='flex items-center justify-between'
@@ -26,7 +24,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
         >
           <Typography variant='h6' component='a' href='#app-bar-with-responsive-menu' sx={{}}>
             <img
-              src={themeMode === 'dark' ? Neo4jLogoBW : Neo4jLogoColor}
+              src={themeMode === 'dark' ? Neo4jLogoBW : Neo4jLogoColor }
               style={{ height: '32px', minHeight: '32px', minWidth: '32px' }}
               alt='Neo4j Logo'
             />
