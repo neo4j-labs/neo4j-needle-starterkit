@@ -39,7 +39,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
               className='inline-flex gap-x-1'
               style={{ display: 'flex', flexGrow: 0, alignItems: 'center', gap: '4px' }}
             >
-              <IconButton clean size='large' onClick={toggleTheme}>
+              <IconButton aria-label='Toggle Dark mode' clean size='large' onClick={toggleTheme}>
                 {themeMode === 'dark' ? (
                   <span role='img' aria-label='sun'>
                     <SunIconOutline />
@@ -50,7 +50,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
                   </span>
                 )}
               </IconButton>
-              <IconButton size='large' clean aria-label='settings'>
+              <IconButton aria-label='Toggle settings' size='large' clean>
                 <Cog8ToothIconOutline />
               </IconButton>
 
