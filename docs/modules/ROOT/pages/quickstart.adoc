@@ -30,14 +30,14 @@ If all is successful, you will be shown the following message:
 ```shell
   VITE v4.5.1  ready in 125 ms
 
-  ➜  Local:   http://localhost:5173/
+  ➜  Local:   http://localhost:3000/
   ➜  Network: use --host to expose
   ➜  press h to show help
 ```
 
 ## View the application
 ### Desktop
-After starting the development server, use your browser to navigate to http://localhost:5173. The default app should look like this:
+After starting the development server, use your browser to navigate to http://localhost:3000. The default app should look like this:
 
 image::Desktop-light.png[Desktop]
 
