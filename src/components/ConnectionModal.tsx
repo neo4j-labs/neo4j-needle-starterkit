@@ -2,7 +2,15 @@ import { Button, Dialog, TextInput, Dropdown } from '@neo4j-ndl/react';
 import { useState } from 'react';
 import { setDriver } from '../utils/Driver';
 
-export default function ConnectionModal({ open, setOpenConnection, setConnectionStatus }) {
+export default function ConnectionModal({
+  open,
+  setOpenConnection,
+  setConnectionStatus,
+}: {
+  open: boolean;
+  setOpenConnection: (arg: boolean) => void;
+  setConnectionStatus: (status: boolean) => void;
+}) {
   const protocols = ['neo4j', 'neo4j+s', 'neo4j+ssc', 'bolt', 'bolt+s', 'bolt+ssc'];
   const [selectedProtocol, setSelectedProtocol] = useState<string>('neo4j');
   const [hostname, setHostname] = useState<string>('localhost');
