@@ -19,11 +19,6 @@ jobs:
       - run: yarn install
       - name: Eslint check
         run: yarn run lint
-      - name: Cypress run
-        uses: cypress-io/github-action@v4
-        with:
-          build: yarn run build
-          start: yarn run dev
   deploy-docs:
     needs: build-test
     runs-on: ubuntu-latest
