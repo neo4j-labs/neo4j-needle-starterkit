@@ -24,7 +24,7 @@ jobs:
         with:
           build: yarn run build
           start: yarn run dev
-          wait-on: "http://localhost:3000"
+          wait-on: "http://localhost:5173"
           browser: chrome
   deploy-docs:
     needs: build-test
