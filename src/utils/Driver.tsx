@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import neo4j, { Driver } from 'neo4j-driver';
 
 let driver: Driver;
@@ -19,7 +20,7 @@ export async function setDriver(connectionURI, username, password) {
 
 export async function disconnect() {
   try {
-    driver.close();
+    await driver.close();
     return true;
   } catch (err) {
     console.error(`Disconnection error\n${err}\nCause: ${err.cause}`);
