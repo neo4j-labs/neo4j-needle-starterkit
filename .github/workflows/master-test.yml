@@ -1,8 +1,8 @@
 name: Test Master
 
 on:
-  pull_request:
-    branches: ['v[0-9]+.[0-9]+.[0-9]+']
+  push:
+    branches: ['[0-9]+.[0-9]+']
 
 jobs:
   build-test:
