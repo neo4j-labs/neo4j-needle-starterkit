@@ -1,4 +1,4 @@
-import { Button, Label, Typography } from '@neo4j-ndl/react';
+import { Typography } from '@neo4j-ndl/react';
 import Card from './Card';
 
 import ChatbotImg from '../../assets/img/ChatbotImg.png';

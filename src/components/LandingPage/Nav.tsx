@@ -1,5 +1,4 @@
 import { Tabs } from '@neo4j-ndl/react';
-import { useState } from 'react';
 
 export default function Nav({ activeTab, setActiveTab }: { activeTab: string; setActiveTab: (e: string) => void }) {
   return (

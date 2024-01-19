@@ -1,4 +1,4 @@
-import { Button, Widget, Box, Dropdown } from '@neo4j-ndl/react';
+import { Button, Widget } from '@neo4j-ndl/react';
 import { ScienceMoleculeIcon, UserCircleIconOutline } from '@neo4j-ndl/react/icons';
 import { useState } from 'react';
 

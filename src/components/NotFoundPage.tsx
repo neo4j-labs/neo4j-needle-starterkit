@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Banner } from '@neo4j-ndl/react';
 
 export default function NotFoundPage() {

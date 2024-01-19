@@ -1,4 +1,4 @@
-import { Button, Label, Typography, Widget, IconButton } from '@neo4j-ndl/react';
+import { Button, Typography, Widget } from '@neo4j-ndl/react';
 import { CodeBracketIconOutline, EyeIconOutline } from '@neo4j-ndl/react/icons';
 import { Link } from 'react-router-dom';
 import './Card.css';

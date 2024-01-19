@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react';
-import { Button, Label, Typography } from '@neo4j-ndl/react';
+import { Typography } from '@neo4j-ndl/react';
 import Industry from './Industry';
 import Product from './Product';
 import Component from './Component';
