@@ -23,6 +23,7 @@ export default function User() {
 
   return (
     <div
+      className='hidden md:inline-block'
       style={{
         display: 'flex',
         borderWidth: '1px',

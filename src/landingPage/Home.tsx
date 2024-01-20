@@ -6,7 +6,7 @@ import Content from './Content';
 export default function QuickStarter() {
   const themeUtils = React.useContext(ThemeWrapperContext);
   const [themeMode, setThemeMode] = useState<string>(themeUtils.colorMode);
-  const [activeTab, setActiveTab] = useState<string>('Industry');
+  const [activeTab, setActiveTab] = useState<string>('Templates');
 
   const toggleColorMode = () => {
     setThemeMode((prevThemeMode) => {

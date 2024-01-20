@@ -33,7 +33,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
             <Typography variant='h6'>Quick Starter</Typography>
           </div>
         </section>
-        <section className='items-center justify-end hidden w-1/3 grow-0 flex' style={{ flexGrow: 0 }}>
+        <section className='items-center justify-end w-1/3 grow-0 flex' style={{ flexGrow: 0 }}>
           <div>
             <div
               className='inline-flex gap-x-1'
@@ -65,7 +65,9 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
                 }}
               ></Typography>
 
-              <User />
+              <div className='hidden md:inline-block'>
+                <User />
+              </div>
             </div>
           </div>
         </section>

@@ -28,28 +28,43 @@ export default function Header({
         aria-label='main navigation'
         style={{ display: 'flex', flexDirection: 'row' }}
       >
-        <section
-          className='flex w-1/3 shrink-0 grow-0'
-          style={{ display: 'flex', minWidth: `200px`, flexGrow: 1, alignItems: 'center' }}
-        >
-          <Typography variant='h6' component='a' href='#app-bar-with-responsive-menu' sx={{}}>
+        <section className='flex md:flex-row flex-col items-center w-1/6 shrink-0 grow-0'>
+          <Typography
+            className='md:inline-block'
+            variant='h6'
+            component='a'
+            href='#app-bar-with-responsive-menu'
+            sx={{ margin: 0, padding: 0 }}
+          >
             <img
               src={themeMode === 'dark' ? Neo4jLogoBW : Neo4jLogoColor}
-              style={{ height: '32px', minHeight: '32px', minWidth: '32px' }}
+              style={{ height: '32px', minHeight: '32px', minWidth: '32px', marginRight: '8px' }}
               alt='Neo4j Logo'
             />
           </Typography>
-          <div style={{ flexGrow: 1, display: 'flex' }}>
-            <Typography variant='h6'>StarterKit</Typography>
+          <div style={{ display: 'flex', justifyContent: 'center', marginLeft: 0, paddingLeft: 0 }}>
+            <Typography className='md:inline-block hidden' variant='h6' sx={{ margin: 0, padding: 0 }}>
+              StarterKit
+            </Typography>
+            <Typography className='md:hidden inline-block' variant='subheading-small'>
+              StarterKit
+            </Typography>
           </div>
         </section>
+
         <section
           className='flex w-1/3 shrink-0 grow-0'
-          style={{ display: 'flex', minWidth: `200px`, flexGrow: 1, alignItems: 'center', marginBottom: '-14px' }}
+          style={{
+            display: 'flex',
+            flexGrow: 1,
+            alignItems: 'center',
+            marginBottom: '-14px',
+            justifyContent: 'center',
+          }}
         >
           <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
         </section>
-        <section className='items-center justify-end hidden w-1/3 grow-0 flex' style={{ flexGrow: 0 }}>
+        <section className='items-center justify-end w-1/6 grow-0 flex' style={{ flexGrow: 0 }}>
           <div>
             <div
               className='inline-flex gap-x-1'
@@ -66,7 +81,7 @@ export default function Header({
                   </span>
                 )}
               </IconButton>
-              <IconButton aria-label='Help' clean size='large'>
+              <IconButton className='hidden md:inline-block' aria-label='Help' clean size='large'>
                 <QuestionMarkCircleIconOutline className='n-w-6 n-h-6' />
               </IconButton>
             </div>

@@ -9,8 +9,10 @@ import NotFoundPage from './landingPage/NotFoundPage';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ConnectionModal from './templates/shared/components/ConnectionModal';
 import Chatbot from './templates/shared/components/Chatbot';
+import messagesData from './templates/shared/components/ChatbotMessages.json';
 
 function App() {
+  const messages = messagesData.listMessages;
   return (
     <BrowserRouter>
       <ThemeWrapper>
@@ -21,7 +23,7 @@ function App() {
             path='/connection-modal-preview'
             element={<ConnectionModal open={true} setOpenConnection={() => null} setConnectionStatus={() => null} />}
           />
-          <Route path='/chat-widget-preview' element={<Chatbot />} />
+          <Route path='/chat-widget-preview' element={<Chatbot messages={messages} />} />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </ThemeWrapper>

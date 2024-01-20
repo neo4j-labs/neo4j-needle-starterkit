@@ -1,6 +1,5 @@
 import { Typography } from '@neo4j-ndl/react';
-import Industry from './categories/Industry';
-import Product from './categories/Product';
+import Templates from './categories/Templates';
 import Component from './categories/Component';
 
 export default function Content({ activeTab }: { activeTab: string }) {
@@ -15,7 +14,7 @@ export default function Content({ activeTab }: { activeTab: string }) {
       }}
     >
       <Typography variant='body-medium' style={{ display: 'flex', padding: '20px' }}>
-        {activeTab === 'Industry' ? <Industry /> : activeTab === 'Product' ? <Product /> : <Component />}
+        {activeTab === 'Templates' ? <Templates /> : activeTab === 'Component' ? <Component /> : <></>}
       </Typography>
     </div>
   );

@@ -17,8 +17,8 @@ export default function Card({
   previewLink: string;
 }) {
   return (
-    <div style={{ height: '420px', width: '450px' }}>
-      <Widget header='' isElevated={true} style={{ height: '420px' }}>
+    <div style={{ minHeight: '100%' }}>
+      <Widget header='' isElevated={true} style={{ minHeight: '100%' }}>
         <div className='card' style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           <div style={{ height: '200px', width: '100%', overflow: 'hidden', position: 'relative' }}>
             <a className='image-link' href={previewLink} target='_blank'>
@@ -35,7 +35,9 @@ export default function Card({
             style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '12px', flexGrow: 1 }}
           >
             <Typography variant='h4'>{title}</Typography>
-            <Typography variant='body-medium'>{description}</Typography>
+            <div style={{ minHeight: '80px', maxHeight: '80px', overflow: 'hidden' }}>
+              <Typography variant='body-medium'>{description}</Typography>
+            </div>
           </div>
           <div
             className='Footer'

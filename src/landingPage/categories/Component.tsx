@@ -3,6 +3,7 @@ import Card from '../components/Card';
 
 import ChatbotImg from '../../assets/img/ChatbotImg.png';
 import ConnectionModalImg from '../../assets/img/ConnectionModalImg.png';
+import WIPImg from '../../assets/img/WIPImg.png';
 
 const componentCards = [
   {
@@ -16,7 +17,7 @@ const componentCards = [
     previewLink: '/chat-widget-preview',
   },
   {
-    title: 'Connection Modal Component',
+    title: 'Connection Modal',
     description:
       'A sleek and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
     image: ConnectionModalImg,
@@ -24,6 +25,14 @@ const componentCards = [
       import.meta.env.PACKAGE_VERSION
     }/src/templates/shared/components/ConnectionModal.tsx`,
     previewLink: '/connection-modal-preview',
+  },
+  {
+    title: 'Widget3',
+    description:
+      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco. Ut enim ad minim veniam quis nostrud exercitation ullamco. ',
+    image: WIPImg,
+    sourceCode: '',
+    previewLink: '/Widget3-preview',
   },
 ];
 
@@ -47,24 +56,17 @@ export default function Component() {
         interface or providing useful information through a custom widget, our component templates are designed for
         flexibility and ease of use.
       </Typography>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          columnGap: '140px',
-          rowGap: '40px',
-        }}
-      >
+      <div className='flex flex-wrap justify-center gap-x-14 gap-y-10 md:grid md:grid-cols-3 md:gap-x-14 md:gap-y-10'>
         {componentCards.map((card, index) => (
-          <Card
-            key={index}
-            title={card.title}
-            description={card.description}
-            image={card.image}
-            sourceCode={card.sourceCode}
-            previewLink={card.previewLink}
-          />
+          <div key={index} className='w-full md:w-auto'>
+            <Card
+              title={card.title}
+              description={card.description}
+              image={card.image}
+              sourceCode={card.sourceCode}
+              previewLink={card.previewLink}
+            />
+          </div>
         ))}
       </div>
     </div>

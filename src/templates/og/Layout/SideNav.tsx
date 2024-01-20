@@ -3,28 +3,32 @@ import { useState } from 'react';
 import { MagnifyingGlassIconOutline, DbmsIcon, BellAlertIconOutline } from '@neo4j-ndl/react/icons';
 
 export default function SideNav() {
-  const [expanded, setOnExpanded] = useState(true);
+  const [expanded, setOnExpanded] = useState<boolean>(!(window.innerWidth < 450));
   const [selected, setSelected] = useState('instances');
+  const [isMobile] = useState<boolean>(window.innerWidth < 450);
+
   const handleClick = (item: string) => (e: any) => {
     e.preventDefault();
     setSelected(item);
   };
   const fullSizeClasses = 'n-w-full n-h-full';
+  const expandedChangeProp = isMobile ? {} : { onExpandedChange: setOnExpanded };
 
   return (
     <div
       style={{
-        height: 'calc(100vh - 68px)',
+        height: 'calc(100vh - 58px)',
         minHeight: '700px',
         display: 'flex',
       }}
     >
-      <SideNavigation iconMenu={true} expanded={expanded} onExpandedChange={setOnExpanded}>
+      <SideNavigation iconMenu={true} expanded={expanded} {...expandedChangeProp}>
         <SideNavigation.List>
           <SideNavigation.Item
             href='#'
             selected={selected === 'search'}
             onClick={handleClick('search')}
+            {...(isMobile ? { icon: <MagnifyingGlassIconOutline className={fullSizeClasses} /> } : {})}
             icon={<MagnifyingGlassIconOutline className={fullSizeClasses} />}
           >
             Search
