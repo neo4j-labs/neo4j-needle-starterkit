@@ -6,10 +6,10 @@ export default function NotFoundPage() {
       className='n-bg-palette-neutral-bg-default'
       style={{
         display: 'flex',
-        alignItems: 'center', // Align items vertically
-        justifyContent: 'center', // Center items horizontally
-        minHeight: '100vh', // Full height of the viewport
-        padding: '3rem', // Padding around the banner
+        alignItems: 'center',
+        justifyContent: 'center',
+        minHeight: '100vh',
+        padding: '3rem',
       }}
     >
       <Banner
@@ -30,9 +30,9 @@ export default function NotFoundPage() {
         icon={true}
         floating={true}
         style={{
-          maxWidth: '600px', // Maximum width of the banner
-          width: '100%', // Makes banner responsive
-          textAlign: 'center', // Centers the text inside the banner
+          maxWidth: '600px',
+          width: '100%',
+          textAlign: 'center',
         }}
       />
     </div>

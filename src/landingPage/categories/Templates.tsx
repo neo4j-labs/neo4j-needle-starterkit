@@ -51,13 +51,11 @@ export default function Templates() {
       }}
     >
       <Typography variant='h2' style={{ display: 'flex', padding: '20px' }}>
-        Product focused templates
+        Templates
       </Typography>
       <Typography variant='body-large' style={{ display: 'flex', padding: '20px' }}>
-        Dive into our collection of product-centric templates, each meticulously crafted to enhance the functionality
-        and appeal of your digital tools and applications. These templates are designed to serve a wide range of product
-        purposes, from analytical dashboards to interactive learning platforms. Whether you're creating a sophisticated
-        project management tool or an engaging educational app, our product templates provide a seamless blend of
+        Dive into our collection of ready-to-use templates tailored for various use cases and domains. These templates
+        are designed to serve a wide range of product purposes. Our product templates provide a seamless blend of
         aesthetics and utility, ensuring your product not only meets its functional objectives but also delivers a
         memorable user experience.
       </Typography>

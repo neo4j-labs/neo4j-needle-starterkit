@@ -7,7 +7,7 @@ export const ThemeWrapperContext = createContext({
 });
 
 interface ThemeWrapperProps {
-  children: ReactNode; // Accept children as a prop
+  children: ReactNode;
 }
 
 export default function ThemeWrapper({ children }: ThemeWrapperProps) {
