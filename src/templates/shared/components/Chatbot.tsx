@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 import { Button, Widget } from '@neo4j-ndl/react';
 import { ScienceMoleculeIcon, UserCircleIconOutline } from '@neo4j-ndl/react/icons';
 import { useState } from 'react';
@@ -110,9 +111,15 @@ export default function Chatbot() {
                   )}
                 </div>
                 <div style={{ flexGrow: 1 }}>
-                {chat.message.split(/`(.+?)`/).map((part, index) => (
-                    index % 2 === 1 ? <span key={index} style={formattedTextStyle}>{part}</span> : part
-                ))}
+                  {chat.message.split(/`(.+?)`/).map((part, index) =>
+                    index % 2 === 1 ? (
+                      <span key={index} style={formattedTextStyle}>
+                        {part}
+                      </span>
+                    ) : (
+                      part
+                    )
+                  )}
                 </div>
               </Widget>
             ))}

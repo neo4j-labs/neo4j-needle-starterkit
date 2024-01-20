@@ -1,7 +1,7 @@
 import { Typography } from '@neo4j-ndl/react';
-import Card from './Card';
+import Card from '../components/Card';
 
-import WIPImg from '../../assets/img/a.png';
+import WIPImg from '../../assets/img/WIPImg.png';
 
 const industryCards = [
   {

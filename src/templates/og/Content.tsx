@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import ConnectionModal from './ConnectionModal';
+import ConnectionModal from '../shared/components/ConnectionModal';
 import { Button, Label, Typography } from '@neo4j-ndl/react';
-import { setDriver, disconnect } from '../utils/Driver';
+import { setDriver, disconnect } from '../shared/utils/Driver';
 
 export default function Content() {
   const [init, setInit] = useState<boolean>(false);

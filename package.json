@@ -1,7 +1,7 @@
 {
   "name": "neo4j-needle-starterkit",
   "private": true,
-  "version": "1.0.0",
+  "version": "development",
   "type": "module",
   "scripts": {
     "dev": "vite",

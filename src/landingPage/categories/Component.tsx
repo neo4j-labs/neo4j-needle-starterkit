@@ -1,5 +1,5 @@
 import { Typography } from '@neo4j-ndl/react';
-import Card from './Card';
+import Card from '../components/Card';
 
 import ChatbotImg from '../../assets/img/ChatbotImg.png';
 import ConnectionModalImg from '../../assets/img/ConnectionModalImg.png';
@@ -10,7 +10,9 @@ const componentCards = [
     description:
       'An interactive chat widget template for support desks, enabling real-time customer assistance and query resolution.',
     image: ChatbotImg,
-    sourceCode: 'chat-widget-source-code-link',
+    sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+      import.meta.env.PACKAGE_VERSION
+    }/src/templates/shared/components/Chatbot.tsx`,
     previewLink: '/chat-widget-preview',
   },
   {
@@ -18,7 +20,9 @@ const componentCards = [
     description:
       'A sleek and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
     image: ConnectionModalImg,
-    sourceCode: 'connection-modal-source-code-link',
+    sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+      import.meta.env.PACKAGE_VERSION
+    }/src/templates/shared/components/ConnectionModal.tsx`,
     previewLink: '/connection-modal-preview',
   },
 ];

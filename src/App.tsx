@@ -2,13 +2,13 @@ import './App.css';
 import '@neo4j-ndl/base/lib/neo4j-ds-styles.css';
 
 import ThemeWrapper from './context/ThemeWrapper';
-import QuickStarter from './components/QuickStarter';
-import Home from './components/Home';
-import NotFoundPage from './components/NotFoundPage';
+import QuickStarter from './templates/og/QuickStarter';
+import Home from './landingPage/Home';
+import NotFoundPage from './landingPage/NotFoundPage';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ConnectionModal from './components/ConnectionModal';
-import Chatbot from './components/Chatbot';
+import ConnectionModal from './templates/shared/components/ConnectionModal';
+import Chatbot from './templates/shared/components/Chatbot';
 
 function App() {
   return (

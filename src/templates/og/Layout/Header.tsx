@@ -1,20 +1,10 @@
-import Neo4jLogoBW from '../../logo.svg';
-import Neo4jLogoColor from '../../logo-color.svg';
-import { MoonIconOutline, SunIconOutline, QuestionMarkCircleIconOutline } from '@neo4j-ndl/react/icons';
+import Neo4jLogoBW from '../../../assets/img/logo.svg';
+import Neo4jLogoColor from '../../../assets/img/logo-color.svg';
+import User from './User';
+import { MoonIconOutline, SunIconOutline, Cog8ToothIconOutline } from '@neo4j-ndl/react/icons';
 import { Typography, IconButton } from '@neo4j-ndl/react';
-import Nav from './Nav';
 
-export default function Header({
-  themeMode,
-  toggleTheme,
-  activeTab,
-  setActiveTab,
-}: {
-  themeMode: string;
-  toggleTheme: () => void;
-  activeTab: string;
-  setActiveTab: (e: string) => void;
-}) {
+export default function Header({ themeMode, toggleTheme }: { themeMode: string; toggleTheme: () => void }) {
   return (
     <div
       className='n-bg-palette-neutral-bg-weak'
@@ -43,17 +33,11 @@ export default function Header({
             <Typography variant='h6'>Quick Starter</Typography>
           </div>
         </section>
-        <section
-          className='flex w-1/3 shrink-0 grow-0'
-          style={{ display: 'flex', minWidth: `200px`, flexGrow: 1, alignItems: 'center', marginBottom: '-14px' }}
-        >
-          <Nav activeTab={activeTab} setActiveTab={setActiveTab} />
-        </section>
         <section className='items-center justify-end hidden w-1/3 grow-0 flex' style={{ flexGrow: 0 }}>
           <div>
             <div
               className='inline-flex gap-x-1'
-              style={{ display: 'flex', flexGrow: 0, alignItems: 'center', gap: '4px', paddingRight: '12px' }}
+              style={{ display: 'flex', flexGrow: 0, alignItems: 'center', gap: '4px' }}
             >
               <IconButton aria-label='Toggle Dark mode' clean size='large' onClick={toggleTheme}>
                 {themeMode === 'dark' ? (
@@ -66,9 +50,22 @@ export default function Header({
                   </span>
                 )}
               </IconButton>
-              <IconButton aria-label='Help' clean size='large'>
-                <QuestionMarkCircleIconOutline className='n-w-6 n-h-6' />
+              <IconButton aria-label='Toggle settings' size='large' clean>
+                <Cog8ToothIconOutline />
               </IconButton>
+
+              <Typography
+                variant='subheading-large'
+                style={{
+                  ml: 'var(--space-8)',
+                  mr: 'var(--space-8)',
+                  width: '1px',
+                  height: 'var(--space-16)',
+                  backgroundColor: 'white',
+                }}
+              ></Typography>
+
+              <User />
             </div>
           </div>
         </section>

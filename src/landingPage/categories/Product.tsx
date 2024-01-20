@@ -1,5 +1,5 @@
 import { Typography } from '@neo4j-ndl/react';
-import Card from './Card';
+import Card from '../components/Card';
 import StarterKitImg from '../../assets/img/StarterKitImg.jpg';
 import NetworkAnalysisImg from '../../assets/img/NeoNetworkImg.png';
 
@@ -8,7 +8,9 @@ const productCards = [
     title: 'OG Template',
     description: 'The OG one, because we all starts somewhere.',
     image: StarterKitImg,
-    sourceCode: 'https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/1.0/src/components/QuickStarter.tsx',
+    sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
+      import.meta.env.PACKAGE_VERSION
+    }/src/templates/og`,
     previewLink: '/og-preview',
   },
   {

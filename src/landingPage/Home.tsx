@@ -1,7 +1,7 @@
-import Header from './LandingPage/Header';
+import Header from './components/Header';
 import React, { useState } from 'react';
 import { ThemeWrapperContext } from '../context/ThemeWrapper';
-import Content from './LandingPage/Content';
+import Content from './Content';
 
 export default function QuickStarter() {
   const themeUtils = React.useContext(ThemeWrapperContext);
