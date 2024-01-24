@@ -28,10 +28,12 @@ export default function Chatbot(props: ChatbotProps) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        minHeight: '100vh',
+        minHeight: '100%',
+        maxHeight: '100%',
+        overflow: 'hidden',
       }}
     >
-      <div style={{ paddingBottom: '3rem', overflowY: 'auto' }}>
+      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '3rem' }}>
         <Widget className='n-bg-palette-neutral-bg-default' header='' isElevated={true} style={{ height: '100%' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '12px' }}>
             {messages.map((chat) => (
@@ -86,12 +88,11 @@ export default function Chatbot(props: ChatbotProps) {
       <div
         className='n-bg-palette-neutral-bg-weak'
         style={{
-          position: 'fixed',
-          bottom: '0rem',
           display: 'flex',
           gap: '10px',
+
+          bottom: '0rem',
           padding: '10px',
-          width: '100%',
         }}
       >
         <input
