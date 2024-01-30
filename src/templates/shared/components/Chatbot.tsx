@@ -34,7 +34,7 @@ export default function Chatbot(props: ChatbotProps) {
       }}
     >
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '3rem' }}>
-        <Widget className='n-bg-palette-neutral-bg-default' header='' isElevated={true} style={{ height: '100%' }}>
+        <Widget className='n-bg-palette-neutral-bg-default' header='' isElevated={false} style={{ height: '100%' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '12px' }}>
             {messages.map((chat) => (
               <div
@@ -56,9 +56,7 @@ export default function Chatbot(props: ChatbotProps) {
                 <Widget
                   header=''
                   isElevated={true}
-                  className={
-                    chat.user === 'chatbot' ? 'n-bg-palette-neutral-bg-weak' : 'n-bg-palette-neutral-bg-stronger'
-                  }
+                  className={chat.user === 'chatbot' ? 'n-bg-palette-neutral-bg-weak' : 'n-bg-palette-primary-bg-weak'}
                   style={{
                     padding: '4',
                     alignSelf: 'flex-start',

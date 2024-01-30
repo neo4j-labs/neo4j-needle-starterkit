@@ -25,7 +25,7 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
         });
       },
     }),
-    []
+    [mode]
   );
   const themeBodyInjection = (mode: string) => {
     if (mode === 'light') {

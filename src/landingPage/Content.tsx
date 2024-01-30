@@ -14,7 +14,7 @@ export default function Content({ activeTab }: { activeTab: string }) {
       }}
     >
       <Typography variant='body-medium' style={{ display: 'flex', padding: '20px' }}>
-        {activeTab === 'Templates' ? <Templates /> : activeTab === 'Component' ? <Component /> : <></>}
+        {activeTab === 'Templates' ? <Templates /> : activeTab === 'Components' ? <Component /> : <></>}
       </Typography>
     </div>
   );

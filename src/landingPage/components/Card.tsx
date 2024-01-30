@@ -18,17 +18,44 @@ export default function Card({
 }) {
   return (
     <div style={{ minHeight: '100%' }}>
-      <Widget header='' isElevated={true} style={{ minHeight: '100%' }}>
+      <Widget className='n-bg-palette-neutral-bg-weak' header='' isElevated={true} style={{ minHeight: '100%' }}>
         <div className='card' style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <div style={{ height: '200px', width: '100%', overflow: 'hidden', position: 'relative' }}>
+          <div
+            style={{
+              height: '200px',
+              width: '100%',
+              overflow: 'hidden',
+              position: 'relative',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
             <a className='image-link' href={previewLink} target='_blank'>
-              <img className='image n-rounded-lg' src={image} alt='Image description' style={{ width: '100%' }} />
-              <div className='overlay-text' style={{ display: 'flex', flexDirection: 'column' }}>
+              <img
+                className='image n-rounded-lg'
+                src={image}
+                alt='Image description'
+                style={{
+                  width: '100%',
+                  maxHeight: '100%',
+                  objectFit: 'contain', // This ensures the image maintains its aspect ratio
+                }}
+              />
+              <div
+                className='overlay-text'
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  position: 'absolute', // To overlay on the image
+                }}
+              >
                 <EyeIconOutline className='n-w-6 n-h-6' />
                 <Typography variant='body-medium'>View live preview</Typography>
               </div>
             </a>
           </div>
+
           <hr style={{ marginLeft: '15%', width: '70%', marginTop: '16px', borderColor: 'grey' }} />
           <div
             className='card-content'

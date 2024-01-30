@@ -1,42 +1,52 @@
 import { Typography } from '@neo4j-ndl/react';
 import Card from '../components/Card';
 
-import ChatbotImg from '../../assets/img/ChatbotImg.png';
-import ConnectionModalImg from '../../assets/img/ConnectionModalImg.png';
-import WIPImg from '../../assets/img/WIPImg.png';
+import ChatbotImgDark from '../../assets/img/ChatbotImg-dark.png';
+import ConnectionModalImgDark from '../../assets/img/ConnectionModalImg-dark.png';
+import HeaderImgDark from '../../assets/img/HeaderImg-dark.png';
 
-const componentCards = [
-  {
-    title: 'Chatbot Widget',
-    description:
-      'An interactive chat widget template for support desks, enabling real-time customer assistance and query resolution.',
-    image: ChatbotImg,
-    sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
-      import.meta.env.PACKAGE_VERSION
-    }/src/templates/shared/components/Chatbot.tsx`,
-    previewLink: '/chat-widget-preview',
-  },
-  {
-    title: 'Connection Modal',
-    description:
-      'A sleek and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
-    image: ConnectionModalImg,
-    sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
-      import.meta.env.PACKAGE_VERSION
-    }/src/templates/shared/components/ConnectionModal.tsx`,
-    previewLink: '/connection-modal-preview',
-  },
-  {
-    title: 'Widget3',
-    description:
-      'lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco. Ut enim ad minim veniam quis nostrud exercitation ullamco. ',
-    image: WIPImg,
-    sourceCode: '',
-    previewLink: '/Widget3-preview',
-  },
-];
+import ChatbotImgLight from '../../assets/img/ChatbotImg-light.png';
+import ConnectionModalImgLight from '../../assets/img/ConnectionModalImg-light.png';
+import HeaderImgLight from '../../assets/img/HeaderImg-light.png';
+
+import { useContext } from 'react';
+import { ThemeWrapperContext } from '../../context/ThemeWrapper';
 
 export default function Component() {
+  const { colorMode } = useContext(ThemeWrapperContext);
+
+  const componentCards = [
+    {
+      title: 'Chatbot Widget',
+      description:
+        'An interactive chat widget template for support desks, enabling real-time customer assistance and query resolution.',
+      image: colorMode === 'dark' ? ChatbotImgDark : ChatbotImgLight,
+      sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/shared/components/Chatbot.tsx`,
+      previewLink: '/chat-widget-preview',
+    },
+    {
+      title: 'Connection Modal',
+      description:
+        'A sleek and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
+      image: colorMode === 'dark' ? ConnectionModalImgDark : ConnectionModalImgLight,
+      sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/shared/components/ConnectionModal.tsx`,
+      previewLink: '/connection-modal-preview',
+    },
+    {
+      title: 'Header',
+      description: 'Header navbar xxx',
+      image: colorMode === 'dark' ? HeaderImgDark : HeaderImgLight,
+      sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/shared/components/Header.tsx`,
+      previewLink: '/header-preview',
+    },
+  ];
+
   return (
     <div
       style={{
@@ -46,7 +56,7 @@ export default function Component() {
       }}
     >
       <Typography variant='h2' style={{ display: 'flex', padding: '20px' }}>
-        Component focused templates
+        Components
       </Typography>
       <Typography variant='body-large' style={{ display: 'flex', padding: '20px' }}>
         Our component templates are perfect for those seeking to integrate individual widgets or elements into their
