@@ -4,8 +4,8 @@ export default function Nav({ activeTab, setActiveTab }: { activeTab: string; se
   return (
     <>
       <Tabs size='large' fill='underline' onChange={(e) => setActiveTab(e)} value={activeTab}>
-        <Tabs.Tab tabId={'Templates'}>Templates</Tabs.Tab>
-        <Tabs.Tab tabId={'Components'}>Components</Tabs.Tab>
+        <Tabs.Tab tabId={'Templates'}>Template</Tabs.Tab>
+        <Tabs.Tab tabId={'Components'}>Component</Tabs.Tab>
       </Tabs>
     </>
   );

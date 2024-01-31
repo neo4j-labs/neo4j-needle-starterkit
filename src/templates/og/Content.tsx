@@ -16,6 +16,21 @@ export default function Content() {
   const messages = messagesData.listMessages;
   const [isOpen, setIsOpen] = useState(false);
 
+  const chatbotStyle: React.CSSProperties = {
+    position: 'absolute',
+    bottom: '0rem',
+    right: '1rem',
+    width: '400px',
+    height: isOpen ? '450px' : '50px',
+    overflow: 'scroll',
+    transition: 'height 0.3s ease-in-out',
+    borderColor: 'rgb(var(--palette-neutral-border-strongest))',
+    borderRadius: '0.5rem',
+    borderLeftWidth: '1px',
+    borderTopWidth: '1px',
+    borderRightWidth: '1px',
+  };
+
   const toggleChatbot = () => setIsOpen(!isOpen);
   const handleChildClick = (e: { stopPropagation: () => void }) => {
     e.stopPropagation();
@@ -68,28 +83,15 @@ export default function Content() {
       )}
 
       <Widget
+        isElevated={true}
+        style={{ ...chatbotStyle }}
         className='n-bg-palette-neutral-bg-default'
         header={
           <div style={{ width: '400px', display: 'flex', flexDirection: 'row', gap: '6em' }} onClick={toggleChatbot}>
             Chatbot{' '}
             {isOpen ? <ArrowDownIconOutline className='n-w-6 n-h-6' /> : <ArrowUpIconOutline className='n-w-6 n-h-6' />}{' '}
           </div>
-        } // Attach the click event only to the header
-        isElevated={true}
-        style={{
-          position: 'absolute',
-          bottom: '0rem',
-          right: '1rem',
-          width: '400px',
-          height: isOpen ? '450px' : '50px',
-          overflow: 'scroll',
-          transition: 'height 0.3s ease-in-out',
-          borderColor: 'rgb(var(--palette-neutral-border-strongest))',
-          borderRadius: '0.5rem',
-          borderLeftWidth: '1px',
-          borderTopWidth: '1px',
-          borderRightWidth: '1px',
-        }}
+        }
       >
         {isOpen && (
           <div onClick={handleChildClick}>

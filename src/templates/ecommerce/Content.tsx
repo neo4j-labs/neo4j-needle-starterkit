@@ -1,13 +1,5 @@
 import { Button, DataGrid, Typography, Widget, Tag } from '@neo4j-ndl/react';
-import {
-  RowModel,
-  Table,
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { createColumnHelper, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 import productImg1 from './assets/product1.png';
 import productImg2 from './assets/product2.png';
 import productImg3 from './assets/product3.png';
@@ -15,7 +7,7 @@ import productImg4 from './assets/product4.png';
 import productImg5 from './assets/product5.png';
 import productImg6 from './assets/product6.png';
 import React from 'react';
-import { PlusCircleIconOutline, PlusIconOutline } from '@neo4j-ndl/react/icons';
+import { PlusCircleIconOutline } from '@neo4j-ndl/react/icons';
 import productsData from './assets/products.json';
 
 type Product = {
@@ -47,7 +39,7 @@ const columns = [
 export default function Content() {
   const products = productsData.listProducts;
   const defaultData: Product[] = products[0].defaultData as Product[];
-  const [data, setData] = React.useState(() => [...defaultData]);
+  const [data] = React.useState(() => [...defaultData]);
   const cardStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',

@@ -84,7 +84,7 @@ export default function Chatbot(props: ChatbotProps) {
         </Widget>
       </div>
       <div
-        className='n-bg-palette-neutral-bg-weak'
+        className='n-bg-palette-neutral-bg-default'
         style={{
           display: 'flex',
           gap: '10px',
