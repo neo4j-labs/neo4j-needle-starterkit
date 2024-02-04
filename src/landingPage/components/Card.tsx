@@ -39,7 +39,7 @@ export default function Card({
                 style={{
                   width: '100%',
                   maxHeight: '100%',
-                  objectFit: 'contain', // This ensures the image maintains its aspect ratio
+                  objectFit: 'contain',
                 }}
               />
               <div
@@ -47,7 +47,7 @@ export default function Card({
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  position: 'absolute', // To overlay on the image
+                  position: 'absolute',
                 }}
               >
                 <EyeIconOutline className='n-w-6 n-h-6' />

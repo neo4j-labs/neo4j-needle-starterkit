@@ -34,20 +34,20 @@ export default function Templates() {
       previewLink: '/ecommerce-preview',
     },
     {
+      title: 'Fraud Detection',
+      description:
+        'Financial templates focused on fraud detection for banking services, taxes evasion, anti-money laundering.',
+      image: WIPImg,
+      sourceCode: 'finance-source-code-link',
+      previewLink: '/finance-preview',
+    },
+    {
       title: 'Network Analysis',
       description:
         'Explore advanced templates for network analysis in XXX. This templates facilitate the visualization and analysis of complex data networks.',
       image: NetworkAnalysisImg,
       sourceCode: 'networkanalysis-source-code-link',
       previewLink: '/networkanalysis-preview',
-    },
-    {
-      title: 'Finance and Banking',
-      description:
-        'Financial templates focused on banking services, investment portfolios, and financial data analysis, ensuring secure and efficient user experiences.',
-      image: WIPImg,
-      sourceCode: 'finance-source-code-link',
-      previewLink: '/finance-preview',
     },
     {
       title: 'Telecommunication Networks',
