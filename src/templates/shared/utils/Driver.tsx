@@ -27,3 +27,22 @@ export async function disconnect() {
     return false;
   }
 }
+
+/*
+  Everything below this line is only for providing examples based on datasets available in Neo4j Sandbox (sandbox.neo4j.com).
+  When using this code in your own project, you should remove the examples below and use your own queries.
+*/
+export async function runRecoQuery(query: string) {
+  const reco = [];
+  try {
+    let { records, summary } = await driver.executeQuery(query)
+    for(let record of records) {
+      reco.push({genres: record.get('genres'), year: record.get('year'), imdbRating: record.get('imdbRating'), languages: record.get('languages'), title: record.get('title'), plot: record.get('plot'), poster: record.get('poster')})
+    }
+
+    return reco;
+  } catch (err) {
+    console.error(`Disconnection error\n${err}\nCause: ${err as Error}`);
+    return false;
+  }
+}

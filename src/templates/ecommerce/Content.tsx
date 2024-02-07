@@ -110,7 +110,6 @@ export default function Content() {
               </div>
             </div>
             <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: 15 }}>
-              {' '}
               {/* Align the button to the bottom */}
               <Typography variant='body-large'>Price: £{products[0].price}</Typography>
               <Button>Add to cart</Button>
@@ -137,7 +136,6 @@ export default function Content() {
                 >
                   <img src={img} alt={`Product ${index + 2}`} style={{ maxWidth: '40%', alignSelf: 'center' }} />
                   <div style={{ padding: '10px', display: 'flex', flexDirection: 'column', gap: 15 }}>
-                    {' '}
                     {/* Align the button to the bottom */}
                     <div>{products[index + 1].desc1}</div>
                     <Typography variant='body-large'>Price: £{products[index + 1].price}</Typography>
