@@ -1,16 +1,25 @@
-import { Button, Dialog, TextInput, Dropdown } from '@neo4j-ndl/react';
+import { Button, Dialog, TextInput, Dropdown, Banner } from '@neo4j-ndl/react';
 import { useState } from 'react';
 import { setDriver } from '../utils/Driver';
+
+interface Message {
+  type: 'success' | 'info' | 'warning' | 'danger' | 'neutral';
+  content: string;
+}
+
+interface ConnectionModalProps {
+  open: boolean;
+  setOpenConnection: (arg: boolean) => void;
+  setConnectionStatus: (status: boolean) => void;
+  message?: Message;
+}
 
 export default function ConnectionModal({
   open,
   setOpenConnection,
   setConnectionStatus,
-}: {
-  open: boolean;
-  setOpenConnection: (arg: boolean) => void;
-  setConnectionStatus: (status: boolean) => void;
-}) {
+  message,
+}: ConnectionModalProps) {
   const protocols = ['neo4j', 'neo4j+s', 'neo4j+ssc', 'bolt', 'bolt+s', 'bolt+ssc'];
   const [selectedProtocol, setSelectedProtocol] = useState<string>('neo4j');
   const [hostname, setHostname] = useState<string>('localhost');
@@ -32,6 +41,7 @@ export default function ConnectionModal({
       <Dialog size='small' open={open} aria-labelledby='form-dialog-title' disableCloseButton>
         <Dialog.Header id='form-dialog-title'>Connect to Neo4j</Dialog.Header>
         <Dialog.Content className='n-flex n-flex-col n-gap-token-4'>
+          {message && <Banner type={message.type}>{message.content}</Banner>}
           <div className='n-flex n-flex-row n-flex-wrap'>
             <Dropdown
               id='protocol'

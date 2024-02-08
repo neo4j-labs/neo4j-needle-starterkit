@@ -38,6 +38,7 @@ export async function runRecoQuery(query: string) {
     let { records } = await driver.executeQuery(query);
     for (let record of records) {
       reco.push({
+        id: record.get('id'),
         genres: record.get('genres'),
         year: record.get('year'),
         imdbRating: record.get('imdbRating'),

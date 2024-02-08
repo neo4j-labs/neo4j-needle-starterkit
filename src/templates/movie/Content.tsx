@@ -1,6 +1,8 @@
-import { Movie } from './Movie';
-import { Button, Typography, Tag, LoadingSpinner, Box } from '@neo4j-ndl/react';
+import { MovieInterface } from './Interfaces';
+import { Button, Typography, Tag, LoadingSpinner } from '@neo4j-ndl/react';
 import React from 'react';
+import Movie from './Movie';
+import { ChevronLeftIconOutline, ChevronRightIconOutline } from '@neo4j-ndl/react/icons';
 
 export default function Content({
   loadingStates,
@@ -9,9 +11,9 @@ export default function Content({
   recoOtherUsers,
 }: {
   loadingStates: { loadingMain: boolean; loadingSimilarGenre: boolean; loadingOtherUsers: boolean };
-  mainMovie: Movie[];
-  recoSimilarGenre: Movie[];
-  recoOtherUsers: Movie[];
+  mainMovie: MovieInterface[];
+  recoSimilarGenre: MovieInterface[];
+  recoOtherUsers: MovieInterface[];
 }) {
   const cardStyle: React.CSSProperties = {
     display: 'flex',
@@ -45,14 +47,14 @@ export default function Content({
                 <Typography variant='body-medium'>{mainMovie[0].plot}</Typography>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', gap: 20 }}>
-                {mainMovie[0].languages.map((lang: Array<string>, index: number) => (
+                {mainMovie[0].languages.map((lang: string, index: number) => (
                   <Tag style={{ padding: '5px 10px' }} key={index}>
                     {lang}
                   </Tag>
                 ))}
               </div>
               <div className='md:flex hidden' style={{ gap: 20 }}>
-                {mainMovie[0].genres.map((genre: Array<string>, index: number) => (
+                {mainMovie[0].genres.map((genre: string, index: number) => (
                   <Tag style={{ padding: '5px 10px' }} key={index}>
                     {genre}
                   </Tag>
@@ -78,29 +80,16 @@ export default function Content({
             <LoadingSpinner size='large' />
           </div>
         ) : (
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', gap: '10px' }}>
             <Typography variant='h2'>Similar genre</Typography>
-            <div className='flex flex-col md:flex-row' style={{ gap: 10, padding: '10px 0' }}>
-              {recoSimilarGenre.map((movie, index) => (
-                <Box key={index} style={{ margin: 'auto', maxWidth: '80%' }}>
-                  <img
-                    src={movie.poster}
-                    alt={`Product ${index + 2}`}
-                    style={{ minWidth: '40%', alignSelf: 'center' }}
-                  />
-                  <div
-                    style={{
-                      padding: '10px',
-                      display: 'none' /* none for now - need to display on hover */,
-                      flexDirection: 'column',
-                      gap: 15,
-                    }}
-                  >
-                    <Typography variant='h4'>{movie.title}</Typography>
-                    <div>{movie.plot}</div>
-                  </div>
-                </Box>
-              ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px' }}>
+              <ChevronLeftIconOutline className='n-w-32 n-h-32' style={{ alignSelf: 'center' }} />
+              <div style={{ display: 'flex', gap: '20px' }}>
+                {recoSimilarGenre.map((movie, index) => (
+                  <Movie key={index} movie={movie} />
+                ))}
+              </div>
+              <ChevronRightIconOutline className='n-w-32 n-h-32' style={{ alignSelf: 'center' }} />
             </div>
           </div>
         )}
@@ -111,20 +100,16 @@ export default function Content({
             <LoadingSpinner size='large' />
           </div>
         ) : (
-          <div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', gap: '10px' }}>
             <Typography variant='h2'>Users who watched {mainMovie[0]?.title} also watched this</Typography>
-            <div className='flex flex-col items-start md:flex-row' style={{ gap: 10, padding: '10px 0' }}>
-              {recoOtherUsers.map((movie, index) => (
-                <Box className='md:max-w-[30%]' key={index}>
-                  <img src={movie.poster} alt='Product 1' style={{ minWidth: '40%' }} />
-                  <div style={{ display: 'none' }}>
-                    <Typography variant='h4' style={{ textAlignLast: 'center' }}>
-                      {movie.title}
-                    </Typography>
-                    <Typography variant='body-medium'>{movie.plot}</Typography>
-                  </div>
-                </Box>
-              ))}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px' }}>
+              <ChevronLeftIconOutline className='n-w-32 n-h-32' style={{ alignSelf: 'center' }} />
+              <div style={{ display: 'flex', gap: '20px' }}>
+                {recoOtherUsers.map((movie, index) => (
+                  <Movie key={index} movie={movie} />
+                ))}
+              </div>
+              <ChevronRightIconOutline className='n-w-32 n-h-32' style={{ alignSelf: 'center' }} />
             </div>
           </div>
         )}
