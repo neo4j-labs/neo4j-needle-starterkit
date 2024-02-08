@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import ConnectionModal from '../shared/components/ConnectionModal';
-import { Button, Label, Typography, Widget } from '@neo4j-ndl/react';
+import { Button, Label, Typography } from '@neo4j-ndl/react';
 import { setDriver, disconnect } from '../shared/utils/Driver';
-
-import { ArrowDownIconOutline, ArrowUpIconOutline } from '@neo4j-ndl/react/icons';
 
 export default function Content() {
   const [init, setInit] = useState<boolean>(false);

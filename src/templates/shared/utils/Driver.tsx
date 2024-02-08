@@ -35,9 +35,17 @@ export async function disconnect() {
 export async function runRecoQuery(query: string) {
   const reco = [];
   try {
-    let { records, summary } = await driver.executeQuery(query)
-    for(let record of records) {
-      reco.push({genres: record.get('genres'), year: record.get('year'), imdbRating: record.get('imdbRating'), languages: record.get('languages'), title: record.get('title'), plot: record.get('plot'), poster: record.get('poster')})
+    let { records } = await driver.executeQuery(query);
+    for (let record of records) {
+      reco.push({
+        genres: record.get('genres'),
+        year: record.get('year'),
+        imdbRating: record.get('imdbRating'),
+        languages: record.get('languages'),
+        title: record.get('title'),
+        plot: record.get('plot'),
+        poster: record.get('poster'),
+      });
     }
 
     return reco;

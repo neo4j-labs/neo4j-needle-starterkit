@@ -4,7 +4,8 @@ import StarterKitImgDark from '../../assets/img/StarterKitImg-dark.jpg';
 import StarterKitImgLight from '../../assets/img/StarterKitImg-light.png';
 import EcommerceImgDark from '../../assets/img/Ecommerce-dark.png';
 import EcommerceImgLight from '../../assets/img/Ecommerce-light.png';
-import NetworkAnalysisImg from '../../assets/img/NeoNetworkImg-dark.png';
+import MovieImgDark from '../../assets/img/MovieImg-dark.png';
+import MovieImgLight from '../../assets/img/MovieImg-light.png';
 import WIPImg from '../../assets/img/WIPImg.png';
 
 import { useContext } from 'react';
@@ -26,12 +27,21 @@ export default function Templates() {
     },
     {
       title: 'Recommendation Engine',
-      description: 'XX reco engine for ecommerce/eshop/streaming platform etc',
+      description: 'XX reco engine for ecommerce/eshop etc',
       image: colorMode === 'dark' ? EcommerceImgDark : EcommerceImgLight,
       sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
       }/src/templates/ecommerce`,
       previewLink: '/ecommerce-preview',
+    },
+    {
+      title: 'Movie Recommendation',
+      description: 'Lorem ipsum... reco engine for the movie db',
+      image: colorMode === 'dark' ? MovieImgDark : MovieImgLight,
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/movie`,
+      previewLink: '/movie-preview',
     },
     {
       title: 'Fraud Detection',
@@ -41,14 +51,14 @@ export default function Templates() {
       sourceCode: 'finance-source-code-link',
       previewLink: '/finance-preview',
     },
-    {
-      title: 'Network Analysis',
-      description:
-        'Explore advanced templates for network analysis in XXX. This templates facilitate the visualization and analysis of complex data networks.',
-      image: NetworkAnalysisImg,
-      sourceCode: 'networkanalysis-source-code-link',
-      previewLink: '/networkanalysis-preview',
-    },
+    // {
+    //   title: 'Network Analysis',
+    //   description:
+    //     'Explore advanced templates for network analysis in XXX. This templates facilitate the visualization and analysis of complex data networks.',
+    //   image: NetworkAnalysisImg,
+    //   sourceCode: 'networkanalysis-source-code-link',
+    //   previewLink: '/networkanalysis-preview',
+    // },
     {
       title: 'Telecommunication Networks',
       description:

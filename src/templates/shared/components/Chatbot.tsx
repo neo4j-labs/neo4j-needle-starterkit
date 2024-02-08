@@ -1,6 +1,5 @@
 /* eslint-disable no-confusing-arrow */
-import { Button, Widget, Typography } from '@neo4j-ndl/react';
-import { ScienceMoleculeIcon, UserCircleIconOutline } from '@neo4j-ndl/react/icons';
+import { Button, Widget, Typography, Avatar } from '@neo4j-ndl/react';
 import { useState } from 'react';
 
 type ChatbotProps = {
@@ -48,9 +47,28 @@ export default function Chatbot(props: ChatbotProps) {
               >
                 <div style={{ width: '30px', height: '30px' }}>
                   {chat.user === 'chatbot' ? (
-                    <ScienceMoleculeIcon className='n-w-6 n-h-6' />
+                    <Avatar
+                      className=''
+                      hasStatus
+                      name='KM'
+                      shape='square'
+                      size='x-large'
+                      source='https://img.freepik.com/free-vector/graident-ai-robot-vectorart_78370-4114.jpg?w=900&t=st=1707390576~exp=1707391176~hmac=cf02ec05e62a87ecfe08699aa2fd71e988e364712f56dc78cd97ef25d7a735f2'
+                      status='online'
+                      type='image'
+                      style={{ marginLeft: '-15px' }}
+                    />
                   ) : (
-                    <UserCircleIconOutline className='n-w-6 n-h-6' />
+                    <Avatar
+                      className=''
+                      hasStatus
+                      name='KM'
+                      shape='square'
+                      size='x-large'
+                      source='https://files.oaiusercontent.com/file-OF2LaI4e3MLHL49fTBlsoAx6?se=2024-02-08T11%3A21%3A22Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D0fabc743-8940-42cf-bb60-85b78769ba6f.webp&sig=9npUEdqnLHdVfmE0U6Bv6pE/3nRoMsA8wrAIiaAQ6fA%3D'
+                      status='online'
+                      type='image'
+                    />
                   )}
                 </div>
                 <Widget
