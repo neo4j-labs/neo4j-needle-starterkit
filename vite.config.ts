@@ -9,6 +9,6 @@ export default defineConfig({
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(packageJson.version),
   },
   server: {
-    port: 3001,
+    port: 3000,
   },
 });
