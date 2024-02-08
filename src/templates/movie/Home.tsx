@@ -34,17 +34,17 @@ export default function Home() {
           movies[1] as Movie,
           movies[2] as Movie,
           movies[3] as Movie,
-          movies[3] as Movie,
-          movies[3] as Movie,
-          movies[3] as Movie,
-        ]);
-        setRecoOtherUsers([
           movies[4] as Movie,
           movies[5] as Movie,
           movies[6] as Movie,
-          movies[3] as Movie,
-          movies[3] as Movie,
-          movies[3] as Movie,
+        ]);
+        setRecoOtherUsers([
+          movies[7] as Movie,
+          movies[8] as Movie,
+          movies[9] as Movie,
+          movies[10] as Movie,
+          movies[11] as Movie,
+          movies[12] as Movie,
         ]);
         setLoadingMain(false);
         setLoadingSimilarGenre(false);
