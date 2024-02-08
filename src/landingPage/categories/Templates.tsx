@@ -5,7 +5,7 @@ import StarterKitImgLight from '../../assets/img/StarterKitImg-light.png';
 import EcommerceImgDark from '../../assets/img/Ecommerce-dark.png';
 import EcommerceImgLight from '../../assets/img/Ecommerce-light.png';
 import MovieImgDark from '../../assets/img/WIPImg.png';
-import MovieImgLight from '../../assets/img/Movie-light.png';
+import MovieImgLight from '../../assets/img/WIPImg.png';
 import WIPImg from '../../assets/img/WIPImg.png';
 
 import { useContext } from 'react';
