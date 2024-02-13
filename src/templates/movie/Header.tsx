@@ -88,7 +88,14 @@ export default function Header({
           <div>
             <div
               className='inline-flex gap-x-1'
-              style={{ width: 'max-content', display: 'flex', flexGrow: 0, alignItems: 'center', gap: '4px', paddingRight: '12px' }}
+              style={{
+                width: 'max-content',
+                display: 'flex',
+                flexGrow: 0,
+                alignItems: 'center',
+                gap: '4px',
+                paddingRight: '12px',
+              }}
             >
               <Switch
                 checked={useReco}

@@ -5,7 +5,7 @@ import { setDriver, runRecoQuery } from '../shared/utils/Driver';
 import { MovieInterface } from './Interfaces';
 import moviesData from './assets/movies.json';
 import ConnectionModal from '../shared/components/ConnectionModal';
-import { Banner, Box, Flex, Typography } from '@neo4j-ndl/react';
+import { Banner, Flex, Typography } from '@neo4j-ndl/react';
 
 const mainMovieId = '79132';
 const queryMainMovie = `MATCH (m:Movie {movieId: '${mainMovieId}'})-[:IN_GENRE]->(g:Genre) RETURN ID(m) as id, collect(g.name) as genres, m.year as year, m.imdbRating as imdbRating, m.languages as languages, m.title as title, m.plot as plot, m.poster as poster;`;

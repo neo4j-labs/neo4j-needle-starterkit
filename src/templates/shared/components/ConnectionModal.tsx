@@ -33,7 +33,12 @@ export default function ConnectionModal({
     const connectionURI = `${selectedProtocol}://${hostname}:${port}`;
     setDriver(connectionURI, username, password).then((isSuccessful) => {
       setConnectionStatus(isSuccessful);
-      isSuccessful ? setOpenConnection(false) : setMessage({ type: 'danger', content: 'Connection failed, please check the developer console logs for more informations' });
+      isSuccessful
+        ? setOpenConnection(false)
+        : setMessage({
+            type: 'danger',
+            content: 'Connection failed, please check the developer console logs for more informations',
+          });
     });
   }
 
