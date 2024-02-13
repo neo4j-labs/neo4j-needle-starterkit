@@ -41,10 +41,21 @@ export default function Content({
               alt='Product 1'
               style={{ width: '20%', height: '100%', borderRadius: '8px' }}
             />
-            <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20 }}>
+            <div style={{ padding: '0 20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 20, width: '80%' }}>
               <Typography variant='h1'>{mainMovie[0].title}</Typography>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-                <Typography variant='body-medium'>{mainMovie[0].plot}</Typography>
+                <Typography variant='body-medium' 
+                style={{
+                  textIndent: '50px',
+                  fontFamily: 'Public Sans',
+                          fontSize: '14px',
+                          fontWeight: '400',
+                          lineHeight: '20px',
+                          letterSpacing: '0px',
+                          textAlign: 'center',
+                          maxWidth: '80%',
+                          alignSelf: 'center'
+                          }}>{mainMovie[0].plot}</Typography>
               </div>
               <div style={{ display: 'flex', flexDirection: 'row', gap: 20 }}>
                 {mainMovie[0].languages.map((lang: string, index: number) => (

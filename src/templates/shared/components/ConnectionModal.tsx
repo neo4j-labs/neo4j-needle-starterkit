@@ -27,13 +27,14 @@ export default function ConnectionModal({
   const [database, setDatabase] = useState<string>('neo4j');
   const [username, setUsername] = useState<string>('neo4j');
   const [password, setPassword] = useState<string>('password');
+  const [connectionMessage, setMessage] = useState<Message | null>(null);
 
   function submitConnection() {
     const connectionURI = `${selectedProtocol}://${hostname}:${port}`;
     setDriver(connectionURI, username, password).then((isSuccessful) => {
       setConnectionStatus(isSuccessful);
+      isSuccessful ? setOpenConnection(false) : setMessage({ type: 'danger', content: 'Connection failed, please check the developer console logs for more informations' });
     });
-    setOpenConnection(false);
   }
 
   return (
@@ -42,6 +43,7 @@ export default function ConnectionModal({
         <Dialog.Header id='form-dialog-title'>Connect to Neo4j</Dialog.Header>
         <Dialog.Content className='n-flex n-flex-col n-gap-token-4'>
           {message && <Banner type={message.type}>{message.content}</Banner>}
+          {connectionMessage && <Banner type={connectionMessage.type}>{connectionMessage.content}</Banner>}
           <div className='n-flex n-flex-row n-flex-wrap'>
             <Dropdown
               id='protocol'

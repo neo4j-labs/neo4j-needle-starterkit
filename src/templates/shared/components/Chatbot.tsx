@@ -1,6 +1,8 @@
 /* eslint-disable no-confusing-arrow */
 import { Button, Widget, Typography, Avatar } from '@neo4j-ndl/react';
 import { useState } from 'react';
+import ChatBotUserAvatar from '../../../assets/img/chatbot-user.png';
+import ChatBotAvatar from '../../../assets/img/chatbot-ai.png';
 
 type ChatbotProps = {
   messages: {
@@ -53,7 +55,7 @@ export default function Chatbot(props: ChatbotProps) {
                       name='KM'
                       shape='square'
                       size='x-large'
-                      source='https://img.freepik.com/free-vector/graident-ai-robot-vectorart_78370-4114.jpg?w=900&t=st=1707390576~exp=1707391176~hmac=cf02ec05e62a87ecfe08699aa2fd71e988e364712f56dc78cd97ef25d7a735f2'
+                      source={ChatBotAvatar}
                       status='online'
                       type='image'
                       style={{ marginLeft: '-15px' }}
@@ -65,7 +67,7 @@ export default function Chatbot(props: ChatbotProps) {
                       name='KM'
                       shape='square'
                       size='x-large'
-                      source='https://files.oaiusercontent.com/file-OF2LaI4e3MLHL49fTBlsoAx6?se=2024-02-08T11%3A21%3A22Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3D0fabc743-8940-42cf-bb60-85b78769ba6f.webp&sig=9npUEdqnLHdVfmE0U6Bv6pE/3nRoMsA8wrAIiaAQ6fA%3D'
+                      source={ChatBotUserAvatar}
                       status='online'
                       type='image'
                     />

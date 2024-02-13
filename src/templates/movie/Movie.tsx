@@ -33,7 +33,13 @@ export default function Movie({ movie }: { movie: MovieInterface }) {
         <Typography className='md:flex hidden' variant='h6'>
           {movie.title}
         </Typography>
-        <Typography className='md:flex hidden' variant='body-small'>
+        <Typography className='md:flex hidden' variant='body-small' style={{
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+        }}>
           {movie.plot}
         </Typography>
       </div>

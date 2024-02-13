@@ -5,7 +5,7 @@ import { setDriver, runRecoQuery } from '../shared/utils/Driver';
 import { MovieInterface } from './Interfaces';
 import moviesData from './assets/movies.json';
 import ConnectionModal from '../shared/components/ConnectionModal';
-import { Banner } from '@neo4j-ndl/react';
+import { Banner, Box, Flex, Typography } from '@neo4j-ndl/react';
 
 const mainMovieId = '79132';
 const queryMainMovie = `MATCH (m:Movie {movieId: '${mainMovieId}'})-[:IN_GENRE]->(g:Genre) RETURN ID(m) as id, collect(g.name) as genres, m.year as year, m.imdbRating as imdbRating, m.languages as languages, m.title as title, m.plot as plot, m.poster as poster;`;
@@ -68,9 +68,15 @@ export default function Home() {
         setLoadingSimilarGenre(false);
         setLoadingOtherUsers(false);
       } else {
+        setLoadingMain(true);
+        setLoadingSimilarGenre(true);
+        setLoadingOtherUsers(true);
         const { uri, user, password } = JSON.parse(localStorage.getItem('neo4j.connection') ?? '') ?? {};
         setDriver(uri, user, password);
         await Promise.all([getMainMovie(), getSimilarGenre(), getOtherUsersAlsoWatched()]);
+        setLoadingMain(false);
+        setLoadingSimilarGenre(false);
+        setLoadingOtherUsers(false);
       }
     };
 
@@ -159,12 +165,12 @@ export default function Home() {
         openConnectionModal={() => setIsConnectionModalOpen(true)}
       />
       {recoError ? (
-        <div
+        <Flex
           className='n-bg-palette-neutral-bg-default'
           style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100svh' }}
         >
           <Banner type='danger'>
-            <p>An error occurred while fetching recommendations.</p>
+            <Typography variant='body-large'>An error occurred while fetching recommendations.</Typography>
             <p>
               Please make sure you are connected to a Neo4j Database with the same data model as the{' '}
               <a href='https://github.com/neo4j-graph-examples/recommendations' target='_blank'>
@@ -182,7 +188,7 @@ export default function Home() {
               </a>
             </p>
           </Banner>
-        </div>
+        </Flex>
       ) : (
         <Content
           loadingStates={{ loadingMain, loadingSimilarGenre, loadingOtherUsers }}
@@ -198,7 +204,7 @@ export default function Home() {
         message={{
           type: 'warning',
           content:
-            'Ensure you connect to a Neo4j database containing the movie dataset ( using sandbox.neo4j.com for example )',
+            'Ensure you connect to a Neo4j database containing the Recommendation dataset ( using sandbox.neo4j.com for example )',
         }}
       />
       <div id='footer' className='n-bg-palette-neutral-bg-default' style={{ height: '100px' }} />
