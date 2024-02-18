@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, Typography, IconButton } from '@neo4j-ndl/react';
+import { Menu, Typography, IconButton, Avatar } from '@neo4j-ndl/react';
 import { ChevronDownIconOutline, UserIconOutline } from '@neo4j-ndl/react/icons';
 import { tokens } from '@neo4j-ndl/base';
 
@@ -32,22 +32,20 @@ export default function User() {
         padding: '6px',
         gap: '8px',
         alignItems: 'center',
+        height: '50px'
       }}
     >
-      <Typography
-        variant='h6'
-        sx={{
-          display: { xs: 'none', md: 'flex' },
-          borderRadius: '12px',
-          bgcolor: 'rgb(var(--theme-palette-primary-bg-strong))',
-        }}
-      >
-        <UserIconOutline className='n-w-6 n-h-6' />
-      </Typography>
+      <Avatar
+        className='md:flex hidden'
+        name='JD'
+        shape='square'
+        size='large'
+        type='letters'
+      />
 
       <div style={{ display: 'grid', flexGrow: 1 }}>
         <Typography
-          variant='body-large'
+          variant='body-medium'
           component='a'
           href='#app-bar-with-responsive-menu'
           sx={{

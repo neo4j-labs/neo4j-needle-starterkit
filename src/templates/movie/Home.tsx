@@ -5,7 +5,9 @@ import { setDriver, runRecoQuery } from '../shared/utils/Driver';
 import { MovieInterface } from './Interfaces';
 import moviesData from './assets/movies.json';
 import ConnectionModal from '../shared/components/ConnectionModal';
-import { Banner, Flex, Typography } from '@neo4j-ndl/react';
+import { Banner, Button, Flex, Typography } from '@neo4j-ndl/react';
+import NoDataImg from './assets/neo4j/NoData.png';
+
 
 const mainMovieId = '79132';
 const queryMainMovie = `MATCH (m:Movie {movieId: '${mainMovieId}'})-[:IN_GENRE]->(g:Genre) RETURN ID(m) as id, collect(g.name) as genres, m.year as year, m.imdbRating as imdbRating, m.languages as languages, m.title as title, m.plot as plot, m.poster as poster;`;
@@ -167,10 +169,14 @@ export default function Home() {
       {recoError ? (
         <Flex
           className='n-bg-palette-neutral-bg-default'
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100svh' }}
+          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100svh - 64px)' }}
+          flexDirection='row'
         >
-          <Banner type='danger'>
-            <Typography variant='body-large'>An error occurred while fetching recommendations.</Typography>
+          <img src={NoDataImg} style={{ padding: '3rem'}}/>
+          <Flex gap='8' >
+            <Typography variant='h1'>Data error</Typography>
+            <Typography variant='body-medium'>
+              <p>An error occurred while fetching recommendations data.</p>
             <p>
               Please make sure you are connected to a Neo4j Database with the same data model as the{' '}
               <a href='https://github.com/neo4j-graph-examples/recommendations' target='_blank'>
@@ -187,7 +193,9 @@ export default function Home() {
                 </b>
               </a>
             </p>
-          </Banner>
+              </Typography>
+            <Button>Go back</Button>
+          </Flex>
         </Flex>
       ) : (
         <Content

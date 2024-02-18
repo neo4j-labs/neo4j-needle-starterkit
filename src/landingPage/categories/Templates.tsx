@@ -6,6 +6,8 @@ import EcommerceImgDark from '../../assets/img/Ecommerce-dark.png';
 import EcommerceImgLight from '../../assets/img/Ecommerce-light.png';
 import MovieImgDark from '../../assets/img/MovieImg-dark.png';
 import MovieImgLight from '../../assets/img/MovieImg-light.png';
+import CyberSecurityImgDark from '../../assets/img/CyberSecurity-dark.png';
+import CyberSecurityImgLight from '../../assets/img/CyberSecurity-light.png';
 import WIPImg from '../../assets/img/WIPImg.png';
 
 import { useContext } from 'react';
@@ -26,13 +28,12 @@ export default function Templates() {
       previewLink: '/og-preview',
     },
     {
-      title: 'Recommendation Engine',
-      description: 'XX reco engine for ecommerce/eshop etc',
-      image: colorMode === 'dark' ? EcommerceImgDark : EcommerceImgLight,
-      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
-        import.meta.env.PACKAGE_VERSION
-      }/src/templates/ecommerce`,
-      previewLink: '/ecommerce-preview',
+      title: 'Network Impact Analysis',
+      description:
+      'Explore advanced templates for network analysis in XXX. This templates facilitate the visualization and analysis of complex data networks.',
+      image: colorMode === 'dark' ? CyberSecurityImgDark : CyberSecurityImgLight,
+      sourceCode: 'networkanalysis-source-code-link',
+      previewLink: '/cybersecurity-preview',
     },
     {
       title: 'Movie Recommendation',
@@ -44,28 +45,21 @@ export default function Templates() {
       previewLink: '/movie-preview',
     },
     {
+      title: 'Recommendation Engine',
+      description: 'XX reco engine for ecommerce/eshop etc',
+      image: colorMode === 'dark' ? EcommerceImgDark : EcommerceImgLight,
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/ecommerce`,
+      previewLink: '/ecommerce-preview',
+    },
+    {
       title: 'Fraud Detection',
       description:
         'Financial templates focused on fraud detection for banking services, taxes evasion, anti-money laundering.',
       image: WIPImg,
       sourceCode: 'finance-source-code-link',
       previewLink: '/finance-preview',
-    },
-    // {
-    //   title: 'Network Analysis',
-    //   description:
-    //     'Explore advanced templates for network analysis in XXX. This templates facilitate the visualization and analysis of complex data networks.',
-    //   image: NetworkAnalysisImg,
-    //   sourceCode: 'networkanalysis-source-code-link',
-    //   previewLink: '/networkanalysis-preview',
-    // },
-    {
-      title: 'Telecommunication Networks',
-      description:
-        'Robust templates for telecommunication platforms, including features for network management, customer service, and data traffic analysis.',
-      image: WIPImg,
-      sourceCode: 'telecommunication-source-code-link',
-      previewLink: '/telecommunication-preview',
     },
   ];
 

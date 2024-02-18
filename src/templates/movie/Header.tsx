@@ -32,7 +32,7 @@ export default function Header({
   return (
     <div
       className='n-bg-palette-neutral-bg-weak'
-      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))' }}
+      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))', height: '64px' }}
     >
       <nav
         className='flex items-center justify-between'
@@ -72,7 +72,7 @@ export default function Header({
             display: 'flex',
             flexGrow: 1,
             alignItems: 'center',
-            marginBottom: '-14px',
+            marginBottom: '-26px',
             justifyContent: 'center',
           }}
         >

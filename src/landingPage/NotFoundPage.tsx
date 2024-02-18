@@ -1,4 +1,5 @@
-import { Banner } from '@neo4j-ndl/react';
+import { Button, Flex, Typography } from '@neo4j-ndl/react';
+import NotFoundImg from '../assets/img/NotFound.png';
 
 export default function NotFoundPage() {
   return (
@@ -12,29 +13,15 @@ export default function NotFoundPage() {
         padding: '3rem',
       }}
     >
-      <Banner
-        description={
-          <>
-            Oops! It looks like you've ventured into uncharted territory. The page you're looking for can't be found,
-            but don't worry, we'll help you get back on track. <br />
-            <a href='/'>
-              <b>
-                <u>Click here to return to the homepage</u>
-              </b>
-            </a>
-            , or use the navigation menu to find what you need.
-          </>
-        }
-        title='404 - Page not found'
-        type='warning'
-        icon={true}
-        floating={true}
-        style={{
-          maxWidth: '600px',
-          width: '100%',
-          textAlign: 'center',
-        }}
-      />
+      <img src={NotFoundImg} style={{ padding: '3rem'}}/>
+      <Flex gap='8' >
+        <Typography variant='h1'>404 - Page Not Found</Typography>
+        <Typography variant='body-medium'>
+          <p>It looks like the page you are trying to access either does not exists or is currently unavailable</p>
+          <p>Please try again later and if the problem persists contact us</p>
+          </Typography>
+        <Button>Go back</Button>
+      </Flex>
     </div>
   );
 }

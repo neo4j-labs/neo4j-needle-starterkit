@@ -5,6 +5,7 @@ import ThemeWrapper from './context/ThemeWrapper';
 import QuickStarter from './templates/og/QuickStarter';
 import ECommerce from './templates/ecommerce/Home';
 import Movie from './templates/movie/Home';
+import Cybersecurity from './templates/cybersecurity/Home';
 import Home from './landingPage/Home';
 import NotFoundPage from './landingPage/NotFoundPage';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path='/og-preview' element={<QuickStarter />} />
           <Route path='/ecommerce-preview' element={<ECommerce />} />
           <Route path='/movie-preview' element={<Movie />} />
+          <Route path='/cybersecurity-preview' element={<Cybersecurity />} />
           <Route
             path='/connection-modal-preview'
             element={<ConnectionModal open={true} setOpenConnection={() => null} setConnectionStatus={() => null} />}

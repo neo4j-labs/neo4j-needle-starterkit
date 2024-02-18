@@ -8,7 +8,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
   return (
     <div
       className='n-bg-palette-neutral-bg-weak'
-      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))' }}
+      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))', height: '64px' }}
     >
       <nav
         className='flex items-center justify-between'

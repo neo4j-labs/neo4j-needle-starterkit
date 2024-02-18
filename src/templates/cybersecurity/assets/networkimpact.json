@@ -1,0 +1,34 @@
+{
+    "ListItems": [
+        {
+            "Type": "Linux",
+            "Name": "webserver-apache",
+            "Version": "Ubuntu 22.04.2 LTS"
+        },
+        {
+            "Type": "Linux",
+            "Name": "rehlprod",
+            "Version": "RHEL 7.0 GA"
+        },
+        {
+            "Type": "Windows",
+            "Name": "vmuserA",
+            "Version": "Windows Server 2019 - b1809"
+        },
+        {
+            "Type": "Linux",
+            "Name": "webserver-apache",
+            "Version": "Ubuntu 22.04.2 LTS"
+        },
+        {
+            "Type": "Linux",
+            "Name": "rehlprod",
+            "Version": "RHEL 7.0 GA"
+        },
+        {
+            "Type": "Windows",
+            "Name": "vmuserA",
+            "Version": "Windows Server 2019 - b1809"
+        }
+    ]
+}

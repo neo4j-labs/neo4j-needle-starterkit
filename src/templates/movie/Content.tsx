@@ -55,17 +55,6 @@ export default function Content({
               <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
                 <Typography
                   variant='body-medium'
-                  style={{
-                    textIndent: '50px',
-                    fontFamily: 'Public Sans',
-                    fontSize: '14px',
-                    fontWeight: '400',
-                    lineHeight: '20px',
-                    letterSpacing: '0px',
-                    textAlign: 'center',
-                    maxWidth: '80%',
-                    alignSelf: 'center',
-                  }}
                 >
                   {mainMovie[0].plot}
                 </Typography>
