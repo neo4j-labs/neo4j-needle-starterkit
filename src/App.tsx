@@ -14,9 +14,11 @@ import ConnectionModal from './templates/shared/components/ConnectionModal';
 import Chatbot from './templates/shared/components/Chatbot';
 import messagesData from './templates/shared/components/ChatbotMessages.json';
 import Header from './templates/shared/components/Header';
+import { useState } from 'react';
 
 function App() {
   const messages = messagesData.listMessages;
+  const [activeTab, setActiveTab] = useState<string>('Home');
   return (
     <BrowserRouter>
       <ThemeWrapper>
@@ -33,7 +35,15 @@ function App() {
           <Route path='/chat-widget-preview' element={<Chatbot messages={messages} />} />
           <Route
             path='/header-preview'
-            element={<Header title='Header Component' navItems={['Home', 'Tab1', 'TabX']} />}
+            element={
+              <Header
+                title='Header Component'
+                navItems={['Home', 'Tab1', 'TabX']}
+                useNeo4jConnect={false}
+                activeNavItem={activeTab}
+                setActiveNavItem={setActiveTab}
+              />
+            }
           />
           <Route path='*' element={<NotFoundPage />} />
         </Routes>

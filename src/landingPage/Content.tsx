@@ -4,17 +4,9 @@ import Component from './categories/Component';
 
 export default function Content({ activeTab }: { activeTab: string }) {
   return (
-    <div
-      className='n-bg-palette-neutral-bg-default'
-      style={{
-        width: '100%',
-        padding: 3,
-
-        gap: 1,
-      }}
-    >
-      <Typography variant='body-medium' style={{ display: 'flex', padding: '20px' }}>
-        {activeTab === 'Templates' ? <Templates /> : activeTab === 'Components' ? <Component /> : <></>}
+    <div className='n-bg-palette-neutral-bg-default w-full p-0.75 gap-1' >
+      <Typography variant='body-medium' className='flex p-5' >
+        {activeTab === 'Template' ? <Templates /> : activeTab === 'Component' ? <Component /> : <></>}
       </Typography>
     </div>
   );

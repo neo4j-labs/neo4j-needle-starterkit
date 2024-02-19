@@ -17,59 +17,30 @@ export default function Card({
   previewLink: string;
 }) {
   return (
-    <div style={{ minHeight: '100%' }}>
-      <Widget className='n-bg-palette-neutral-bg-weak' header='' isElevated={true} style={{ minHeight: '100%' }}>
-        <div className='card' style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <div
-            style={{
-              height: '200px',
-              width: '100%',
-              overflow: 'hidden',
-              position: 'relative',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
+    <div className="min-h-full">
+      <Widget className='n-bg-palette-neutral-bg-weak min-h-full' header='' isElevated={true}>
+        <div className='card flex flex-col h-full'>
+          <div className='h-[200px] w-full overflow-hidden relative flex items-center justify-center'>
             <a className='image-link' href={previewLink} target='_blank'>
               <img
-                className='image n-rounded-lg'
+                className='image n-rounded-lg w-full max-h-full object-contain'
                 src={image}
-                alt='Image description'
-                style={{
-                  width: '100%',
-                  maxHeight: '100%',
-                  objectFit: 'contain',
-                }}
-              />
-              <div
-                className='overlay-text'
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  position: 'absolute',
-                }}
-              >
+                alt='Image description' />
+              <div className='overlay-text w-full max-h-full object-contain' >
                 <EyeIconOutline className='n-w-6 n-h-6' />
                 <Typography variant='body-medium'>View live preview</Typography>
               </div>
             </a>
           </div>
 
-          <hr style={{ marginLeft: '15%', width: '70%', marginTop: '16px', borderColor: 'grey' }} />
-          <div
-            className='card-content'
-            style={{ padding: '12px', display: 'flex', flexDirection: 'column', gap: '12px', flexGrow: 1 }}
-          >
+          <hr className='ml-[15%] w-[70%] mt-4 border border-gray-400' />
+          <div className='card-content p-3 flex flex-col gap-3 flex-grow' >
             <Typography variant='h4'>{title}</Typography>
-            <div style={{ minHeight: '80px', maxHeight: '80px', overflow: 'hidden' }}>
+            <div className='min-h-[80px] max-h-[80px] overflow-hidden'>
               <Typography variant='body-medium'>{description}</Typography>
             </div>
           </div>
-          <div
-            className='Footer'
-            style={{ width: '100%', display: 'flex', alignContent: 'center', justifyContent: 'center' }}
-          >
+          <div className='Footer w-full flex content-center justify-center' >
             <Link to={sourceCode} target='_blank'>
               <Button>
                 <CodeBracketIconOutline className='n-w-6 n-h-6' /> &emsp; Source code

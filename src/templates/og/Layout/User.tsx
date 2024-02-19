@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, Typography, IconButton, Avatar } from '@neo4j-ndl/react';
-import { ChevronDownIconOutline, UserIconOutline } from '@neo4j-ndl/react/icons';
+import { ChevronDownIconOutline } from '@neo4j-ndl/react/icons';
 import { tokens } from '@neo4j-ndl/base';
 
 const settings = ['Profile', 'Logout'];
@@ -32,16 +32,10 @@ export default function User() {
         padding: '6px',
         gap: '8px',
         alignItems: 'center',
-        height: '50px'
+        height: '50px',
       }}
     >
-      <Avatar
-        className='md:flex hidden'
-        name='JD'
-        shape='square'
-        size='large'
-        type='letters'
-      />
+      <Avatar className='md:flex hidden' name='JD' shape='square' size='large' type='letters' />
 
       <div style={{ display: 'grid', flexGrow: 1 }}>
         <Typography

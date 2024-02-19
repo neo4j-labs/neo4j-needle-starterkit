@@ -1,8 +1,8 @@
 /* eslint-disable no-confusing-arrow */
 import { Button, Widget, Typography, Avatar } from '@neo4j-ndl/react';
 import { useState } from 'react';
-import ChatBotUserAvatar from '../../../assets/img/chatbot-user.png';
-import ChatBotAvatar from '../../../assets/img/chatbot-ai.png';
+import ChatBotUserAvatar from '../assets/chatbot-user.png';
+import ChatBotAvatar from '../assets/chatbot-ai.png';
 
 type ChatbotProps = {
   messages: {

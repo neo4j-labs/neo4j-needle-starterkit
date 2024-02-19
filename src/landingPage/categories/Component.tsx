@@ -1,13 +1,15 @@
 import { Typography } from '@neo4j-ndl/react';
 import Card from '../components/Card';
 
-import ChatbotImgDark from '../../assets/img/ChatbotImg-dark.png';
-import ConnectionModalImgDark from '../../assets/img/ConnectionModalImg-dark.png';
-import HeaderImgDark from '../../assets/img/HeaderImg-dark.png';
+// Dark mode featured images
+import ChatbotImgDark from '../../assets/img/component/ChatbotImg-dark.png';
+import ConnectionModalImgDark from '../../assets/img/component/ConnectionModalImg-dark.png';
+import HeaderImgDark from '../../assets/img/component/HeaderImg-dark.png';
 
-import ChatbotImgLight from '../../assets/img/ChatbotImg-light.png';
-import ConnectionModalImgLight from '../../assets/img/ConnectionModalImg-light.png';
-import HeaderImgLight from '../../assets/img/HeaderImg-light.png';
+// Light mode featured images
+import ChatbotImgLight from '../../assets/img/component/ChatbotImg-light.png';
+import ConnectionModalImgLight from '../../assets/img/component/ConnectionModalImg-light.png';
+import HeaderImgLight from '../../assets/img/component/HeaderImg-light.png';
 
 import { useContext } from 'react';
 import { ThemeWrapperContext } from '../../context/ThemeWrapper';
@@ -29,7 +31,7 @@ export default function Component() {
     {
       title: 'Connection Modal',
       description:
-        'A sleek and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
+        'A responsive and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
       image: colorMode === 'dark' ? ConnectionModalImgDark : ConnectionModalImgLight,
       sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
         import.meta.env.PACKAGE_VERSION
@@ -48,17 +50,11 @@ export default function Component() {
   ];
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant='h2' style={{ display: 'flex', padding: '20px' }}>
+    <div className='flex flex-col items-center'>
+      <Typography variant='h2' className="flex p-5">
         Components
       </Typography>
-      <Typography variant='body-large' style={{ display: 'flex', padding: '20px' }}>
+      <Typography variant='body-large' className="flex p-5">
         Our component templates are perfect for those seeking to integrate individual widgets or elements into their
         existing projects. These templates range from interactive web chats to connections modal and many more coming on
         the way, offering a versatile selection of standalone components. Each template is built to be easily adaptable

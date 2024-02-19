@@ -28,7 +28,7 @@ export default function Movie({ movie }: { movie: MovieInterface }) {
 
   return (
     <Box onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} style={boxStyle}>
-      <img src={movie.poster} alt={movie.title} style={{ width: '100%', borderRadius: '4px' }} />
+      <img src={movie.poster} alt={movie.title} className='w-full rounded-sm' />
       <div style={infoStyle}>
         <Typography className='md:flex hidden' variant='h6'>
           {movie.title}

@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import Header from './Header';
-import Content from './Content';
+import { Button, Flex, Typography } from '@neo4j-ndl/react';
+
+import Header from '../shared/components/Header';
 import { setDriver, runRecoQuery } from '../shared/utils/Driver';
+import ConnectionModal from '../shared/components/ConnectionModal';
+
+import Content from './Content';
 import { MovieInterface } from './Interfaces';
 import moviesData from './assets/movies.json';
-import ConnectionModal from '../shared/components/ConnectionModal';
-import { Banner, Button, Flex, Typography } from '@neo4j-ndl/react';
-import NoDataImg from './assets/neo4j/NoData.png';
-
+import NoDataImg from '../shared/assets/NoData.png';
 
 const mainMovieId = '79132';
 const queryMainMovie = `MATCH (m:Movie {movieId: '${mainMovieId}'})-[:IN_GENRE]->(g:Genre) RETURN ID(m) as id, collect(g.name) as genres, m.year as year, m.imdbRating as imdbRating, m.languages as languages, m.title as title, m.plot as plot, m.poster as poster;`;
@@ -17,189 +18,105 @@ const similarByGenre = `MATCH (m:Movie {movieId: '${mainMovieId}'})-[:IN_GENRE]-
 export default function Home() {
   const [useReco, setUseReco] = useState(false);
   const [recoError, setRecoError] = useState(false);
-  const [loadingMain, setLoadingMain] = useState(true);
-  const [loadingSimilarGenre, setLoadingSimilarGenre] = useState(true);
-  const [loadingOtherUsers, setLoadingOtherUsers] = useState(true);
+  const [isConnectionModalOpen, setIsConnectionModalOpen] = useState(false);
+
+  const [loading, setLoading] = useState({ main: true, similarGenre: true, otherUsers: true });
+  
   const [mainMovie, setMainMovie] = useState<MovieInterface[]>([]);
   const [recoOtherUsers, setRecoOtherUsers] = useState<MovieInterface[]>([]);
   const [recoSimilarGenre, setRecoSimilarGenre] = useState<MovieInterface[]>([]);
-  const [isConnectionModalOpen, setIsConnectionModalOpen] = useState(false);
-
-  const movies = moviesData.listMovies;
-
-  function isValidMovieData(movie: MovieInterface): boolean {
-    const requiredFields: (keyof MovieInterface)[] = [
-      'id',
-      'genres',
-      'year',
-      'imdbRating',
-      'languages',
-      'title',
-      'plot',
-      'poster',
-    ];
-    return requiredFields.every((field) => movie[field] !== undefined);
-  }
 
   useEffect(() => {
     const fetchData = async () => {
       if (!useReco) {
-        setLoadingMain(true);
-        setLoadingSimilarGenre(true);
-        setLoadingOtherUsers(true);
-        setMainMovie([movies[0]]);
-        setMainMovie([movies[0] as MovieInterface]);
-        setRecoSimilarGenre([
-          movies[1] as MovieInterface,
-          movies[2] as MovieInterface,
-          movies[3] as MovieInterface,
-          movies[4] as MovieInterface,
-          movies[5] as MovieInterface,
-          movies[6] as MovieInterface,
-        ]);
-        setRecoOtherUsers([
-          movies[7] as MovieInterface,
-          movies[8] as MovieInterface,
-          movies[9] as MovieInterface,
-          movies[10] as MovieInterface,
-          movies[11] as MovieInterface,
-          movies[12] as MovieInterface,
-        ]);
         setRecoError(false);
-        setLoadingMain(false);
-        setLoadingSimilarGenre(false);
-        setLoadingOtherUsers(false);
+        setLoading({ main: true, similarGenre: true, otherUsers: true });
+        setMainMovie([moviesData.listMovies[0]]);
+        setRecoSimilarGenre(moviesData.listMovies.slice(1, 7));
+        setRecoOtherUsers(moviesData.listMovies.slice(7, 13));
+        setLoading({ main: false, similarGenre: false, otherUsers: false });
       } else {
-        setLoadingMain(true);
-        setLoadingSimilarGenre(true);
-        setLoadingOtherUsers(true);
+        setLoading({ main: true, similarGenre: true, otherUsers: true });
         const { uri, user, password } = JSON.parse(localStorage.getItem('neo4j.connection') ?? '') ?? {};
         setDriver(uri, user, password);
-        await Promise.all([getMainMovie(), getSimilarGenre(), getOtherUsersAlsoWatched()]);
-        setLoadingMain(false);
-        setLoadingSimilarGenre(false);
-        setLoadingOtherUsers(false);
+        await Promise.all([
+          fetchMovies(queryMainMovie).then(movies => setMainMovie(movies || [])),
+          fetchMovies(similarByGenre).then(movies => setRecoSimilarGenre(movies || [])),
+          fetchMovies(queryOtherUsersAlsoWatched).then(movies => setRecoOtherUsers(movies || [])),
+        ]);
+        setLoading({ main: false, similarGenre: false, otherUsers: false });
       }
     };
 
     fetchData();
   }, [useReco]);
 
-  async function getMainMovie() {
-    const result = await runRecoQuery(queryMainMovie);
-    if (Array.isArray(result)) {
-      const validMovies = result.filter(isValidMovieData);
-      if (validMovies.length !== result.length || result.length < 1) {
-        setRecoError(true);
-      } else {
-        setMainMovie(
-          validMovies.map((record) => ({
-            id: record.id,
-            genres: record.genres,
-            year: record.year,
-            imdbRating: record.imdbRating,
-            languages: record.languages,
-            title: record.title,
-            plot: record.plot,
-            poster: record.poster,
-          }))
-        );
+  const fetchMovies = async (query: string) => {
+      const result = await runRecoQuery(query);
+      if (Array.isArray(result)) {
+        if (result.length < 1) {
+          setRecoError(true);
+        } else {
+          return result.map(movie => ({
+            id: movie.id,
+            genres: movie.genres,
+            year: movie.year,
+            imdbRating: movie.imdbRating,
+            languages: movie.languages,
+            title: movie.title,
+            plot: movie.plot,
+            poster: movie.poster,
+          }));
+        }
       }
-    }
-    setLoadingMain(false);
-  }
-
-  async function getSimilarGenre() {
-    const result = await runRecoQuery(similarByGenre);
-    if (Array.isArray(result)) {
-      const validMovies = result.filter(isValidMovieData);
-      if (validMovies.length !== result.length || result.length < 1) {
-        setRecoError(true);
-      } else {
-        setRecoSimilarGenre(
-          validMovies.map((record) => ({
-            id: record.id,
-            genres: record.genres,
-            year: record.year,
-            imdbRating: record.imdbRating,
-            languages: record.languages,
-            title: record.title,
-            plot: record.plot,
-            poster: record.poster,
-          }))
-        );
-      }
-    }
-    setLoadingSimilarGenre(false);
-  }
-
-  async function getOtherUsersAlsoWatched() {
-    const result = await runRecoQuery(queryOtherUsersAlsoWatched);
-    if (Array.isArray(result)) {
-      const validMovies = result.filter(isValidMovieData);
-      if (validMovies.length !== result.length || result.length < 1) {
-        setRecoError(true);
-      } else {
-        setRecoOtherUsers(
-          validMovies.map((record) => ({
-            id: record.id,
-            genres: record.genres,
-            year: record.year,
-            imdbRating: record.imdbRating,
-            languages: record.languages,
-            title: record.title,
-            plot: record.plot,
-            poster: record.poster,
-          }))
-        );
-      }
-    }
-    setLoadingOtherUsers(false);
-  }
+  };
 
   return (
     <div>
       <Header
         title='NeoMovie'
-        navItems={[]}
-        setUseReco={setUseReco}
-        useReco={useReco}
+        useNeo4jConnect={true}
+        setConnectNeo4j={setUseReco}
+        connectNeo4j={useReco}
         openConnectionModal={() => setIsConnectionModalOpen(true)}
       />
       {recoError ? (
         <Flex
-          className='n-bg-palette-neutral-bg-default'
-          style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 'calc(100svh - 64px)' }}
+          className='n-bg-palette-neutral-bg-default flex justify-center items-center h-[calc(100vh-64px)]'
           flexDirection='row'
         >
-          <img src={NoDataImg} style={{ padding: '3rem'}}/>
-          <Flex gap='8' >
+          <img src={NoDataImg} className="p-12" />
+          <Flex gap='8'>
             <Typography variant='h1'>Data error</Typography>
             <Typography variant='body-medium'>
               <p>An error occurred while fetching recommendations data.</p>
-            <p>
-              Please make sure you are connected to a Neo4j Database with the same data model as the{' '}
-              <a href='https://github.com/neo4j-graph-examples/recommendations' target='_blank'>
-                <b>
-                  <u>Recommendation demo available here</u>
-                </b>
-              </a>
-            </p>
-            <p>
-              Alternatively, you can also use the one from{' '}
-              <a href='https://sandbox.neo4j.com' target='_blank'>
-                <b>
-                  <u>Neo4j Sandbox</u>
-                </b>
-              </a>
-            </p>
-              </Typography>
+              <p>
+                Please make sure you are connected to a Neo4j Database with the same data model as the{' '}
+                <a href='https://github.com/neo4j-graph-examples/recommendations' target='_blank'>
+                  <b>
+                    <u>Recommendation demo available here</u>
+                  </b>
+                </a>
+              </p>
+              <p>
+                Alternatively, you can also use the one from{' '}
+                <a href='https://sandbox.neo4j.com' target='_blank'>
+                  <b>
+                    <u>Neo4j Sandbox</u>
+                  </b>
+                </a>
+              </p>
+            </Typography>
             <Button>Go back</Button>
           </Flex>
         </Flex>
       ) : (
         <Content
-          loadingStates={{ loadingMain, loadingSimilarGenre, loadingOtherUsers }}
+        loadingStates={{
+          loadingMain: loading.main,
+          loadingSimilarGenre: loading.similarGenre,
+          loadingOtherUsers: loading.otherUsers,
+        }}
           mainMovie={mainMovie}
           recoSimilarGenre={recoSimilarGenre}
           recoOtherUsers={recoOtherUsers}
@@ -215,7 +132,7 @@ export default function Home() {
             'Ensure you connect to a Neo4j database containing the Recommendation dataset ( using sandbox.neo4j.com for example )',
         }}
       />
-      <div id='footer' className='n-bg-palette-neutral-bg-default' style={{ height: '100px' }} />
+      <div id='footer' className='n-bg-palette-neutral-bg-default h-[100px]' />
     </div>
   );
 }

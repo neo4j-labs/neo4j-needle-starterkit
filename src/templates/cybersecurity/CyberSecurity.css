@@ -14,6 +14,7 @@
 }
 
 .search-bar.center {
+    width: 100dvh;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -31,3 +32,13 @@
     font-size: 1.2rem;
     text-align: center;
 }
+
+.text-input-container {
+    transition: width 0.5s ease;
+    width: 100dvh;
+}
+  
+.text-input-container.search-initiated {
+    width: 60dvh;
+}
+  

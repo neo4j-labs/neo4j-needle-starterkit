@@ -1,14 +1,16 @@
-import Neo4jLogoBW from '../../../assets/img/logo.svg';
-import Neo4jLogoColor from '../../../assets/img/logo-color.svg';
 import User from './User';
 import { MoonIconOutline, SunIconOutline, Cog8ToothIconOutline } from '@neo4j-ndl/react/icons';
-import { Typography, IconButton } from '@neo4j-ndl/react';
+import { Typography, IconButton, Logo } from '@neo4j-ndl/react';
 
 export default function Header({ themeMode, toggleTheme }: { themeMode: string; toggleTheme: () => void }) {
   return (
     <div
       className='n-bg-palette-neutral-bg-weak'
-      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))', height: '64px' }}
+      style={{
+        padding: '4px',
+        borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))',
+        height: '64px',
+      }}
     >
       <nav
         className='flex items-center justify-between'
@@ -22,13 +24,7 @@ export default function Header({ themeMode, toggleTheme }: { themeMode: string; 
           className='flex w-1/3 shrink-0 grow-0'
           style={{ display: 'flex', minWidth: `200px`, flexGrow: 1, alignItems: 'center' }}
         >
-          <Typography variant='h6' component='a' href='#app-bar-with-responsive-menu' sx={{}}>
-            <img
-              src={themeMode === 'dark' ? Neo4jLogoBW : Neo4jLogoColor}
-              style={{ height: '32px', minHeight: '32px', minWidth: '32px' }}
-              alt='Neo4j Logo'
-            />
-          </Typography>
+          <Logo className='h-8 min-h-12 min-w-24 mr-2' type='full' />
           <div style={{ flexGrow: 1, display: 'flex' }}>
             <Typography variant='h6'>Quick Starter</Typography>
           </div>

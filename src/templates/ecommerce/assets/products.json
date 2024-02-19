@@ -11,17 +11,17 @@
                 {
                   "CPU": 1,
                   "Memory": "2Gib",
-                  "Characteristics": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo id suscipit beatae incidunt."
+                  "Details": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo id suscipit beatae incidunt."
                 },
                 {
                   "CPU": 2,
                   "Memory": "4Gib",
-                  "Characteristics": "Officiis eos illo vitae accusamus! Doloremque sapiente ducimus ullam. Assumenda ad sapiente deleniti!"
+                  "Details": "Officiis eos illo vitae accusamus! Doloremque sapiente ducimus ullam. Assumenda ad sapiente deleniti!"
                 },
                 {
                   "CPU": 4,
                   "Memory": "16Gib",
-                  "Characteristics": "Provident ipsum earum, officiis obcaecati labore quisquam cum officia delectus minus dolor. Necessitatibus nemo illo pariatur velit voluptatibus cupiditate quas?"
+                  "Details": "Provident ipsum earum, officiis obcaecati labore quisquam cum officia delectus minus dolor. Necessitatibus nemo illo pariatur velit voluptatibus cupiditate quas?"
                 }
               ]
         },

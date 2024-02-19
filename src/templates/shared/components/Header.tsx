@@ -1,14 +1,29 @@
-import Neo4jLogoBW from '../../../assets/img/logo.svg';
-import Neo4jLogoColor from '../../../assets/img/logo-color.svg';
 import { MoonIconOutline, SunIconOutline, QuestionMarkCircleIconOutline } from '@neo4j-ndl/react/icons';
-import { Typography, IconButton, Tabs } from '@neo4j-ndl/react';
+import { Typography, IconButton, Tabs, Switch, Logo } from '@neo4j-ndl/react';
 import React, { useState } from 'react';
 import { ThemeWrapperContext } from '../../../context/ThemeWrapper';
 
-export default function Header({ title, navItems }: { title: string; navItems: string[] }) {
+export default function Header({
+  title,
+  navItems = [],
+  activeNavItem = navItems[0],
+  setActiveNavItem = () => {},
+  useNeo4jConnect = false,
+  connectNeo4j = false,
+  setConnectNeo4j = () => {},
+  openConnectionModal = () => {},
+}: {
+  title: string;
+  navItems?: string[];
+  activeNavItem?: string;
+  setActiveNavItem?: (activeNavItem: string) => void;
+  useNeo4jConnect?: boolean;
+  connectNeo4j?: boolean;
+  setConnectNeo4j?: (connectNeo4j: boolean) => void;
+  openConnectionModal?: () => void;
+}) {
   const themeUtils = React.useContext(ThemeWrapperContext);
   const [themeMode, setThemeMode] = useState<string>(themeUtils.colorMode);
-  const [activeTab, setActiveTab] = useState<string>(navItems[0] || '');
 
   const toggleColorMode = () => {
     setThemeMode((prevThemeMode) => {
@@ -20,7 +35,11 @@ export default function Header({ title, navItems }: { title: string; navItems: s
   return (
     <div
       className='n-bg-palette-neutral-bg-weak'
-      style={{ padding: '4px', borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))', height: '64px' }}
+      style={{
+        padding: '4px',
+        borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))',
+        height: '64px',
+      }}
     >
       <nav
         className='flex items-center justify-between'
@@ -31,19 +50,9 @@ export default function Header({ title, navItems }: { title: string; navItems: s
         style={{ display: 'flex', flexDirection: 'row' }}
       >
         <section className='flex md:flex-row flex-col items-center w-1/6 shrink-0 grow-0'>
-          <Typography
-            className='md:inline-block'
-            variant='h6'
-            component='a'
-            href='#app-bar-with-responsive-menu'
-            sx={{ margin: 0, padding: 0 }}
-          >
-            <img
-              src={themeMode === 'dark' ? Neo4jLogoBW : Neo4jLogoColor}
-              style={{ height: '32px', minHeight: '32px', minWidth: '32px', marginRight: '8px' }}
-              alt='Neo4j Logo'
-            />
-          </Typography>
+          <div className='md:inline-block' style={{ margin: 0, padding: 0 }}>
+            <Logo className='h-8 min-h-12 min-w-24 mr-2' type='full' />
+          </div>
           <div style={{ display: 'flex', justifyContent: 'center', marginLeft: 0, paddingLeft: 0 }}>
             <Typography className='md:inline-block hidden' variant='h6' sx={{ margin: 0, padding: 0 }}>
               {title}
@@ -64,7 +73,7 @@ export default function Header({ title, navItems }: { title: string; navItems: s
             justifyContent: 'center',
           }}
         >
-          <Tabs size='large' fill='underline' onChange={(e) => setActiveTab(e)} value={activeTab}>
+          <Tabs size='large' fill='underline' onChange={(e) => setActiveNavItem(e)} value={activeNavItem}>
             {navItems.map((item) => (
               <Tabs.Tab tabId={item} key={item}>
                 {item}
@@ -76,8 +85,33 @@ export default function Header({ title, navItems }: { title: string; navItems: s
           <div>
             <div
               className='inline-flex gap-x-1'
-              style={{ display: 'flex', flexGrow: 0, alignItems: 'center', gap: '4px', paddingRight: '12px' }}
+              style={{
+                width: 'max-content',
+                display: 'flex',
+                flexGrow: 0,
+                alignItems: 'center',
+                gap: '4px',
+                paddingRight: '12px',
+              }}
             >
+              {useNeo4jConnect ? (
+                <Switch
+                  checked={connectNeo4j}
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      openConnectionModal();
+                    } else {
+                      setConnectNeo4j(false);
+                    }
+                  }}
+                  disabled={false}
+                  fluid={true}
+                  label={`Connect${connectNeo4j ? 'ed' : ''} to Neo4j`}
+                  labelBefore={true}
+                />
+              ) : (
+                <></>
+              )}
               <IconButton aria-label='Toggle Dark mode' clean size='large' onClick={toggleColorMode}>
                 {themeMode === 'dark' ? (
                   <span role='img' aria-label='sun'>
