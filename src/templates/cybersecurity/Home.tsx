@@ -1,5 +1,15 @@
 import React, { useState } from 'react';
-import { DataGrid, Flex, StatusIndicator, Tabs, TextInput, Tip, Typography, Widget } from '@neo4j-ndl/react';
+import {
+  DataGrid,
+  Flex,
+  IconButton,
+  StatusIndicator,
+  Tabs,
+  TextInput,
+  Tip,
+  Typography,
+  Widget,
+} from '@neo4j-ndl/react';
 import { MagnifyingGlassIconOutline, InformationCircleIconOutline } from '@neo4j-ndl/react/icons';
 import { createColumnHelper, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
 
@@ -114,7 +124,11 @@ export default function Home() {
               placeholder='Search...'
               helpText='Search for server, IP, domain, etc.'
               fluid={true}
-              rightIcon={<MagnifyingGlassIconOutline className={isSearchInitiated ? 'n-w-4 n-h-4' : 'n-w-6 n-h-6'} />}
+              rightIcon={
+                <IconButton aria-label='Search Icon' clean size='small' className='-mt-1' type='submit'>
+                  <MagnifyingGlassIconOutline className={isSearchInitiated ? 'n-w-4 n-h-4' : 'n-w-6 n-h-6'} />
+                </IconButton>
+              }
             />
           </div>
         </form>

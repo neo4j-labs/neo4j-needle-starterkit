@@ -34,7 +34,7 @@
 }
 
 .text-input-container {
-    transition: width 0.5s ease;
+    transition: width 1.5s ease;
     width: 100dvh;
 }
   
