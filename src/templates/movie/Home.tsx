@@ -21,7 +21,7 @@ export default function Home() {
   const [isConnectionModalOpen, setIsConnectionModalOpen] = useState(false);
 
   const [loading, setLoading] = useState({ main: true, similarGenre: true, otherUsers: true });
-  
+
   const [mainMovie, setMainMovie] = useState<MovieInterface[]>([]);
   const [recoOtherUsers, setRecoOtherUsers] = useState<MovieInterface[]>([]);
   const [recoSimilarGenre, setRecoSimilarGenre] = useState<MovieInterface[]>([]);
@@ -40,9 +40,9 @@ export default function Home() {
         const { uri, user, password } = JSON.parse(localStorage.getItem('neo4j.connection') ?? '') ?? {};
         setDriver(uri, user, password);
         await Promise.all([
-          fetchMovies(queryMainMovie).then(movies => setMainMovie(movies || [])),
-          fetchMovies(similarByGenre).then(movies => setRecoSimilarGenre(movies || [])),
-          fetchMovies(queryOtherUsersAlsoWatched).then(movies => setRecoOtherUsers(movies || [])),
+          fetchMovies(queryMainMovie).then((movies) => setMainMovie(movies || [])),
+          fetchMovies(similarByGenre).then((movies) => setRecoSimilarGenre(movies || [])),
+          fetchMovies(queryOtherUsersAlsoWatched).then((movies) => setRecoOtherUsers(movies || [])),
         ]);
         setLoading({ main: false, similarGenre: false, otherUsers: false });
       }
@@ -52,23 +52,23 @@ export default function Home() {
   }, [useReco]);
 
   const fetchMovies = async (query: string) => {
-      const result = await runRecoQuery(query);
-      if (Array.isArray(result)) {
-        if (result.length < 1) {
-          setRecoError(true);
-        } else {
-          return result.map(movie => ({
-            id: movie.id,
-            genres: movie.genres,
-            year: movie.year,
-            imdbRating: movie.imdbRating,
-            languages: movie.languages,
-            title: movie.title,
-            plot: movie.plot,
-            poster: movie.poster,
-          }));
-        }
+    const result = await runRecoQuery(query);
+    if (Array.isArray(result)) {
+      if (result.length < 1) {
+        setRecoError(true);
+      } else {
+        return result.map((movie) => ({
+          id: movie.id,
+          genres: movie.genres,
+          year: movie.year,
+          imdbRating: movie.imdbRating,
+          languages: movie.languages,
+          title: movie.title,
+          plot: movie.plot,
+          poster: movie.poster,
+        }));
       }
+    }
   };
 
   return (
@@ -85,7 +85,7 @@ export default function Home() {
           className='n-bg-palette-neutral-bg-default flex justify-center items-center h-[calc(100vh-64px)]'
           flexDirection='row'
         >
-          <img src={NoDataImg} className="p-12" />
+          <img src={NoDataImg} className='p-12' />
           <Flex gap='8'>
             <Typography variant='h1'>Data error</Typography>
             <Typography variant='body-medium'>
@@ -112,11 +112,11 @@ export default function Home() {
         </Flex>
       ) : (
         <Content
-        loadingStates={{
-          loadingMain: loading.main,
-          loadingSimilarGenre: loading.similarGenre,
-          loadingOtherUsers: loading.otherUsers,
-        }}
+          loadingStates={{
+            loadingMain: loading.main,
+            loadingSimilarGenre: loading.similarGenre,
+            loadingOtherUsers: loading.otherUsers,
+          }}
           mainMovie={mainMovie}
           recoSimilarGenre={recoSimilarGenre}
           recoOtherUsers={recoOtherUsers}

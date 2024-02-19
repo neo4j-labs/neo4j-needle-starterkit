@@ -14,7 +14,7 @@ export default function QuickStarter() {
         activeNavItem={activeTab}
         setActiveNavItem={setActiveTab}
       />
-      <div className="h-full min-h-screen w-full flex">
+      <div className='h-full min-h-screen w-full flex'>
         <Content activeTab={activeTab} />
       </div>
     </div>

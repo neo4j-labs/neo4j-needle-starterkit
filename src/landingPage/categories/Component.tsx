@@ -51,10 +51,10 @@ export default function Component() {
 
   return (
     <div className='flex flex-col items-center'>
-      <Typography variant='h2' className="flex p-5">
+      <Typography variant='h2' className='flex p-5'>
         Components
       </Typography>
-      <Typography variant='body-large' className="flex p-5">
+      <Typography variant='body-large' className='flex p-5'>
         Our component templates are perfect for those seeking to integrate individual widgets or elements into their
         existing projects. These templates range from interactive web chats to connections modal and many more coming on
         the way, offering a versatile selection of standalone components. Each template is built to be easily adaptable

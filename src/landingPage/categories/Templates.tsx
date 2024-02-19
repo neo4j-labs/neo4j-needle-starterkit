@@ -59,11 +59,11 @@ export default function Templates() {
   ];
 
   return (
-    <div className='flex flex-col items-center' >
-      <Typography variant='h2' className="flex p-5">
+    <div className='flex flex-col items-center'>
+      <Typography variant='h2' className='flex p-5'>
         Templates
       </Typography>
-      <Typography variant='body-large' className="flex p-5">
+      <Typography variant='body-large' className='flex p-5'>
         Dive into our collection of ready-to-use templates tailored for various use cases and industry. These templates
         are designed to serve a wide range of product purposes. Our templates provide a seamless blend of aesthetics and
         utility, ensuring your product not only meets its functional objectives but also delivers a memorable user

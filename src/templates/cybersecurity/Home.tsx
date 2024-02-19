@@ -37,24 +37,26 @@ const columns = [
   }),
   columnHelper.accessor('Status', {
     header: () => <b>Status</b>,
-    cell: (info) => <>
-    <StatusIndicator type={info.getValue() != 'Up'? 'danger' : 'success'} />
-    {info.getValue().startsWith('CVE') ?
-    <div className='flex flex-column'>
-      CVE Detected
-      <Tip>
-        <Tip.Trigger>
-          <InformationCircleIconOutline className="n-w-4 n-h-4 ml-2" />
-        </Tip.Trigger>
-        <Tip.Content>
-          <Tip.Body>{info.renderValue()}</Tip.Body>
-        </Tip.Content>
-      </Tip>
-    </div>
-    :
-    <>{info.renderValue()}</>
-    }
-    </>,
+    cell: (info) => (
+      <>
+        <StatusIndicator type={info.getValue() != 'Up' ? 'danger' : 'success'} />
+        {info.getValue().startsWith('CVE') ? (
+          <div className='flex flex-column'>
+            CVE Detected
+            <Tip>
+              <Tip.Trigger>
+                <InformationCircleIconOutline className='n-w-4 n-h-4 ml-2' />
+              </Tip.Trigger>
+              <Tip.Content>
+                <Tip.Body>{info.renderValue()}</Tip.Body>
+              </Tip.Content>
+            </Tip>
+          </div>
+        ) : (
+          <>{info.renderValue()}</>
+        )}
+      </>
+    ),
     footer: (info) => info.column.id,
   }),
 ];
@@ -129,23 +131,23 @@ export default function Home() {
                   <Tabs.Tab tabId={1}>Graph</Tabs.Tab>
                 </Tabs>
                 <Flex className='p-8'>
-                {activeTab === 0 ? (
+                  {activeTab === 0 ? (
                     <DataGrid
-                    isResizable={false}
-                    tableInstance={table}
-                    isKeyboardNavigable={false}
-                    styling={{
-                      zebraStriping: true,
-                      borderStyle: 'none',
-                      headerStyle: 'filled',
-                    }}
-                    components={{
-                      Navigation: null,
-                    }}
-                  />
+                      isResizable={false}
+                      tableInstance={table}
+                      isKeyboardNavigable={false}
+                      styling={{
+                        zebraStriping: true,
+                        borderStyle: 'none',
+                        headerStyle: 'filled',
+                      }}
+                      components={{
+                        Navigation: null,
+                      }}
+                    />
                   ) : (
                     <Flex flexDirection='row'>
-                      <img src={NoGraphImg} className="p-12" />
+                      <img src={NoGraphImg} className='p-12' />
                       <Flex gap='8'>
                         <Typography variant='h1'>WIP Screen</Typography>
                         <Typography variant='body-medium'>
@@ -160,7 +162,7 @@ export default function Home() {
                   )}
                 </Flex>
               </div>
-              <div className='text-center' >
+              <div className='text-center'>
                 <>Results for "{searchQuery}"</>
               </div>
             </Flex>

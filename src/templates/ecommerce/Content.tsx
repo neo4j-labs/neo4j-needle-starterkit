@@ -48,15 +48,14 @@ export default function Content() {
   });
 
   return (
-    <div className='w-full flex justify-center' >
+    <div className='w-full flex justify-center'>
       <div className='n-bg-palette-neutral-bg-default p-5 flex flex-col'>
-
         {/* Featured Product */}
         <Typography variant='h1'>{products[0].name}</Typography>
-        <div className="flex flex-row items-start p-4 m-2">
-          <img src={productImg1} alt='Product 1' className="w-[40%] rounded-md" />
-          <div className="px-5 flex flex-col" >
-            <div className="flex flex-col gap-5" >
+        <div className='flex flex-row items-start p-4 m-2'>
+          <img src={productImg1} alt='Product 1' className='w-[40%] rounded-md' />
+          <div className='px-5 flex flex-col'>
+            <div className='flex flex-col gap-5'>
               <Typography variant='body-medium'>{products[0].desc1}</Typography>
               <Typography className='md:inline-block hidden' variant='body-medium'>
                 {products[0].desc2}
@@ -82,7 +81,7 @@ export default function Content() {
                 <Tag>Next day delivery</Tag>
               </div>
             </div>
-            <div className="p-2.5 flex flex-col gap-2.5" >
+            <div className='p-2.5 flex flex-col gap-2.5'>
               <Typography variant='body-large'>Price: £{products[0].price}</Typography>
               <Button>Add to cart</Button>
             </div>
@@ -94,17 +93,10 @@ export default function Content() {
           <Typography variant='h2'>Similar products</Typography>
           <div className='flex flex-col md:flex-row gap-2.5 py-2.5'>
             {[productImg2, productImg3, productImg4].map((img, index) => (
-              <Widget
-                header={products[index + 1].name}
-                isElevated={true}
-                key={index}
-                className="mx-auto max-w-[80%]"
-              >
-                <div
-                  className='flex flex-col gap-2.5 md:flex-row'
-                >
+              <Widget header={products[index + 1].name} isElevated={true} key={index} className='mx-auto max-w-[80%]'>
+                <div className='flex flex-col gap-2.5 md:flex-row'>
                   <img src={img} alt={`Product ${index + 2}`} className='max-w-[40%] self-center' />
-                  <div className="p-2.5 flex flex-col gap-2.5" >
+                  <div className='p-2.5 flex flex-col gap-2.5'>
                     <div>{products[index + 1].desc1}</div>
                     <Typography variant='body-large'>Price: £{products[index + 1].price}</Typography>
                     <Button>Add to cart</Button>
@@ -121,9 +113,7 @@ export default function Content() {
           <div className='flex flex-col items-start md:flex-row gap-2.5 py-2.5'>
             {[productImg5, productImg6].map((img, index) => (
               <Widget className='md:max-w-[30%]' header='' isElevated={true} key={index}>
-                <div
-                  className='flex flex-row gap-2.5 md:flex-row'
-                >
+                <div className='flex flex-row gap-2.5 md:flex-row'>
                   <img src={productImg1} alt='Product 1' className='max-w-[40%]' />
                   <Typography variant='h6' className='self-center'>
                     <PlusCircleIconOutline className='n-w-6 n-h-6' />
