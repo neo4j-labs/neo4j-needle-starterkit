@@ -4,7 +4,7 @@ import Content from './Content';
 export default function Home() {
   return (
     <div>
-      <Header title='Neoshop' navItems={[]} />
+      <Header title='Neoshop' navItems={[]} userHeader={false} />
       <Content />
     </div>
   );

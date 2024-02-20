@@ -1,5 +1,5 @@
-import { SideNavigation } from '@neo4j-ndl/react';
 import { useState } from 'react';
+import { SideNavigation } from '@neo4j-ndl/react';
 import { MagnifyingGlassIconOutline, DbmsIcon, BellAlertIconOutline } from '@neo4j-ndl/react/icons';
 
 export default function SideNav() {
@@ -15,13 +15,7 @@ export default function SideNav() {
   const expandedChangeProp = isMobile ? {} : { onExpandedChange: setOnExpanded };
 
   return (
-    <div
-      style={{
-        height: 'calc(100vh - 58px)',
-        minHeight: '700px',
-        display: 'flex',
-      }}
-    >
+    <div className="h-[calc(100vh-58px)] min-h-[700px] flex" >
       <SideNavigation iconMenu={true} expanded={expanded} {...expandedChangeProp}>
         <SideNavigation.List>
           <SideNavigation.Item

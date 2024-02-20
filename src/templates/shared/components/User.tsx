@@ -23,7 +23,7 @@ export default function User() {
 
   return (
     <div
-      className='hidden md:inline-block'
+      className='hidden md:inline-block n-bg-palette-neutral-bg-weak'
       style={{
         display: 'flex',
         borderWidth: '1px',

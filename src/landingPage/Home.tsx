@@ -13,6 +13,7 @@ export default function QuickStarter() {
         useNeo4jConnect={false}
         activeNavItem={activeTab}
         setActiveNavItem={setActiveTab}
+        userHeader={false}
       />
       <div className='h-full min-h-screen w-full flex'>
         <Content activeTab={activeTab} />

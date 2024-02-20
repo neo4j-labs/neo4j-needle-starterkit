@@ -106,6 +106,7 @@ export default function Home() {
         connectNeo4j={connectNeo4j}
         setConnectNeo4j={setConnectNeo4j}
         openConnectionModal={() => setIsConnectionModalOpen(true)}
+        userHeader={false}
       />
 
       <div className='landing-page n-bg-palette-neutral-bg-default'>

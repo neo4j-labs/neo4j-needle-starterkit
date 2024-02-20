@@ -7,7 +7,7 @@ import ECommerce from './templates/ecommerce/Home';
 import Movie from './templates/movie/Home';
 import Cybersecurity from './templates/cybersecurity/Home';
 import Home from './landingPage/Home';
-import NotFoundPage from './landingPage/NotFoundPage';
+import PageNotFoundPage from './templates/shared/components/PageNotFoundPage';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import ConnectionModal from './templates/shared/components/ConnectionModal';
@@ -15,6 +15,7 @@ import Chatbot from './templates/shared/components/Chatbot';
 import messagesData from './templates/shared/components/ChatbotMessages.json';
 import Header from './templates/shared/components/Header';
 import { useState } from 'react';
+import User from './templates/shared/components/User';
 
 function App() {
   const messages = messagesData.listMessages;
@@ -45,7 +46,11 @@ function App() {
               />
             }
           />
-          <Route path='*' element={<NotFoundPage />} />
+          <Route
+            path='/user-preview'
+            element={<User />}
+          />
+          <Route path='*' element={<PageNotFoundPage />} />
         </Routes>
       </ThemeWrapper>
     </BrowserRouter>

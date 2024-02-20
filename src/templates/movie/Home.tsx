@@ -79,6 +79,7 @@ export default function Home() {
         setConnectNeo4j={setUseReco}
         connectNeo4j={useReco}
         openConnectionModal={() => setIsConnectionModalOpen(true)}
+        userHeader={false}
       />
       {recoError ? (
         <Flex

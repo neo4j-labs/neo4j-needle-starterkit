@@ -1,8 +1,8 @@
 import { Button, Flex, Typography } from '@neo4j-ndl/react';
-import NotFoundImg from '../assets/img/NotFound.png';
+import NotFoundImg from '../assets/NotFound.png';
 import { useNavigate } from 'react-router-dom';
 
-export default function NotFoundPage() {
+export default function PageNotFoundPage() {
   const navigate = useNavigate();
 
   return (

@@ -2,6 +2,7 @@ import { MoonIconOutline, SunIconOutline, QuestionMarkCircleIconOutline } from '
 import { Typography, IconButton, Tabs, Switch, Logo } from '@neo4j-ndl/react';
 import React, { useState } from 'react';
 import { ThemeWrapperContext } from '../../../context/ThemeWrapper';
+import User from './User';
 
 export default function Header({
   title,
@@ -12,6 +13,7 @@ export default function Header({
   connectNeo4j = false,
   setConnectNeo4j = () => {},
   openConnectionModal = () => {},
+  userHeader = true,
 }: {
   title: string;
   navItems?: string[];
@@ -21,6 +23,7 @@ export default function Header({
   connectNeo4j?: boolean;
   setConnectNeo4j?: (connectNeo4j: boolean) => void;
   openConnectionModal?: () => void;
+  userHeader?: boolean;
 }) {
   const themeUtils = React.useContext(ThemeWrapperContext);
   const [themeMode, setThemeMode] = useState<string>(themeUtils.colorMode);
@@ -51,7 +54,7 @@ export default function Header({
       >
         <section className='flex md:flex-row flex-col items-center w-1/6 shrink-0 grow-0'>
           <div className='md:inline-block' style={{ margin: 0, padding: 0 }}>
-            <Logo className='h-8 min-h-12 min-w-24 mr-2' type='full' />
+          <Logo className="h-6 min-h-6 min-w-12 md:h-8 md:min-h-12 md:min-w-24 md:mr-2 " type="full" />
           </div>
           <div style={{ display: 'flex', justifyContent: 'center', marginLeft: 0, paddingLeft: 0 }}>
             <Typography className='md:inline-block hidden' variant='h6' sx={{ margin: 0, padding: 0 }}>
@@ -126,6 +129,15 @@ export default function Header({
               <IconButton className='hidden md:inline-block' aria-label='Help' clean size='large'>
                 <QuestionMarkCircleIconOutline className='n-w-6 n-h-6' />
               </IconButton>
+              
+              {
+                userHeader ? (
+                  <div className='hidden md:inline-block'>
+                    <User />
+                  </div>
+                ) : null
+              }
+
             </div>
           </div>
         </section>
