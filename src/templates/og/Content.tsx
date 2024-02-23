@@ -11,7 +11,7 @@ export default function Content() {
 
   useEffect(() => {
     if (!init) {
-      let session = localStorage.getItem('neo4j.connection');
+      let session = localStorage.getItem('needleStarterKit-neo4j.connection');
       if (session) {
         let neo4jConnection = JSON.parse(session);
         setDriver(neo4jConnection.uri, neo4jConnection.user, neo4jConnection.password).then((isSuccessful: boolean) => {
@@ -23,7 +23,7 @@ export default function Content() {
   });
 
   return (
-    <div className='n-bg-palette-neutral-bg-default w-full p-0.75 flex flex-col items-center gap-1' >
+    <div className='n-bg-palette-neutral-bg-default w-full p-0.75 flex flex-col items-center gap-1'>
       <ConnectionModal
         open={openConnection}
         setOpenConnection={setOpenConnection}
@@ -32,9 +32,9 @@ export default function Content() {
       <div>Your content goes here.</div>
       <div>Happy coding!</div>
 
-      <Typography variant='body-medium' className="flex p-5" >
+      <Typography variant='body-medium' className='flex p-5'>
         Neo4j connection Status:
-        <Typography variant='body-medium' className="ml-2.5" >
+        <Typography variant='body-medium' className='ml-2.5'>
           {!connectionStatus ? <Label color='danger'>Not connected</Label> : <Label color='success'>Connected</Label>}
         </Typography>
       </Typography>

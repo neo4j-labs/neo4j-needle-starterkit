@@ -36,28 +36,20 @@ export default function Header({
   };
 
   return (
-    <div
-      className='n-bg-palette-neutral-bg-weak'
-      style={{
-        padding: '4px',
-        borderBottom: '2px solid rgb(var(--theme-palette-neutral-border-weak))',
-        height: '64px',
-      }}
-    >
+    <div className='n-bg-palette-neutral-bg-weak p-1 border-b-2 border-[rgb(var(--theme-palette-neutral-border-weak))] h-16'>
       <nav
         className='flex items-center justify-between'
         role='navigation'
         data-testid='navigation'
         id='navigation'
         aria-label='main navigation'
-        style={{ display: 'flex', flexDirection: 'row' }}
       >
         <section className='flex md:flex-row flex-col items-center w-1/6 shrink-0 grow-0'>
-          <div className='md:inline-block' style={{ margin: 0, padding: 0 }}>
-          <Logo className="h-6 min-h-6 min-w-12 md:h-8 md:min-h-12 md:min-w-24 md:mr-2 " type="full" />
+          <div className='md:inline-block'>
+            <Logo className='h-6 min-h-6 min-w-12 md:h-8 md:min-h-12 md:min-w-24 md:mr-2' type='full' />
           </div>
-          <div style={{ display: 'flex', justifyContent: 'center', marginLeft: 0, paddingLeft: 0 }}>
-            <Typography className='md:inline-block hidden' variant='h6' sx={{ margin: 0, padding: 0 }}>
+          <div className='flex justify-center md:ml-0 pl-0'>
+            <Typography className='md:inline-block hidden' variant='h6'>
               {title}
             </Typography>
             <Typography className='md:hidden inline-block' variant='subheading-small'>
@@ -66,16 +58,7 @@ export default function Header({
           </div>
         </section>
 
-        <section
-          className='flex w-1/3 shrink-0 grow-0'
-          style={{
-            display: 'flex',
-            flexGrow: 1,
-            alignItems: 'center',
-            marginBottom: '-26px',
-            justifyContent: 'center',
-          }}
-        >
+        <section className='flex w-1/3 shrink-0 grow-0 justify-center items-center mb-[-26px]'>
           <Tabs size='large' fill='underline' onChange={(e) => setActiveNavItem(e)} value={activeNavItem}>
             {navItems.map((item) => (
               <Tabs.Tab tabId={item} key={item}>
@@ -84,19 +67,9 @@ export default function Header({
             ))}
           </Tabs>
         </section>
-        <section className='items-center justify-end w-1/6 grow-0 flex' style={{ flexGrow: 0 }}>
+        <section className='flex items-center justify-end w-1/6 grow-0'>
           <div>
-            <div
-              className='inline-flex gap-x-1'
-              style={{
-                width: 'max-content',
-                display: 'flex',
-                flexGrow: 0,
-                alignItems: 'center',
-                gap: '4px',
-                paddingRight: '12px',
-              }}
-            >
+            <div className='flex grow-0 gap-x-1 w-max items-center pr-3'>
               {useNeo4jConnect ? (
                 <Switch
                   checked={connectNeo4j}
@@ -112,9 +85,7 @@ export default function Header({
                   label={`Connect${connectNeo4j ? 'ed' : ''} to Neo4j`}
                   labelBefore={true}
                 />
-              ) : (
-                <></>
-              )}
+              ) : null}
               <IconButton aria-label='Toggle Dark mode' clean size='large' onClick={toggleColorMode}>
                 {themeMode === 'dark' ? (
                   <span role='img' aria-label='sun'>
@@ -126,18 +97,15 @@ export default function Header({
                   </span>
                 )}
               </IconButton>
-              <IconButton className='hidden md:inline-block' aria-label='Help' clean size='large'>
-                <QuestionMarkCircleIconOutline className='n-w-6 n-h-6' />
+              <IconButton className='hidden md:inline-flex' aria-label='Help' clean size='large'>
+                <QuestionMarkCircleIconOutline />
               </IconButton>
-              
-              {
-                userHeader ? (
-                  <div className='hidden md:inline-block'>
-                    <User />
-                  </div>
-                ) : null
-              }
 
+              {userHeader ? (
+                <div className='hidden md:inline-block'>
+                  <User />
+                </div>
+              ) : null}
             </div>
           </div>
         </section>

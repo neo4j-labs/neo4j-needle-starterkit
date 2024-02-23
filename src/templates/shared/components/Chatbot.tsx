@@ -1,6 +1,7 @@
 /* eslint-disable no-confusing-arrow */
-import { Button, Widget, Typography, Avatar } from '@neo4j-ndl/react';
 import { useState } from 'react';
+import { Button, Widget, Typography, Avatar, TextInput } from '@neo4j-ndl/react';
+
 import ChatBotUserAvatar from '../assets/chatbot-user.png';
 import ChatBotAvatar from '../assets/chatbot-ai.png';
 
@@ -15,42 +16,27 @@ type ChatbotProps = {
 
 export default function Chatbot(props: ChatbotProps) {
   const { messages } = props;
-  const formattedTextStyle = { color: 'rgb(var(--theme-palette-discovery-bg-strong))' };
   const [message, setMessage] = useState('');
+  const formattedTextStyle = { color: 'rgb(var(--theme-palette-discovery-bg-strong))' };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
   return (
-    <div
-      className='n-bg-palette-neutral-bg-default'
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        minHeight: '100%',
-        maxHeight: '100%',
-        overflow: 'hidden',
-      }}
-    >
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: '3rem' }}>
-        <Widget className='n-bg-palette-neutral-bg-default' header='' isElevated={false} style={{ height: '100%' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', padding: '12px' }}>
+    <div className='n-bg-palette-neutral-bg-default flex flex-col justify-between min-h-full max-h-full overflow-hidden'>
+      <div className='flex overflow-y-auto pb-12'>
+        <Widget className='n-bg-palette-neutral-bg-default h-full' header='' isElevated={false}>
+          <div className='flex flex-col gap-3 p-3'>
             {messages.map((chat) => (
               <div
                 key={chat.id}
-                style={{
-                  display: 'flex',
-                  flexDirection: chat.user === 'chatbot' ? 'row' : 'row-reverse',
-                  alignItems: 'flex-end',
-                  gap: '10px',
-                }}
+                className={`flex gap-2.5 items-end ${chat.user === 'chatbot' ? 'flex-row' : 'flex-row-reverse'} `}
               >
-                <div style={{ width: '30px', height: '30px' }}>
+                <div className='w-8 h-8'>
                   {chat.user === 'chatbot' ? (
                     <Avatar
-                      className=''
+                      className='-ml-4'
                       hasStatus
                       name='KM'
                       shape='square'
@@ -58,7 +44,6 @@ export default function Chatbot(props: ChatbotProps) {
                       source={ChatBotAvatar}
                       status='online'
                       type='image'
-                      style={{ marginLeft: '-15px' }}
                     />
                   ) : (
                     <Avatar
@@ -76,14 +61,11 @@ export default function Chatbot(props: ChatbotProps) {
                 <Widget
                   header=''
                   isElevated={true}
-                  className={chat.user === 'chatbot' ? 'n-bg-palette-neutral-bg-weak' : 'n-bg-palette-primary-bg-weak'}
-                  style={{
-                    padding: '4',
-                    alignSelf: 'flex-start',
-                    maxWidth: '55%',
-                  }}
+                  className={`p-4 self-start max-w-[55%] ${
+                    chat.user === 'chatbot' ? 'n-bg-palette-neutral-bg-weak' : 'n-bg-palette-primary-bg-weak'
+                  }`}
                 >
-                  <div style={{ flexGrow: 1 }}>
+                  <div>
                     {chat.message.split(/`(.+?)`/).map((part, index) =>
                       index % 2 === 1 ? (
                         <span key={index} style={formattedTextStyle}>
@@ -94,7 +76,7 @@ export default function Chatbot(props: ChatbotProps) {
                       )
                     )}
                   </div>
-                  <div style={{ textAlign: 'right', verticalAlign: 'bottom', paddingTop: '12px' }}>
+                  <div className='text-right align-bottom pt-3'>
                     <Typography variant='body-small'>{chat.datetime}</Typography>
                   </div>
                 </Widget>
@@ -103,26 +85,15 @@ export default function Chatbot(props: ChatbotProps) {
           </div>
         </Widget>
       </div>
-      <div
-        className='n-bg-palette-neutral-bg-default'
-        style={{
-          display: 'flex',
-          gap: '10px',
-
-          bottom: '0rem',
-          padding: '10px',
-        }}
-      >
-        <input
-          className='n-bg-palette-neutral-bg-default n-rounded-lg n-border-2 n-border-palette-neutral-border-weak n-p-2'
+      <div className='n-bg-palette-neutral-bg-default flex gap-2.5 bottom-0 p-2.5 w-full'>
+        <TextInput
+          className='n-bg-palette-neutral-bg-default flex-grow-7 w-full'
           type='text'
           value={message}
+          fluid
           onChange={handleInputChange}
-          style={{ flexGrow: 7, height: '40px' }}
         />
-        <Button onClick={() => null} style={{ flexGrow: 2 }}>
-          Submit
-        </Button>
+        <Button onClick={() => null}>Submit</Button>
       </div>
     </div>
   );

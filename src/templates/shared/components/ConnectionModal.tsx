@@ -60,10 +60,10 @@ export default function ConnectionModal({
                 options: protocols.map((option) => ({ label: option, value: option })),
                 value: { label: selectedProtocol, value: selectedProtocol },
               }}
-              style={{ width: '25%', display: 'inline-block' }}
+              className='w-1/4 inline-block'
               fluid
             />
-            <div style={{ marginLeft: '2.5%', width: '55%', marginRight: '2.5%', display: 'inline-block' }}>
+            <div className='ml-[2.5%] w-[55%] mr-[2.5%] inline-block'>
               <TextInput
                 id='url'
                 value={hostname}
@@ -75,7 +75,7 @@ export default function ConnectionModal({
                 onChange={(e) => setHostname(e.target.value)}
               />
             </div>
-            <div style={{ width: '15%', display: 'inline-block' }}>
+            <div className='w-[15%] inline-block'>
               <TextInput
                 id='port'
                 value={port}
@@ -95,9 +95,10 @@ export default function ConnectionModal({
             placeholder='neo4j'
             fluid
             onChange={(e) => setDatabase(e.target.value)}
+            className='w-full'
           />
           <div className='n-flex n-flex-row n-flex-wrap'>
-            <div style={{ width: '48.5%', marginRight: '1.5%', display: 'inline-block' }}>
+            <div className='w-[48.5%] mr-1.5 inline-block'>
               <TextInput
                 id='username'
                 value={username}
@@ -108,7 +109,7 @@ export default function ConnectionModal({
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
-            <div style={{ width: '48.5%', marginLeft: '1.5%', display: 'inline-block' }}>
+            <div className='w-[48.5%] ml-[1.5%] inline-block'>
               <TextInput
                 id='password'
                 value={password}

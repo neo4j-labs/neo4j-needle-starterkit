@@ -1,20 +1,22 @@
-import './App.css';
+import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
 import '@neo4j-ndl/base/lib/neo4j-ds-styles.css';
 
 import ThemeWrapper from './context/ThemeWrapper';
-import QuickStarter from './templates/og/QuickStarter';
-import ECommerce from './templates/ecommerce/Home';
-import Movie from './templates/movie/Home';
-import Cybersecurity from './templates/cybersecurity/Home';
+
 import Home from './landingPage/Home';
 import PageNotFoundPage from './templates/shared/components/PageNotFoundPage';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import ConnectionModal from './templates/shared/components/ConnectionModal';
+import QuickStarter from './templates/og/QuickStarter';
+import Cybersecurity from './templates/cybersecurity/Home';
+import Movie from './templates/movie/Home';
+import ECommerce from './templates/ecommerce/Home';
+
 import Chatbot from './templates/shared/components/Chatbot';
-import messagesData from './templates/shared/components/ChatbotMessages.json';
+import messagesData from './templates/shared/assets/ChatbotMessages.json';
+import ConnectionModal from './templates/shared/components/ConnectionModal';
 import Header from './templates/shared/components/Header';
-import { useState } from 'react';
 import User from './templates/shared/components/User';
 
 function App() {
@@ -46,10 +48,7 @@ function App() {
               />
             }
           />
-          <Route
-            path='/user-preview'
-            element={<User />}
-          />
+          <Route path='/user-preview' element={<User />} />
           <Route path='*' element={<PageNotFoundPage />} />
         </Routes>
       </ThemeWrapper>

@@ -37,7 +37,8 @@ export default function Home() {
         setLoading({ main: false, similarGenre: false, otherUsers: false });
       } else {
         setLoading({ main: true, similarGenre: true, otherUsers: true });
-        const { uri, user, password } = JSON.parse(localStorage.getItem('neo4j.connection') ?? '') ?? {};
+        const { uri, user, password } =
+          JSON.parse(localStorage.getItem('needleStarterKit-neo4j.connection') ?? '') ?? {};
         setDriver(uri, user, password);
         await Promise.all([
           fetchMovies(queryMainMovie).then((movies) => setMainMovie(movies || [])),

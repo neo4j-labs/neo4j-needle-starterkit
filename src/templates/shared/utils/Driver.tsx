@@ -8,7 +8,7 @@ export async function setDriver(connectionURI: string, username: string, passwor
     driver = neo4j.driver(connectionURI, neo4j.auth.basic(username, password));
     await driver.getServerInfo();
     localStorage.setItem(
-      'neo4j.connection',
+      'needleStarterKit-neo4j.connection',
       JSON.stringify({ uri: connectionURI, user: username, password: password })
     );
     return true;

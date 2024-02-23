@@ -15,7 +15,7 @@ export default function SideNav() {
   const expandedChangeProp = isMobile ? {} : { onExpandedChange: setOnExpanded };
 
   return (
-    <div className="h-[calc(100vh-58px)] min-h-[700px] flex" >
+    <div className='h-[calc(100vh-58px)] min-h-[700px] flex'>
       <SideNavigation iconMenu={true} expanded={expanded} {...expandedChangeProp}>
         <SideNavigation.List>
           <SideNavigation.Item
