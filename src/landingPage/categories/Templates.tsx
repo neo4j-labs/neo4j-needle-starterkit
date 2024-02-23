@@ -23,7 +23,7 @@ export default function Templates() {
     {
       title: 'OG Template',
       description:
-        'The OG one, because we all starts somewhere. This was the first template we created, combining simple, modern and UX all together for generic application design.',
+        'The OG one, because we all starts somewhere, this was the first template we created, combining simple, modern and UX all together for a generic application design.',
       image: colorMode === 'dark' ? StarterKitImgDark : StarterKitImgLight,
       sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
@@ -33,14 +33,14 @@ export default function Templates() {
     {
       title: 'Network Impact Analysis',
       description:
-        'Explore advanced templates for network analysis in XXX. This templates facilitate the visualization and analysis of complex data networks.',
+        'Explore your network infrastructure and retrieve impact analysis in one click! This templates facilitate the visualization and analysis of complex infrastructures.',
       image: colorMode === 'dark' ? CyberSecurityImgDark : CyberSecurityImgLight,
       sourceCode: 'networkanalysis-source-code-link',
       previewLink: '/cybersecurity-preview',
     },
     {
       title: 'Movie Recommendation',
-      description: 'Lorem ipsum... reco engine for the movie db',
+      description: 'Simple and modern movie recommendation template based on the famous Neo4j movie dataset.',
       image: colorMode === 'dark' ? MovieImgDark : MovieImgLight,
       sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
@@ -49,7 +49,8 @@ export default function Templates() {
     },
     {
       title: 'Ecommerce',
-      description: 'XX reco engine for ecommerce/eshop etc',
+      description:
+        'E-commerce product page with a modern and clean design. Perfect for having one featured product followed by suggestions on recommanded products and packages/frequently bought together.',
       image: colorMode === 'dark' ? EcommerceImgDark : EcommerceImgLight,
       sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
@@ -64,10 +65,10 @@ export default function Templates() {
         Templates
       </Typography>
       <Typography variant='body-large' className='flex p-5'>
-        Dive into our collection of ready-to-use templates tailored for various use cases and industry. These templates
-        are designed to serve a wide range of product purposes. Our templates provide a seamless blend of aesthetics and
-        utility, ensuring your product not only meets its functional objectives but also delivers a memorable user
-        experience.
+        Dive into our collection of ready-to-use templates tailored for various use cases and industries. These
+        templates are designed to serve a wide range of product purposes. Our templates provide a seamless blend of
+        aesthetics and utility, ensuring your product not only meets its functional objectives but also delivers a
+        memorable user experience.
       </Typography>
       <div className='flex flex-wrap justify-center gap-x-14 gap-y-10 md:grid md:grid-cols-3 md:gap-x-14 md:gap-y-10'>
         {templatesCards.map((card, index) => (

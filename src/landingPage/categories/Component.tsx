@@ -21,7 +21,7 @@ export default function Component() {
     {
       title: 'Chatbot Widget',
       description:
-        'An interactive chat widget template for support desks, enabling real-time customer assistance and query resolution.',
+        'An interactive chat widget component which you can use for your support, sales or any other chatbot needs. It is designed to be easily embeddable and customizable to fit your needs',
       image: colorMode === 'dark' ? ChatbotImgDark : ChatbotImgLight,
       sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
         import.meta.env.PACKAGE_VERSION
@@ -31,7 +31,7 @@ export default function Component() {
     {
       title: 'Connection Modal',
       description:
-        'A responsive and user-friendly connection modal template, ideal for facilitating network connections and integrations in your applications.',
+        'A responsive and user-friendly connection modal template, ideal for facilitating connection to your Neo4j database in your applications.',
       image: colorMode === 'dark' ? ConnectionModalImgDark : ConnectionModalImgLight,
       sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
         import.meta.env.PACKAGE_VERSION
@@ -40,7 +40,8 @@ export default function Component() {
     },
     {
       title: 'Header',
-      description: 'Header navbar xxx',
+      description:
+        'A modern and clean header component, perfect for any web application. It is designed to be easily embeddable and customizable to fit your needs.',
       image: colorMode === 'dark' ? HeaderImgDark : HeaderImgLight,
       sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
         import.meta.env.PACKAGE_VERSION
@@ -55,12 +56,10 @@ export default function Component() {
         Components
       </Typography>
       <Typography variant='body-large' className='flex p-5'>
-        Our component templates are perfect for those seeking to integrate individual widgets or elements into their
-        existing projects. These templates range from interactive web chats to connections modal and many more coming on
-        the way, offering a versatile selection of standalone components. Each template is built to be easily adaptable
-        and embeddable, ensuring seamless integration with your larger project. Whether you're enhancing user engagement
-        with a chat interface or providing useful information through a custom widget, our component templates are
-        designed for flexibility and ease of use.
+        Our components (patterns) are perfect for those seeking to integrate individual widgets or elements into their
+        existing projects. These templates range from chatbot to a connections modal and many more coming on the way,
+        offering a versatile selection of standalone components. Each component is built to be easily adaptable and
+        embeddable, ensuring seamless integration with your larger project.
       </Typography>
       <div className='flex flex-wrap justify-center gap-x-14 gap-y-10 md:grid md:grid-cols-3 md:gap-x-14 md:gap-y-10'>
         {componentCards.map((card, index) => (
