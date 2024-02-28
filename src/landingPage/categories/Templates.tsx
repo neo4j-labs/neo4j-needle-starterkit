@@ -2,7 +2,7 @@ import { Typography } from '@neo4j-ndl/react';
 import Card from '../components/Card';
 
 // Dark mode featured images
-import StarterKitImgDark from '../../assets/img/template/StarterKitImg-dark.jpg';
+import StarterKitImgDark from '../../assets/img/template/StarterKitImg-dark.png';
 import EcommerceImgDark from '../../assets/img/template/Ecommerce-dark.png';
 import MovieImgDark from '../../assets/img/template/MovieImg-dark.png';
 import CyberSecurityImgDark from '../../assets/img/template/CyberSecurity-dark.png';

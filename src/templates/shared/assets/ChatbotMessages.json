@@ -4,64 +4,39 @@
       "id": 1,
       "message": "Hi, I need help with creating a Cypher query for Neo4j.",
       "user": "user",
-      "datetime": "2024-01-20 15:26:45"
+      "datetime": "01/01/2024 00:00:00"
     },
     {
       "id": 2,
       "message": "Sure, I can help with that. What specific data are you looking to retrieve?",
       "user": "chatbot",
-      "datetime": "2024-01-20 15:26:45"
+      "datetime": "01/01/2024 00:00:00"
     },
     {
       "id": 3,
       "message": "I need to find all employees who work in the IT department.",
       "user": "user",
-      "datetime": "2024-01-20 15:26:45"
+      "datetime": "01/01/2024 00:00:00"
     },
     {
       "id": 4,
       "message":
         "Alright, you can use the following query: `MATCH (e:Employee)-[:WORKS_IN]->(d:Department {name: 'IT'}) RETURN e.name`. This query matches nodes labeled 'Employee' related to the 'IT' department and returns their names.",
       "user": "chatbot",
-      "datetime": "2024-01-20 15:26:45"
+      "datetime": "01/01/2024 00:00:00"
     },
     {
       "id": 5,
       "message": "Thanks! And how do I get the total number of such employees?",
       "user": "user",
-      "datetime": "2024-01-20 15:26:45"
+      "datetime": "01/01/2024 00:00:00"
     },
     {
       "id": 6,
       "message":
         "To get the count, use: `MATCH (e:Employee)-[:WORKS_IN]->(d:Department {name: 'IT'}) RETURN count(e)`. This counts all the distinct 'Employee' nodes related to the 'IT' department.",
       "user": "chatbot",
-      "datetime": "2024-01-20 15:26:45"
-    },
-    {
-      "id": 7,
-      "message": "Got it. What if I want to include their managers in the result?",
-      "user": "user",
-      "datetime": "2024-01-20 15:26:45"
-    },
-    {
-      "id": 8,
-      "message":
-        "You can expand the query like this: `MATCH (e:Employee)-[:WORKS_IN]->(d:Department {name: 'IT'}), (e)-[:REPORTS_TO]->(m:Manager) RETURN e.name, m.name`. This will return both the employees' and their managers' names.",
-      "user": "chatbot",
-      "datetime": "2024-01-20 15:26:45"
-    },
-    {
-      "id": 9,
-      "message": "That's perfect. Thanks for the help!",
-      "user": "user",
-      "datetime": "2024-01-20 15:26:45"
-    },
-    {
-      "id": 10,
-      "message": "You're welcome! Feel free to ask if you have more questions.",
-      "user": "chatbot",
-      "datetime": "2024-01-20 15:26:45"
+      "datetime": "01/01/2024 00:00:00"
     }
     ]
  }

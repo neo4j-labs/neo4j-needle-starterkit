@@ -100,7 +100,7 @@ export default function Home() {
   return (
     <>
       <Header
-        title='NeoCyberSecurity'
+        title='CyberSecurity'
         navItems={[]}
         useNeo4jConnect={true}
         connectNeo4j={connectNeo4j}

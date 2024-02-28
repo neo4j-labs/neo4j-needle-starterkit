@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <div>
       <Header
-        title='NeoMovie'
+        title='Movie'
         useNeo4jConnect={true}
         setConnectNeo4j={setUseReco}
         connectNeo4j={useReco}
