@@ -5,6 +5,8 @@ import { Button, Widget, Typography, Avatar, TextInput } from '@neo4j-ndl/react'
 import ChatBotUserAvatar from '../assets/chatbot-user.png';
 import ChatBotAvatar from '../assets/chatbot-ai.png';
 
+import ReactMarkdown from 'react-markdown';
+
 type ChatbotProps = {
   messages: {
     id: number;
@@ -19,12 +21,39 @@ export default function Chatbot(props: ChatbotProps) {
   const { messages } = props;
   const [listMessages, setListMessages] = useState(messages);
   const [inputMessage, setInputMessage] = useState('');
+  const [gettingResponse, setGettingResponse] = useState(false);
   const formattedTextStyle = { color: 'rgb(var(--theme-palette-discovery-bg-strong))' };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputMessage(e.target.value);
+  };
+
+  const fetchResponseFromAPI = async () => {
+    setGettingResponse(true);
+    const requestBody = {
+      message: inputMessage
+    };
+
+    try {
+      const response = await fetch(`http://localhost:3005/api`, {
+        method: 'POST',
+        headers: {
+          'accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+      const data = await response.json();
+      setGettingResponse(false);
+      return data.content;
+    } catch (error) {
+      console.error("API call failed:", error);
+      return "Sorry, something went wrong.";
+    } finally {
+      setGettingResponse(false);
+    }
   };
 
   const simulateTypingEffect = (responseText: string, index = 0) => {
@@ -49,7 +78,7 @@ export default function Chatbot(props: ChatbotProps) {
     }
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!inputMessage.trim()) {
       return;
@@ -60,7 +89,8 @@ export default function Chatbot(props: ChatbotProps) {
     setListMessages((listMessages) => [...listMessages, userMessage]);
     setInputMessage('');
 
-    const chatbotReply = 'Hello Sir, how can I help you today?'; // Replace with your chatbot API response
+    //const chatbotReply = 'Hello Sir, how can I help you today?'; // Replace with your chatbot API response
+    const chatbotReply = await fetchResponseFromAPI();
     simulateTypingEffect(chatbotReply);
   };
 
@@ -116,15 +146,11 @@ export default function Chatbot(props: ChatbotProps) {
                   }`}
                 >
                   <div>
-                    {chat.message.split(/`(.+?)`/).map((part, index) =>
-                      index % 2 === 1 ? (
-                        <span key={index} style={formattedTextStyle}>
-                          {part}
-                        </span>
-                      ) : (
-                        part
-                      )
-                    )}
+                  <ReactMarkdown>
+      {chat.message}
+    </ReactMarkdown>
+             
+
                   </div>
                   <div className='text-right align-bottom pt-3'>
                     <Typography variant='body-small'>{chat.datetime}</Typography>
@@ -144,7 +170,7 @@ export default function Chatbot(props: ChatbotProps) {
             fluid
             onChange={handleInputChange}
           />
-          <Button type='submit'>Submit</Button>
+          <Button type='submit' loading={gettingResponse} disabled={gettingResponse}>Submit</Button>
         </form>
       </div>
     </div>
