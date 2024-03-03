@@ -60,7 +60,7 @@ export default function Chatbot(props: ChatbotProps) {
     setListMessages((listMessages) => [...listMessages, userMessage]);
     setInputMessage('');
 
-    const chatbotReply = 'Hello Sir, how can I help you today?'; // Replace with your chatbot API response
+    const chatbotReply = 'Hello Sir, how can I help you today?'; // Replace with getting a response from your chatbot through your APIs
     simulateTypingEffect(chatbotReply);
   };
 

@@ -11,12 +11,11 @@ import {
   Widget,
 } from '@neo4j-ndl/react';
 import { MagnifyingGlassIconOutline, InformationCircleIconOutline } from '@neo4j-ndl/react/icons';
-import { createColumnHelper, getCoreRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { createColumnHelper, getCoreRowModel, getSortedRowModel, useReactTable, Table } from '@tanstack/react-table';
 
 import productsData from './assets/networkimpact.json';
 import NoGraphImg from '../shared/assets/NoData.png';
 import Header from '../shared/components/Header';
-import ConnectionModal from '../shared/components/ConnectionModal';
 
 import './CyberSecurity.css';
 
@@ -26,6 +25,8 @@ type NetworkImpact = {
   Version: string;
   Status: string;
 };
+
+
 
 const columnHelper = createColumnHelper<NetworkImpact>();
 
@@ -74,18 +75,14 @@ const columns = [
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearchInitiated, setIsSearchInitiated] = useState(false);
-  const [isSearchCompleted, setIsSearchCompleted] = useState(true);
   const network = productsData.ListItems;
   const defaultData: NetworkImpact[] = network as NetworkImpact[];
   const [data] = React.useState(() => [...defaultData]);
 
   const [activeTab, setActiveTab] = useState<number>(0);
-  const [connectNeo4j, setConnectNeo4j] = useState(false);
-  const [isConnectionModalOpen, setIsConnectionModalOpen] = useState(false);
 
   const handleSearch = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    isSearchInitiated ? null : setIsSearchCompleted(false);
     setIsSearchInitiated(true);
   };
 
@@ -97,15 +94,21 @@ export default function Home() {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const displayResult = () => {
+    if (isSearchInitiated) {
+      const searchResultElement = document.getElementById('search-result');
+      if (searchResultElement) {
+        searchResultElement.classList.add('search-result-visible');
+      }
+    }
+  };
+
   return (
     <>
       <Header
         title='CyberSecurity'
         navItems={[]}
-        useNeo4jConnect={true}
-        connectNeo4j={connectNeo4j}
-        setConnectNeo4j={setConnectNeo4j}
-        openConnectionModal={() => setIsConnectionModalOpen(true)}
+        useNeo4jConnect={false}
         userHeader={false}
       />
 
@@ -113,11 +116,9 @@ export default function Home() {
         <form
           className={`search-bar ${isSearchInitiated ? 'top' : 'center'}`}
           onSubmit={handleSearch}
-          onTransitionEnd={() => {
-            setIsSearchCompleted(true);
-          }}
+          
         >
-          <div className={`text-input-container ${isSearchInitiated ? 'search-initiated' : ''}`}>
+          <div onTransitionEnd={displayResult} className={`text-input-container ${isSearchInitiated ? 'search-initiated' : ''}`}>
             <TextInput
               type='text'
               value={searchQuery}
@@ -133,11 +134,11 @@ export default function Home() {
             />
           </div>
         </form>
-        {isSearchInitiated && isSearchCompleted && (
           <Widget
-            className='n-bg-palette-neutral-bg-weak min-h-[60%] min-w-[60%] flex flex-col'
+            className='n-bg-palette-neutral-bg-weak min-h-[60%] min-w-[60%] flex flex-col search-result'
             header=''
             isElevated={true}
+            id='search-result'
           >
             <Flex flexDirection='column' justifyContent='space-between'>
               <div>
@@ -147,7 +148,7 @@ export default function Home() {
                 </Tabs>
                 <Flex className='p-8'>
                   {activeTab === 0 ? (
-                    <DataGrid
+                    <DataGrid<NetworkImpact>
                       isResizable={false}
                       tableInstance={table}
                       isKeyboardNavigable={false}
@@ -182,20 +183,7 @@ export default function Home() {
               </div>
             </Flex>
           </Widget>
-        )}
       </div>
-
-      <div id='footer' className='n-bg-palette-neutral-bg-default h-[100px]' />
-      <ConnectionModal
-        open={isConnectionModalOpen}
-        setOpenConnection={setIsConnectionModalOpen}
-        setConnectionStatus={setConnectNeo4j}
-        message={{
-          type: 'danger',
-          content:
-            'The connection for this template is WIP. This will not work for now. for a working example, check the Movie template.',
-        }}
-      />
     </>
   );
 }

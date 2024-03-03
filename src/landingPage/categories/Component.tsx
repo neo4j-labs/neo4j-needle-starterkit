@@ -31,7 +31,7 @@ export default function Component() {
     {
       title: 'Connection Modal',
       description:
-        'A responsive and user-friendly connection modal template, ideal for facilitating connection to your Neo4j database in your applications.',
+        'A responsive and user-friendly connection modal template, ideal for facilitating connection to your Neo4j databases in your applications.',
       image: colorMode === 'dark' ? ConnectionModalImgDark : ConnectionModalImgLight,
       sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
         import.meta.env.PACKAGE_VERSION

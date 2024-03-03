@@ -3,15 +3,15 @@ import Card from '../components/Card';
 
 // Dark mode featured images
 import StarterKitImgDark from '../../assets/img/template/StarterKitImg-dark.png';
-import EcommerceImgDark from '../../assets/img/template/Ecommerce-dark.png';
+import EcommerceImgDark from '../../assets/img/template/EcommerceImg-dark.png';
 import MovieImgDark from '../../assets/img/template/MovieImg-dark.png';
-import CyberSecurityImgDark from '../../assets/img/template/CyberSecurity-dark.png';
+import CyberSecurityImgDark from '../../assets/img/template/CyberSecurityImg-dark.png';
 
 // Light mode featured images
 import StarterKitImgLight from '../../assets/img/template/StarterKitImg-light.png';
-import EcommerceImgLight from '../../assets/img/template/Ecommerce-light.png';
+import EcommerceImgLight from '../../assets/img/template/EcommerceImg-light.png';
 import MovieImgLight from '../../assets/img/template/MovieImg-light.png';
-import CyberSecurityImgLight from '../../assets/img/template/CyberSecurity-light.png';
+import CyberSecurityImgLight from '../../assets/img/template/CyberSecurityImg-light.png';
 
 import { useContext } from 'react';
 import { ThemeWrapperContext } from '../../context/ThemeWrapper';
@@ -31,11 +31,13 @@ export default function Templates() {
       previewLink: '/og-preview',
     },
     {
-      title: 'Network Impact Analysis',
+      title: 'Cyber security',
       description:
         'Explore your network infrastructure and retrieve impact analysis in one click! This templates facilitate the visualization and analysis of complex infrastructures.',
       image: colorMode === 'dark' ? CyberSecurityImgDark : CyberSecurityImgLight,
-      sourceCode: 'networkanalysis-source-code-link',
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/cybersecurity`,
       previewLink: '/cybersecurity-preview',
     },
     {
@@ -50,7 +52,7 @@ export default function Templates() {
     {
       title: 'Ecommerce',
       description:
-        'E-commerce product page with a modern and clean design. Perfect for having one featured product followed by suggestions on recommanded products and packages/frequently bought together.',
+        'E-commerce product page with a modern and clean design. Perfect for having one featured product followed by suggestions on recommended products and packages/frequently bought together.',
       image: colorMode === 'dark' ? EcommerceImgDark : EcommerceImgLight,
       sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
