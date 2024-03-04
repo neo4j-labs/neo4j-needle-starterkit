@@ -8,7 +8,9 @@ export default defineConfig({
   plugins: [
     react(),
     vitePluginSingleSpa({
-      type: 'root',
+      type: 'mife',
+      serverPort: 80,
+      spaEntryPoints: 'src/spa.tsx',
     }),
   ],
   define: {
