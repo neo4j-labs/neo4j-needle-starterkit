@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: production
-      url: https://graphapp.io/
+      url: https://needle-starterkit.graphapp.io/
     strategy:
       matrix:
         node-version: [ 18.x ]
