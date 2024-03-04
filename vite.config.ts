@@ -5,11 +5,12 @@ import vitePluginSingleSpa from 'vite-plugin-single-spa';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), vitePluginSingleSpa({
-    serverPort: 4101,
-    // @ts-ignore
-    spaEntryPoint: 'src/spa.tsx'
-  })],
+  plugins: [
+    react(),
+    vitePluginSingleSpa({
+      type: 'root',
+    }),
+  ],
   define: {
     'import.meta.env.PACKAGE_VERSION': JSON.stringify(packageJson.version),
   },
