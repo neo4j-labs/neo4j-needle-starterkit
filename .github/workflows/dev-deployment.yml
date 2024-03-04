@@ -47,8 +47,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: rm -rf docs
-      - run: yarn install
-      - run: yarn run build-minimal
+      - run: yarn
+      - run: yarn run build
 #      - run: curl ${{ vars.INDEX_HTML_DEPLOYMENT_URL }} > dist/index.html
       - uses: kersvers/s3-sync-with-cloudfront-invalidation@v1.0.0
         with:
