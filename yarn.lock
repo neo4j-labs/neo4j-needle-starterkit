@@ -5376,6 +5376,11 @@ util-deprecate@^1.0.2:
   resolved "https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz"
   integrity sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==
 
+vite-plugin-single-spa@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-single-spa/-/vite-plugin-single-spa-0.6.1.tgz#20fc6aa76eb60078e291fa240e530ee497d13110"
+  integrity sha512-zxglV9A4DKdQ6zwwRJrZnwWmF2c6/Wrkll7tpM9ZYPbSgJOn1PBAl4xKQ1h8pCsKAFJYoCRJ8d2mXL5ZqUeALQ==
+
 vite@^4.4.5:
   version "4.5.2"
   resolved "https://registry.npmjs.org/vite/-/vite-4.5.2.tgz"
