@@ -4,8 +4,8 @@
 |===
 | Light | Dark
 
-| image::DesktopConnectionModalLight.png[DesktopConnectionModalLight,width=600,height=600]
-| image::DesktopConnectionModalDark.png[DesktopConnectionModalDark,width=600,height=600]
+| image::Components/DesktopConnectionModalLight.png[DesktopConnectionModalLight,width=600,height=600]
+| image::Components/DesktopConnectionModalDark.png[DesktopConnectionModalDark,width=600,height=600]
 |===
 
 The ConnectionModal component is a React component designed to handle the connection setup to a Neo4j database. It provides a user-friendly interface for entering database connection details and displays feedback on the connection attempt. This component is particularly useful in applications requiring a dynamic connection to a Neo4j database.

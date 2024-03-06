@@ -1,6 +1,6 @@
 = User Component
 
-image::UserComponent.png[UserComponent,width=300,height=300]
+image::Components/UserComponent.png[UserComponent,width=300,height=300]
 
 
 The User component provides a user interface for displaying user information and a dropdown menu for user actions such as 'Profile' and 'Logout'.

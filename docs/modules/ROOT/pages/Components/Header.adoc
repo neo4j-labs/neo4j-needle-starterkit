@@ -4,8 +4,8 @@
 |===
 | Light | Dark
 
-| image::DesktopHeaderLight.png[DesktopHeaderLight,width=600,height=600]
-| image::DesktopHeaderDark.png[DesktopHeaderDark,width=600,height=600]
+| image::Components/DesktopHeaderLight.png[DesktopHeaderLight,width=600,height=600]
+| image::Components/DesktopHeaderDark.png[DesktopHeaderDark,width=600,height=600]
 |===
 
 The Header component serves as the primary navigation and interaction header in a web application. It incorporates theme toggling, navigation tabs, and optional Neo4j database connection functionality.

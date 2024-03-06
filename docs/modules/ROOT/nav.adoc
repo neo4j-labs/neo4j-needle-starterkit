@@ -1,7 +1,7 @@
 * xref:index.adoc[Introduction]
 * xref:quickstart.adoc[Quickstart]
 * Templates
-** xref:Templates/OG.adoc[OG]
+** xref:Templates/Foundation.adoc[Foundation]
 ** xref:Templates/Cybersecurity.adoc[Cybersecurity]
 ** xref:Templates/Movie.adoc[Movie]
 ** xref:Templates/Ecommerce.adoc[Ecommerce]

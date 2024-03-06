@@ -4,16 +4,16 @@
 |===
 | Desktop Light | Mobile Light
 
-| image::DesktopChatbotLight.png[DesktopChatbotLight,width=600,height=600]
-| image::MobileChatbotLight.png[MobileChatbotLight,width=150,height=150]
+| image::Components/DesktopChatbotLight.png[DesktopChatbotLight,width=600,height=600]
+| image::Components/MobileChatbotLight.png[MobileChatbotLight,width=150,height=150]
 |===
 
 [cols="1a,1a"]
 |===
 | Desktop Dark | Mobile Dark
 
-| image::DesktopChatbotDark.png[DesktopChatbotDark,width=600,height=600]
-| image::MobileChatbotDark.png[MobileChatbotDark,width=150,height=150]
+| image::Components/DesktopChatbotDark.png[DesktopChatbotDark,width=600,height=600]
+| image::Components/MobileChatbotDark.png[MobileChatbotDark,width=150,height=150]
 |===
 
 The `Chatbot` component provides a dynamic and interactive chat interface for users to communicate with an AI chatbot. It renders chat messages between a user and a chatbot, including features like typing simulation for the chatbot's responses and automatic scrolling to the latest message.
@@ -133,7 +133,7 @@ First, we will set a new state `gettingResponse` that will indicate us if we are
 const [gettingResponse, setGettingResponse] = useState(false);
 ---- 
 
-Then, we will define a new function `fetchResponseFromAPI` that will be responsible for fetching the chatbot's response from the backend based on the user's message (Ideally you will want to use a framework to manage the states, caching and hooks for you like `tanstack/react-query` for example)
+Then, we will define a new function `fetchResponseFromAPI` that will be responsible for fetching the chatbot's response from the backend based on the user's message:
 
 [source, tsx]
 ----
@@ -163,6 +163,8 @@ const fetchResponseFromAPI = async () => {
     }
   };
 ----
+
+WARNING: Ideally you will want to consider using a framework to manage the states, caching and hooks like `tanstack/react-query` for example as well as adding an authentication and authorization to your backend API calls
 
 Then all we need to do is to call this function when the user submits a message, retrieve the response, and simulate the typing effect:
 In our `handleSubmit` function:

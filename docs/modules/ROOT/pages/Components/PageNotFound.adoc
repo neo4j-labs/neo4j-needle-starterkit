@@ -4,8 +4,8 @@
 |===
 | Light | Dark
 
-| image::DesktopPageNotFoundLight.png[DesktopPageNotFoundLight,width=600,height=600]
-| image::DesktopPageNotFoundDark.png[DesktopPageNotFoundDark,width=600,height=600]
+| image::Components/DesktopPageNotFoundLight.png[DesktopPageNotFoundLight,width=600,height=600]
+| image::Components/DesktopPageNotFoundDark.png[DesktopPageNotFoundDark,width=600,height=600]
 |===
 
 The `PageNotFoundPage` component is a React component designed to display a user-friendly message when a page is not found (404 error). It provides a visual indication that the requested page is unavailable and offers a button to navigate back to the previous page.

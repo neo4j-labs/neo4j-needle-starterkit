@@ -1,0 +1,72 @@
+= Foundation Template
+
+image::Templates/FeaturedStarterKit.png[StarterKit,align="center"]
+
+== Introduction
+
+The Foundation template provides a generic, simple yet powerful template for developing applications on top of your Neo4j databases. It features a clean and intuitive layout, including a side navigation bar, a central content area, and a connection modal for establishing or disconnecting from Neo4j instances.
+
+== Documentation
+
+=== Layout Architecture
+
+image::Templates/FoundationArchitecture.png[FoundationArchitecture,align="center"]
+
+The template structure is centered around the `Home.tsx` component, which incorporates the `Header` and `PageLayout` components. `PageLayout` further divides the page into `SideNav` and `Content` sections, offering a comprehensive environment for application development.
+
+The layout is designed to be responsive, ensuring a seamless user experience across various devices and screen sizes.
+
+=== Code Snippets
+
+.Here is a snippet for the auto-connect feature in `Content.tsx`
+
+[source,tsx]
+----
+useEffect(() => {
+  if (!init) {
+    let session = localStorage.getItem('needleStarterKit-neo4j.connection');
+    if (session) {
+      let neo4jConnection = JSON.parse(session);
+      setDriver(neo4jConnection.uri, neo4jConnection.user, neo4jConnection.password)
+        .then((isSuccessful: boolean) => {
+          setConnectionStatus(isSuccessful);
+        });
+    }
+    setInit(true);
+  }
+});
+----
+
+.This snippet showcases the side navigation bar setup in `SideNav.tsx`
+
+[source,tsx]
+----
+<SideNavigation iconMenu={true} expanded={expanded} {...expandedChangeProp}>
+  <SideNavigation.List>
+    <SideNavigation.Item
+      href='#'
+      selected={selected === 'search'}
+      onClick={handleClick('search')}
+      icon={<MagnifyingGlassIconOutline className={fullSizeClasses} />}
+    >
+      Search
+    </SideNavigation.Item>
+    // Additional navigation items...
+  </SideNavigation.List>
+</SideNavigation>
+----
+
+=== Integration with Neo4j
+
+The StarterKit is designed to seamlessly integrate with Neo4j databases, facilitating easy connectivity and interaction with Neo4j. The `ConnectionModal` component enables users to connect to or disconnect from their Neo4j instances, providing error feedback on the connection status if it does not succeed to connect.
+
+.Connection Modal Usage:
+
+[source,tsx]
+----
+<ConnectionModal
+  open={openConnection}
+  setOpenConnection={setOpenConnection}
+  setConnectionStatus={setConnectionStatus}
+/>
+----
