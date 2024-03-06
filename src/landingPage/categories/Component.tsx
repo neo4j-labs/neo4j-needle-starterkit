@@ -23,7 +23,7 @@ export default function Component() {
       description:
         'An interactive chat widget component which you can use for your support, sales or any other chatbot needs. It is designed to be easily embeddable and customizable to fit your needs',
       image: colorMode === 'dark' ? ChatbotImgDark : ChatbotImgLight,
-      sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
       }/src/templates/shared/components/Chatbot.tsx`,
       previewLink: '/chat-widget-preview',
@@ -33,7 +33,7 @@ export default function Component() {
       description:
         'A responsive and user-friendly connection modal template, ideal for facilitating connection to your Neo4j databases in your applications.',
       image: colorMode === 'dark' ? ConnectionModalImgDark : ConnectionModalImgLight,
-      sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
       }/src/templates/shared/components/ConnectionModal.tsx`,
       previewLink: '/connection-modal-preview',
@@ -43,7 +43,7 @@ export default function Component() {
       description:
         'A modern and clean header component, perfect for any web application. It is designed to be easily embeddable and customizable to fit your needs.',
       image: colorMode === 'dark' ? HeaderImgDark : HeaderImgLight,
-      sourceCode: `https://raw.githubusercontent.com/neo4j-labs/neo4j-needle-starterkit/${
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
       }/src/templates/shared/components/Header.tsx`,
       previewLink: '/header-preview',

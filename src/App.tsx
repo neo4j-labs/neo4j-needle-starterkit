@@ -8,7 +8,7 @@ import ThemeWrapper from './context/ThemeWrapper';
 import Home from './landingPage/Home';
 import PageNotFoundPage from './templates/shared/components/PageNotFoundPage';
 
-import QuickStarter from './templates/og/QuickStarter';
+import QuickStarter from './templates/foundation/QuickStarter';
 import Cybersecurity from './templates/cybersecurity/Home';
 import Movie from './templates/movie/Home';
 import ECommerce from './templates/ecommerce/Home';
@@ -27,7 +27,7 @@ function App() {
       <ThemeWrapper>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/og-preview' element={<QuickStarter />} />
+          <Route path='/foundation-preview' element={<QuickStarter />} />
           <Route path='/ecommerce-preview' element={<ECommerce />} />
           <Route path='/movie-preview' element={<Movie />} />
           <Route path='/cybersecurity-preview' element={<Cybersecurity />} />

@@ -138,7 +138,7 @@ export default function Home() {
                 <Tabs.Tab tabId={0}>Table</Tabs.Tab>
                 <Tabs.Tab tabId={1}>Graph</Tabs.Tab>
               </Tabs>
-              <Flex className='p-8'>
+              <Flex className='p-6'>
                 {activeTab === 0 ? (
                   <DataGrid<NetworkImpact>
                     isResizable={false}
@@ -157,14 +157,24 @@ export default function Home() {
                   <Flex flexDirection='row'>
                     <img src={NoGraphImg} className='p-12' />
                     <Flex gap='8'>
-                      <Typography variant='h1'>WIP Screen</Typography>
-                      <Typography variant='body-medium'>
-                        <p>Ideally this would display a graph of the network/search result</p>
-                        <p>
-                          This would be interactive and allow user to explore the network to make a proper impact
-                          analysis
-                        </p>
-                      </Typography>
+                      <Typography variant='h1'>Graph Screen</Typography>
+                      <div className='flex flex-col gap-3' >
+                        <Typography variant='body-medium'>This is where you would display a graph of the network/search result.</Typography>
+                        <Typography variant='body-medium'>
+                          For now, we do not ship any visualization library to let you the freedom of using the one you prefer. <br />
+                          although, that might change in the futur...
+                        </Typography>
+                        <></>
+                        <Typography variant='body-medium'>
+                          If you want to use visualization libraries, here are few ones that you can use on top of Neo4j (in no specific order):
+                          <ul className='list-disc ml-8'>
+                            <li>Neovis.js</li>
+                            <li>D3.js</li>
+                            <li>react-force-graph</li>
+                            <li>Cytoscape.js</li>
+                          </ul>
+                        </Typography>
+                      </div>
                     </Flex>
                   </Flex>
                 )}

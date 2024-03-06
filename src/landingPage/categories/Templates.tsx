@@ -21,14 +21,14 @@ export default function Templates() {
 
   const templatesCards = [
     {
-      title: 'OG Template',
+      title: 'Foundation Template',
       description:
-        'The OG one, because we all starts somewhere, this was the first template we created, combining simple, modern and UX all together for a generic application design.',
+        'The Foundation template, because we all starts somewhere, this was the first template we created, combining simple, modern and UX all together for a generic application design.',
       image: colorMode === 'dark' ? StarterKitImgDark : StarterKitImgLight,
       sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
         import.meta.env.PACKAGE_VERSION
-      }/src/templates/og`,
-      previewLink: '/og-preview',
+      }/src/templates/foundation`,
+      previewLink: '/foundation-preview',
     },
     {
       title: 'Cyber security',
