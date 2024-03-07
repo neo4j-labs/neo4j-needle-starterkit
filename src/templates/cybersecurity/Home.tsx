@@ -158,15 +158,19 @@ export default function Home() {
                     <img src={NoGraphImg} className='p-12' />
                     <Flex gap='8'>
                       <Typography variant='h1'>Graph Screen</Typography>
-                      <div className='flex flex-col gap-3' >
-                        <Typography variant='body-medium'>This is where you would display a graph of the network/search result.</Typography>
+                      <div className='flex flex-col gap-3'>
                         <Typography variant='body-medium'>
-                          For now, we do not ship any visualization library to let you the freedom of using the one you prefer. <br />
+                          This is where you would display a graph of the network/search result.
+                        </Typography>
+                        <Typography variant='body-medium'>
+                          For now, we do not ship any visualization library to let you the freedom of using the one you
+                          prefer. <br />
                           although, that might change in the futur...
                         </Typography>
                         <></>
                         <Typography variant='body-medium'>
-                          If you want to use visualization libraries, here are few ones that you can use on top of Neo4j (in no specific order):
+                          If you want to use visualization libraries, here are few ones that you can use on top of Neo4j
+                          (in no specific order):
                           <ul className='list-disc ml-8'>
                             <li>Neovis.js</li>
                             <li>D3.js</li>
