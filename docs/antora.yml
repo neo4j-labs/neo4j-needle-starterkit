@@ -1,5 +1,5 @@
 name: neo4j-needle-starterkit
-version: "1.0"
+version: "2.0"
 title: Needle Starter Kit
 start_page: ROOT:index.adoc
 nav:
@@ -7,7 +7,7 @@ nav:
 
 asciidoc:
   attributes:
-    docs-version: "1.0"
+    docs-version: "2.0"
     page-product: neo4j-needle-starterkit
     page-type: Neo4j Needle Starter Kit
     page-canonical-root: /labs
