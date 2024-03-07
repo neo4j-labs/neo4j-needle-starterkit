@@ -1,7 +1,7 @@
 # Neo4j Needle StarterKit
 
 Reactjs Responsive Starter Kit for building applications using https://www.neo4j.design/[Neo4j Needle] for accelerating TTV of your Neo4j-powered front-end applications.
-You can access the https://development.needle-starterkit.graphapp.io[online version here].
+You can access the https://needle-starterkit.graphapp.io[online version here].
 
 image::FeaturedImg.jpg[Featured Image]
 

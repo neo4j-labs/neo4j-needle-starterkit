@@ -6,7 +6,7 @@ image::Templates/FeaturedCyberSecurity.png[Cybersecurity,align="center"]
 
 The Cybersecurity dashboard is an interface designed to provide a comprehensive overview of network impacts, illustrating potential vulnerabilities and system statuses within a network infrastructure. This tool leverages a dynamic data visualization approach, rendering interactive charts, graphs, and tables.
 
-https://development.needle-starterkit.graphapp.io/cybersecurity[Link to the live preview]
+https://needle-starterkit.graphapp.io/cybersecurity[Link to the live preview]
 https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/cybersecurity[Link to the template code]
 
 == Documentation

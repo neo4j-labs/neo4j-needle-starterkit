@@ -1,6 +1,6 @@
 # Quickstart
 
-If you want to try it without installing it locally, you can access https://development.needle-starterkit.graphapp.io[our self-hosted] version.
+If you want to try it without installing it locally, you can access https://needle-starterkit.graphapp.io[our self-hosted] version.
 
 Alternatively, if you want to run it locally or within your self-managed environment, please follow the steps below.
 

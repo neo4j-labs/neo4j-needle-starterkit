@@ -10,7 +10,7 @@ This template is the only one (`currently`) providing not only a static dataset 
 
 CAUTION: This feature allowing you to connect and retrieve data from your database into the template is experimental (hence only available in this template). It is designed to work with the https://github.com/neo4j-graph-examples/recommendations[Recommendation dataset]. If you are using a different dataset or data model, you may need to modify the cypher queries and/or the data structure to fit your needs. 
 
-https://development.needle-starterkit.graphapp.io/movie[Link to the live preview]
+https://needle-starterkit.graphapp.io/movie[Link to the live preview]
 https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/movie[Link to the template code]
 
 == Documentation
