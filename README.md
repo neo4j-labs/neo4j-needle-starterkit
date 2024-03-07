@@ -2,6 +2,7 @@
 ![Header](docs/modules/ROOT/images/FeaturedImg.jpg)
 
 Reactjs Responsive Starter Kit for building applications using [Neo4j Needle](https://www.neo4j.design/) for accelerating TTV.
+You can access the [online version here](https://needle-starterkit.graphapp.io).
 
 ## Features
 - 📈 Various templates and components focused on uses-cases and industries
@@ -17,6 +18,10 @@ Reactjs Responsive Starter Kit for building applications using [Neo4j Needle](ht
 yarn install
 yarn run dev
 ```
+
+## Documentation
+
+The full documentation of every templates and components is available [here](https://neo4j.com/labs/neo4j-needle-starterkit/)
 
 ## What it looks like
 ### Desktop
