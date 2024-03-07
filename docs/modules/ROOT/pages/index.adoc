@@ -1,12 +1,13 @@
 # Neo4j Needle StarterKit
 
-Reactjs Responsive Starter Kit for building applications using https://www.neo4j.design/[Neo4j Needle] for accelerating TTV of your Neo4j-powered front-end tools.
+Reactjs Responsive Starter Kit for building applications using https://www.neo4j.design/[Neo4j Needle] for accelerating TTV of your Neo4j-powered front-end applications.
+You can access the https://development.needle-starterkit.graphapp.io[online version here].
 
 image::FeaturedImg.jpg[Featured Image]
 
 
 ## Features
-- 📈 Various templates and components focused on uses-cases and industries
+- 📈 Various templates and components focused on specific uses-cases and industries
 - 🚀 Responsive: Adapts to different screen sizes for optimal user experience.
 - 🌚 Dark/Light Mode Theme 🌞: Includes a theme wrapper to switch between light and dark modes without having to reinvent the wheel!
 - ⚙️ Neo4j Integration: A simple example for connecting to a Neo4j database.
@@ -17,8 +18,8 @@ image::FeaturedImg.jpg[Featured Image]
 ## Documentation
 
 - To get started, see the link:quickstart[Quickstart] page.
-- For details on the available templates, see the link:templates[Templates] page.
-- For details on the available components, see the link:components[Components] page.
-- Examples are available for every templates and components.
+- For details on the available templates, see the Templates section.
+- For details on the available components, see the Components section.
+- Examples and documentation are available for every templates and components.
 - If you want to contribute to this project, see link:contributing[Contributing].
 

@@ -18,7 +18,7 @@ export default function Content({
   return (
     <div className='w-full flex justify-center'>
       <div className='n-bg-palette-neutral-bg-default p-5 flex flex-col'>
-        {/* Featured Product */}
+        {/* Featured Movie */}
         {loadingStates.loadingMain ? (
           <div className='w-screen h-[33vh] flex justify-center'>
             <LoadingSpinner size='large' />
@@ -59,7 +59,7 @@ export default function Content({
           </div>
         )}
 
-        {/* Similar Products */}
+        {/* Similar Genre */}
         {loadingStates.loadingSimilarGenre ? (
           <div className='w-screen h-[33vh] flex justify-center'>
             <LoadingSpinner size='large' />
@@ -79,7 +79,7 @@ export default function Content({
           </div>
         )}
 
-        {/* Frequently Bought Together */}
+        {/* User who watched this, also watched this */}
         {loadingStates.loadingOtherUsers ? (
           <div className='w-screen h-[33vh] flex justify-center'>
             <LoadingSpinner size='large' />

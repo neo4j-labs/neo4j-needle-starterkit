@@ -1,10 +1,29 @@
 = Foundation Template
 
-image::Templates/FeaturedStarterKit.png[StarterKit,align="center"]
+[cols="1a,1a"]
+|===
+| Desktop | Mobile
+
+| image::Templates/FeaturedFoundation.png[FeaturedFoundation,width=600,height=600]
+| image::Templates/FeaturedFoundationMobile.png[FeaturedFoundationMobile,width=150,height=150]
+|===
 
 == Introduction
 
-The Foundation template provides a generic, simple yet powerful template for developing applications on top of your Neo4j databases. It features a clean and intuitive layout, including a side navigation bar, a central content area, and a connection modal for establishing or disconnecting from Neo4j instances.
+The Foundation template provides a generic, simple yet powerful template for developing applications on top of your Neo4j databases. It features a clean and intuitive layout, including a side navigation bar, a central content area, and a connection modal for connecting or disconnecting from Neo4j instances.
+
+https://development.needle-starterkit.graphapp.io/foundation[Link to the live preview]
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/foundation[Link to the template code]
+
+== Pre-requisite
+
+- Ensure you have the `@neo4j-ndl` library installed in your project to use this `Foundation` template.
+
+This template is using the following components and utilities from the shared folders, make sure to import them:
+
+- The Header component from the shared component folder.
+- The ConnectionModal component from the shared component folder.
+- The Driver utility from the shared utils folder.
 
 == Documentation
 
