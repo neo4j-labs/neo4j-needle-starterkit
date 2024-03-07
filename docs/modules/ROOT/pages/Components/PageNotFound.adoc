@@ -10,6 +10,10 @@
 
 The `PageNotFoundPage` component is a React component designed to display a user-friendly message when a page is not found (404 error). It provides a visual indication that the requested page is unavailable and offers a button to navigate back to the previous page.
 
+https://needle-starterkit.graphapp.io/notfound[Link to the live preview,window=_blank]
+
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/shared/components/PageNotFound.tsx[Link to the component code,window=_blank]
+
 == Pre-requisite
 
 - Ensure you have the `@neo4j-ndl` library installed in your project to use this `PageNotFound` component.

@@ -84,5 +84,5 @@ export default function Content() {
 
 ## Templates
 This page will contain a set of example applications built using the Needle starter kit. 
-Looking for inspiration on what to build? Check out https://neo4j.com/developer-blog/needle-neo4j-design-system/[this post] on the Neo4j Developer Blog.
+Looking for inspiration on what to build? Check out https://neo4j.com/developer-blog/needle-neo4j-design-system/[this post,window=_blank] on the Neo4j Developer Blog.
 

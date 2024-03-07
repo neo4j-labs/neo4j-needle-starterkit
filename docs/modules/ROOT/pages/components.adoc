@@ -1,7 +1,7 @@
 
 # Components 
 
-The Needle Starterkit makes use of the official https://storybook-components-build.appspot.com/?path=/docs/getting-started-welcome--docs[Neo4j Needle] React component library.
+The Needle Starterkit makes use of the official https://storybook-components-build.appspot.com/?path=/docs/getting-started-welcome--docs[Neo4j Needle,window=_blank] React component library.
 You can use these components together with the higher-order components part of the starter kit.
 
 ## Architecture

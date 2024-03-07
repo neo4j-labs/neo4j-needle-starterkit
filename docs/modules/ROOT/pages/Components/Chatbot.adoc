@@ -18,6 +18,10 @@
 
 The `Chatbot` component provides a dynamic and interactive chat interface for users to communicate with an AI chatbot. It renders chat messages between a user and a chatbot, including features like typing simulation for the chatbot's responses and automatic scrolling to the latest message.
 
+https://needle-starterkit.graphapp.io/chat-widget-preview[Link to the live preview,window=_blank]
+
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/shared/components/Chatbot.tsx[Link to the component code,window=_blank]
+
 == Pre-requisite
 
 Ensure you have the `@neo4j-ndl` library installed in your project to use this `Chatbot` component.
@@ -175,4 +179,4 @@ const chatbotReply = await fetchResponseFromAPI();
 simulateTypingEffect(chatbotReply);
 ----
 
-https://github.com/neo4j-labs/neo4j-needle-starterkit/tree/development-openaichatbot[The full example can be found here]
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/development-openaichatbot/src/templates/shared/components/Chatbot.tsx[The full example can be found here,window=_blank]

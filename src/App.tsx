@@ -6,7 +6,7 @@ import '@neo4j-ndl/base/lib/neo4j-ds-styles.css';
 import ThemeWrapper from './context/ThemeWrapper';
 
 import Home from './landingPage/Home';
-import PageNotFoundPage from './templates/shared/components/PageNotFoundPage';
+import PageNotFound from './templates/shared/components/PageNotFound';
 
 import Foundation from './templates/foundation/Home';
 import Cybersecurity from './templates/cybersecurity/Home';
@@ -49,7 +49,7 @@ function App() {
             }
           />
           <Route path='/user-preview' element={<User />} />
-          <Route path='*' element={<PageNotFoundPage />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </ThemeWrapper>
     </BrowserRouter>

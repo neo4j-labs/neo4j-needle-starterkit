@@ -5,6 +5,8 @@ image::Components/UserComponent.png[UserComponent,width=300,height=300]
 
 The User component provides a user interface for displaying user information and a dropdown menu for user actions such as 'Profile' and 'Logout'.
 
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/shared/components/User.tsx[Link to the component code,window=_blank]
+
 == Pre-requisite
 
 - Ensure you have the `@neo4j-ndl` library installed in your project to use this `User` component.

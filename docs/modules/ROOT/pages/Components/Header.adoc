@@ -10,6 +10,10 @@
 
 The Header component serves as the primary navigation and interaction header in a web application. It incorporates theme toggling, navigation tabs, and optional Neo4j database connection functionality.
 
+https://needle-starterkit.graphapp.io/header-preview[Link to the live preview,window=_blank]
+
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/shared/components/Header.tsx[Link to the component code,window=_blank]
+
 == Pre-requisite
 
 - Ensure you have the `@neo4j-ndl` library installed in your project to use this `Header` component.

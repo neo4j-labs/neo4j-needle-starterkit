@@ -6,6 +6,10 @@ image::Templates/FeaturedEcommerce.png[E-commerce,align="center"]
 
 The E-commerce platform showcases a dynamic and interactive way to display products, their details, and similar or frequently bought together items. This template aim at introducing and explaining how the recommendation engine use case can be leveraged for the retail industry.
 
+https://needle-starterkit.graphapp.io/ecommerce-preview[Link to the live preview,window=_blank]
+
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/ecommerce[Link to the template code,window=_blank]
+
 == Documentation
 
 === Layout Architecture

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import NotFoundImg from '../assets/NotFound.png';
 
-export default function PageNotFoundPage() {
+export default function PageNotFound() {
   const navigate = useNavigate();
 
   return (

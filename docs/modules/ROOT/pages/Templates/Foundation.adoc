@@ -12,8 +12,9 @@
 
 The Foundation template provides a generic, simple yet powerful template for developing applications on top of your Neo4j databases. It features a clean and intuitive layout, including a side navigation bar, a central content area, and a connection modal for connecting or disconnecting from Neo4j instances.
 
-https://needle-starterkit.graphapp.io/foundation[Link to the live preview]
-https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/foundation[Link to the template code]
+https://needle-starterkit.graphapp.io/foundation-preview[Link to the live preview,window=_blank]
+
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/foundation[Link to the template code,window=_blank]
 
 == Pre-requisite
 
