@@ -13,6 +13,7 @@ import Cybersecurity from './templates/cybersecurity/Home';
 import Movie from './templates/movie/Home';
 import ECommerce from './templates/ecommerce/Home';
 
+import DemoCards from './templates/shared/components/DemoCards';
 import Chatbot from './templates/shared/components/Chatbot';
 import messagesData from './templates/shared/assets/ChatbotMessages.json';
 import ConnectionModal from './templates/shared/components/ConnectionModal';
@@ -57,6 +58,7 @@ function App() {
             }
           />
           <Route path='/user-preview' element={<User />} />
+          <Route path='/cards-preview' element={<DemoCards />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </ThemeWrapper>
