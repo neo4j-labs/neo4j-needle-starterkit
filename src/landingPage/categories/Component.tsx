@@ -5,11 +5,13 @@ import Card from '../components/Card';
 import ChatbotImgDark from '../../assets/img/component/ChatbotImg-dark.png';
 import ConnectionModalImgDark from '../../assets/img/component/ConnectionModalImg-dark.png';
 import HeaderImgDark from '../../assets/img/component/HeaderImg-dark.png';
+import CardImgDark from '../../assets/img/component/CardImg-dark.png';
 
 // Light mode featured images
 import ChatbotImgLight from '../../assets/img/component/ChatbotImg-light.png';
 import ConnectionModalImgLight from '../../assets/img/component/ConnectionModalImg-light.png';
 import HeaderImgLight from '../../assets/img/component/HeaderImg-light.png';
+import CardImgLight from '../../assets/img/component/CardImg-light.png';
 
 import { useContext } from 'react';
 import { ThemeWrapperContext } from '../../context/ThemeWrapper';
@@ -47,6 +49,16 @@ export default function Component() {
         import.meta.env.PACKAGE_VERSION
       }/src/templates/shared/components/Header.tsx`,
       previewLink: '/header-preview',
+    },
+    {
+      title: 'Card',
+      description:
+        'A versatile card component that can be used to display information in a clean and organized way. It is designed to be easily customizable to fit your needs.',
+      image: colorMode === 'dark' ? CardImgDark : CardImgLight,
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/shared/components/Card.tsx`,
+      previewLink: '/cards-preview',
     },
   ];
 
