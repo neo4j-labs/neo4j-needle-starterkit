@@ -5,6 +5,7 @@ interface CardProps {
   layout: 'vertical' | 'horizontal';
   imageSrc?: string;
   imageSize?: 'full' | 'small';
+  iconSystem?: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   children: ReactNode;
   className?: string;
 }
@@ -25,7 +26,7 @@ const Card: React.FC<CardProps> & {
   Header: React.FC<CardHeaderProps>;
   Subheader: React.FC<CardSubheaderProps>;
   Content: React.FC<CardContentProps>;
-} = ({ layout, imageSrc, imageSize = 'small', children, className }) => {
+} = ({ layout, imageSrc, imageSize = 'small', iconSystem, children, className }) => {
   return (
     <Box 
       className={`n-bg-palette-neutral-bg-weak border rounded-3xl shadow-lg mx-auto ${layout === 'horizontal' ? 'flex' : 'block'} ${className}`}
@@ -40,6 +41,11 @@ const Card: React.FC<CardProps> & {
                     className={`${imageSize === 'full' ? 'object-cover w-full h-full' : 'object-cover w-16 h-16'} ${layout === 'horizontal' ? 'rounded-tl-3xl rounded-bl-3xl' : 'rounded-tl-3xl rounded-tr-3xl'}`} 
                     
                 />
+                </div>
+            )}
+            {iconSystem && (
+                <div className='p-4'>
+                {React.createElement(iconSystem, { className: 'w-8 h-8' })}
                 </div>
             )}
             <div className={`p-4 ${layout === 'horizontal' ? 'flex flex-col justify-between w-2/3' : ''}`}>
@@ -59,7 +65,7 @@ const Subheader: React.FC<CardSubheaderProps> = ({ children }) => (
 );
 
 const Content: React.FC<CardContentProps> = ({ children }) => (
-  <Typography variant="body-small">{children}</Typography>
+  <Typography variant="body-small" className='flex flex-col gap-3'>{children}</Typography>
 );
 
 Card.Header = Header;
