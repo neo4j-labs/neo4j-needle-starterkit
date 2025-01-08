@@ -1,8 +1,10 @@
 /* eslint-disable no-confusing-arrow */
 import { useEffect, useRef, useState } from 'react';
-import { Button, Widget, Typography, Avatar, TextInput } from '@neo4j-ndl/react';
+import { Button, Widget, Typography, Avatar, TextInput, IconButton, useCopyToClipboard, Modal } from '@neo4j-ndl/react';
 
 import ChatBotAvatar from '../assets/chatbot-ai.png';
+import { ArrowPathIconOutline, ClipboardDocumentIconOutline, HandThumbDownIconOutline, InformationCircleIconOutline, SpeakerWaveIconOutline } from '@neo4j-ndl/react/icons';
+import RetrievalInformation from './RetrievalInformation';
 
 type ChatbotProps = {
   messages: {
@@ -11,13 +13,27 @@ type ChatbotProps = {
     message: string;
     datetime: string;
     isTyping?: boolean;
+    src?: Array<string>;
   }[];
+};
+
+type ChatbotResponse = {
+  response: string;
+  src: string[];
 };
 
 export default function Chatbot(props: ChatbotProps) {
   const { messages } = props;
   const [listMessages, setListMessages] = useState(messages);
   const [inputMessage, setInputMessage] = useState('');
+  const [value, copy] = useCopyToClipboard();
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false);
+  const [timeTaken, setTimeTaken] = useState<number>(0);
+  const [sourcesModal, setSourcesModal] = useState<string[]>([]);
+  const [modelModal, setModelModal] = useState<string>('');
+
+  const handleCloseModal = () => setIsOpenModal(false);
+
   const formattedTextStyle = { color: 'rgb(var(--theme-palette-discovery-bg-strong))' };
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -26,17 +42,18 @@ export default function Chatbot(props: ChatbotProps) {
     setInputMessage(e.target.value);
   };
 
-  const simulateTypingEffect = (responseText: string, index = 0) => {
-    if (index < responseText.length) {
+  const simulateTypingEffect = (responseText: ChatbotResponse, index = 0) => {
+    const msg = responseText.response;
+    if (index < msg.length) {
       const nextIndex = index + 1;
-      const currentTypedText = responseText.substring(0, nextIndex);
+      const currentTypedText = msg.substring(0, nextIndex);
 
       if (index === 0) {
         const date = new Date();
         const datetime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
         setListMessages((msgs) => [
           ...msgs,
-          { id: Date.now(), user: 'chatbot', message: currentTypedText, datetime: datetime, isTyping: true },
+          { id: Date.now(), user: 'chatbot', message: currentTypedText, datetime: datetime, isTyping: true, src: responseText.src },
         ]);
       } else {
         setListMessages((msgs) => msgs.map((msg) => (msg.isTyping ? { ...msg, message: currentTypedText } : msg)));
@@ -59,7 +76,7 @@ export default function Chatbot(props: ChatbotProps) {
     setListMessages((listMessages) => [...listMessages, userMessage]);
     setInputMessage('');
 
-    const chatbotReply = 'Hello, how can I help you today?'; // Replace with getting a response from your chatbot through your APIs
+    const chatbotReply = {response: 'Hello, here is an example response with sources. To use the chatbot, plug this to your backend with a fetch containing an object response of type: {response: string, src: Array<string>}', src: ["1:1234-abcd-efgh-ijkl-5678:2", "3:8765-zyxw-vuts-rqpo-4321:4"]}; // Replace with getting a response from your chatbot through your APIs
     simulateTypingEffect(chatbotReply);
   };
 
@@ -127,6 +144,39 @@ export default function Chatbot(props: ChatbotProps) {
                   <div className='text-right align-bottom pt-3'>
                     <Typography variant='body-small'>{chat.datetime}</Typography>
                   </div>
+                  <Typography variant='body-small' className='text-right'>
+                    {chat.user === 'chatbot' ? (
+                      <div className='flex gap-1'>
+                            <>
+                              <IconButton isClean ariaLabel="Search Icon">
+                                <SpeakerWaveIconOutline className="w-4 h-4 inline-block"/>
+                              </IconButton>
+                              {chat.src ? (
+                                <IconButton isClean ariaLabel="Search Icon"
+                                onClick={() => {
+                                  setModelModal('OpenAI GPT 4o');
+                                  setSourcesModal(chat.src ?? []);
+                                  setTimeTaken(50);
+                                  setIsOpenModal(true)
+                                }}>
+                                  <InformationCircleIconOutline className='w-4 h-4 inline-block' />
+                                </IconButton>
+                              ) : <></>}
+                              <IconButton isClean ariaLabel="Search Icon" onClick={() => copy(chat.message)} >
+                                <ClipboardDocumentIconOutline className='w-4 h-4 inline-block' />
+                              </IconButton>
+                              <IconButton isClean ariaLabel="Search Icon">
+                                <ArrowPathIconOutline className='w-4 h-4 inline-block' />
+                              </IconButton>
+                              <IconButton isClean ariaLabel="Search Icon">
+                                <HandThumbDownIconOutline className='w-4 h-4 inline-block n-text-palette-danger-text' />
+                              </IconButton>
+                            </>
+                      </div>
+                    ) : (
+                      <></>
+                    )}
+                  </Typography>
                 </Widget>
               </div>
             ))}
@@ -142,11 +192,19 @@ export default function Chatbot(props: ChatbotProps) {
             onChange={handleInputChange}
             htmlAttributes={{
               type: 'text',
+              "aria-label": "Chatbot Input",
             }}
           />
           <Button type='submit'>Submit</Button>
         </form>
       </div>
+
+      <Modal modalProps={{
+          id: 'default-menu',
+          className: 'n-p-token-4 n-bg-palette-neutral-bg-weak n-rounded-lg min-w-[60%]',
+        }} onClose={handleCloseModal} isOpen={isOpenModal}>
+          <RetrievalInformation sources={sourcesModal} model={modelModal} timeTaken={timeTaken} />
+      </Modal>
     </div>
   );
 }
