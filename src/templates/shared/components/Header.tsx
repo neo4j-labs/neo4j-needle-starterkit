@@ -14,7 +14,7 @@ export default function Header({
   setConnectNeo4j = () => {},
   openConnectionModal = () => {},
   userHeader = true,
-  documentation = "",
+  documentation = '',
 }: {
   title: string;
   navItems?: string[];
@@ -103,7 +103,13 @@ export default function Header({
                   </span>
                 )}
               </IconButton>
-              <IconButton onClick={() => handleURLClick(documentation)} className='hidden md:inline-flex' ariaLabel='Help' isClean size='large'>
+              <IconButton
+                onClick={() => handleURLClick(documentation)}
+                className='hidden md:inline-flex'
+                ariaLabel='Help'
+                isClean
+                size='large'
+              >
                 <QuestionMarkCircleIconOutline />
               </IconButton>
 
