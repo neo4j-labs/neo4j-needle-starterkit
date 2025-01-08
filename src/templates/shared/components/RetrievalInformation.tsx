@@ -105,7 +105,7 @@ function RetrievalInformation(props: RetrievalProps) {
                     ref={nvl}
                     nodes={nodes}
                     rels={rels}
-                    onClick={(evt) => console.log('custom click event', evt)}
+                    onClick={() => null}
                     mouseEventCallbacks={mouseEventCallbacks}
                     nvlOptions={{
                         initialZoom: 2,
