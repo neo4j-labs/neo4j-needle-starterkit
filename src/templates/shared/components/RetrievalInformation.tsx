@@ -47,7 +47,7 @@ function RetrievalInformation(props: RetrievalProps) {
     function retrieveSources() {
         // This is only for rendering the sources nodes. Ideally, for each of the sources, you would use your retrieval query to get the nodes and relationships
         // Example:
-        // setDriver('neo4j+s://20825466.databases.neo4j.io', 'neo4j', 'zRkZb0LO2EYLtSNqrQ4OdvEWg3Q6eGV8xLt8Putg8vU');
+        // setDriver('bolt://localhost:7687', 'neo4j', 'password');
         // runRAGQuery(props.sources).then((nvlGraph) => {
         //     setNodes(nvlGraph.nodes);
         //     setRels(nvlGraph.relationships);
