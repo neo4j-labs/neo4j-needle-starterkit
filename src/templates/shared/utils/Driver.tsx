@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import neo4j, { Driver } from 'neo4j-driver';
 import { nvlResultTransformer } from '@neo4j-nvl/base';
+import { calcWordColor } from '@neo4j-devtools/word-color';
 
 export let driver: Driver;
 
@@ -12,7 +13,7 @@ export async function setDriver(connectionURI: string, username: string, passwor
       'needleStarterKit-neo4j.connection',
       JSON.stringify({ uri: connectionURI, user: username, password: password })
     );
-    return true;
+    return driver;
   } catch (err) {
     console.error(`Connection error\n${err}\nCause: ${err as Error}`);
     return false;
@@ -39,9 +40,9 @@ export async function runRAGQuery(sources: Array<string>) {
     return {
       ...node,
       caption: properties.name ?? labels[0],
+      color: calcWordColor(properties.name ?? labels[0]),
     };
   });
-  console.log(nodes);
   const relationships = nvlGraph.relationships.map((rel) => {
     const or = nvlGraph.recordObjectMap.get(rel.id);
     return {
@@ -50,6 +51,36 @@ export async function runRAGQuery(sources: Array<string>) {
     };
   });
   return { nodes, relationships };
+}
+
+export async function runQuery(query: string, driver: Driver, limit: number | boolean) {
+  try {
+    // Customize the RETRIEVAL_QUERY to match your needs
+    let formattedQuery = `${query}`;
+    if (typeof limit === 'number') {
+      formattedQuery += ` LIMIT ${limit}`;
+    }
+    const nvlGraph = await driver.executeQuery(formattedQuery, {}, { resultTransformer: nvlResultTransformer });
+    const nodes = nvlGraph.nodes.map((node) => {
+      const { properties, labels } = nvlGraph.recordObjectMap.get(node.id);
+      return {
+        ...node,
+        caption: properties.name ?? labels[0],
+        color: calcWordColor(properties.name ?? labels[0]),
+      };
+    });
+    const relationships = nvlGraph.relationships.map((rel) => {
+      const or = nvlGraph.recordObjectMap.get(rel.id);
+      return {
+        ...rel,
+        caption: or.type,
+      };
+    });
+    return { nodes, relationships };
+  } catch (err) {
+    console.error(`Query error\n${err}\nCause: ${err as Error}`);
+    return { error: (err as Error).message };
+  }
 }
 
 /*

@@ -19,6 +19,7 @@ import messagesData from './templates/shared/assets/ChatbotMessages.json';
 import ConnectionModal from './templates/shared/components/ConnectionModal';
 import Header from './templates/shared/components/Header';
 import User from './templates/shared/components/User';
+import CypherBlock from './templates/shared/components/CypherBlock';
 
 import { FileContextProvider } from './context/connectionFile';
 
@@ -59,6 +60,7 @@ function App() {
           />
           <Route path='/user-preview' element={<User />} />
           <Route path='/cards-preview' element={<DemoCards />} />
+          <Route path='/cypherblock-preview' element={<CypherBlock neo4jConnection='needleStarterKit-neo4j.connection' initialQuery='MATCH (a)-[r]-(b) RETURN a, r, b' limitResultSet={1000} />} />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </ThemeWrapper>

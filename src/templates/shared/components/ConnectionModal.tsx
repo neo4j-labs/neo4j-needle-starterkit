@@ -79,12 +79,15 @@ export default function ConnectionModal({
     const connectionURI = `${protocol}://${URI}${URI.split(':')[1] ? '' : `:${port}`}`;
     setDriver(connectionURI, username, password).then((isSuccessful) => {
       setConnectionStatus(isSuccessful);
-      isSuccessful
-        ? setOpenConnection(false)
-        : setMessage({
+      if (isSuccessful) {
+        setOpenConnection(false);
+        setMessage({ type: 'success', content: `Connected to ${connectionURI}` });
+      } else {
+        setMessage({
             type: 'danger',
             content: 'Connection failed, please check the developer console logs for more informations',
           });
+      }
     });
   }
 
@@ -93,10 +96,10 @@ export default function ConnectionModal({
       <Dialog
         size='small'
         isOpen={open}
-        hasDisabledCloseButton
         htmlAttributes={{
           'aria-labelledby': 'form-dialog-title',
         }}
+        onClose={() => setOpenConnection(false)}
       >
         <Dialog.Header
           htmlAttributes={{
