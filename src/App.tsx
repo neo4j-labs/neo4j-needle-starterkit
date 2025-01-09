@@ -60,7 +60,16 @@ function App() {
           />
           <Route path='/user-preview' element={<User />} />
           <Route path='/cards-preview' element={<DemoCards />} />
-          <Route path='/cypherblock-preview' element={<CypherBlock neo4jConnection='needleStarterKit-neo4j.connection' initialQuery='MATCH (a)-[r]-(b) RETURN a, r, b' limitResultSet={1000} />} />
+          <Route
+            path='/cypherblock-preview'
+            element={
+              <CypherBlock
+                neo4jConnection='needleStarterKit-neo4j.connection'
+                initialQuery='MATCH (a)-[r]-(b) RETURN a, r, b'
+                limitResultSet={1000}
+              />
+            }
+          />
           <Route path='*' element={<PageNotFound />} />
         </Routes>
       </ThemeWrapper>

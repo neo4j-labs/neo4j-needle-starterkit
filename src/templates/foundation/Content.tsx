@@ -3,6 +3,7 @@ import { Button, Label, Typography } from '@neo4j-ndl/react';
 
 import { setDriver, disconnect } from '../shared/utils/Driver';
 import ConnectionModal from '../shared/components/ConnectionModal';
+import { Driver } from 'neo4j-driver';
 
 export default function Content() {
   const [init, setInit] = useState<boolean>(false);
@@ -14,8 +15,8 @@ export default function Content() {
       let session = localStorage.getItem('needleStarterKit-neo4j.connection');
       if (session) {
         let neo4jConnection = JSON.parse(session);
-        setDriver(neo4jConnection.uri, neo4jConnection.user, neo4jConnection.password).then((isSuccessful: boolean) => {
-          setConnectionStatus(isSuccessful);
+        setDriver(neo4jConnection.uri, neo4jConnection.user, neo4jConnection.password).then((driver: false | Driver) => {
+          setConnectionStatus(driver instanceof Driver);
         });
       }
       setInit(true);
