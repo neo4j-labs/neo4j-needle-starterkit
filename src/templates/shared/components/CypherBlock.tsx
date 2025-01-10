@@ -176,7 +176,7 @@ export default function CypherBlock(props: CypherBlockProps) {
               <Tooltip.Trigger hasButtonWrapper>
                 <IconButton
                   className='n-size-token-7'
-                  ariaLabel='Fit to screen'
+                  ariaLabel='Run query'
                   isDisabled={!connectionStatus}
                   onClick={() => submitQuery(query)}
                 >
@@ -201,7 +201,12 @@ export default function CypherBlock(props: CypherBlockProps) {
             </Tooltip>
           </Flex>
 
-          <CypherEditor {...cypherEditorProps} value={query} className='ndl-cypher-editor p-2' />
+          <CypherEditor {...cypherEditorProps} value={query} className='ndl-cypher-editor p-2' onKeyDown={(e: { metaKey: any; key: string; preventDefault: () => void; }) => {
+                  if (e.metaKey && e.key === 'Enter' && connectionStatus) {
+                    e.preventDefault();
+                    submitQuery(query);
+                  }
+                  }} />
         </div>
         <Box className='button-container flex justify-between mt-2'>
           <div

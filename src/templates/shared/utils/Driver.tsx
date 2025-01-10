@@ -58,7 +58,11 @@ export async function runQuery(query: string, driver: Driver, limit: number | bo
     // Customize the RETRIEVAL_QUERY to match your needs
     let formattedQuery = `${query}`;
     if (typeof limit === 'number') {
-      formattedQuery += ` LIMIT ${limit}`;
+      if (formattedQuery.trim().endsWith(';')) {
+        formattedQuery = `${formattedQuery.trim().slice(0, -1)  } LIMIT ${limit};`;
+      } else {
+        formattedQuery += ` LIMIT ${limit}`;
+      }
     }
     const nvlGraph = await driver.executeQuery(formattedQuery, {}, { resultTransformer: nvlResultTransformer });
     const nodes = nvlGraph.nodes.map((node) => {
