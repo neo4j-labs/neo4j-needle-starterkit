@@ -11,9 +11,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@neo4j-ndl/base": "^3.0.14",
-    "@neo4j-ndl/react": "^3.0.24",
-    "@neo4j-nvl/react": "^0.3.6",
+    "@neo4j-ndl/base": "^3.7.10",
+    "@neo4j-ndl/react": "^3.8.22",
+    "@neo4j-nvl/react": "^0.3.8",
     "@tanstack/react-table": "^8.9.3",
     "autoprefixer": "^10.4.17",
     "eslint-plugin-react": "^7.33.2",
@@ -39,5 +39,6 @@
     "prettier": "^2.7.1",
     "typescript": "5.3.3",
     "vite": "^4.4.5"
-  }
+  },
+  "packageManager": "yarn@1.22.22"
 }
