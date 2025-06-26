@@ -63,11 +63,16 @@ function App() {
           <Route
             path='/cypherblock-preview'
             element={
+
+
               <CypherBlock
+                //cypherEditorEnabled={true}
                 neo4jConnection='needleStarterKit-neo4j.connection'
                 initialQuery='MATCH (a)-[r]-(b) RETURN a, r, b'
                 limitResultSet={1000}
               />
+
+              
             }
           />
           <Route path='*' element={<PageNotFound />} />
