@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@neo4j-cypher/react-codemirror": "^1.0.4",
+    "@neo4j-devtools/word-color": "^0.0.8",
     "@neo4j-ndl/base": "^3.0.14",
     "@neo4j-ndl/react": "^3.0.24",
     "@neo4j-nvl/react": "^0.3.6",

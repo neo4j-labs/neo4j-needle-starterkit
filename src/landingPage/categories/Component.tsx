@@ -60,6 +60,16 @@ export default function Component() {
       }/src/templates/shared/components/Card.tsx`,
       previewLink: '/cards-preview',
     },
+    {
+      title: 'CypherBlock',
+      description:
+        'xxx',
+      image: colorMode === 'dark' ? CardImgDark : CardImgLight,
+      sourceCode: `https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/${
+        import.meta.env.PACKAGE_VERSION
+      }/src/templates/shared/components/Card.tsx`,
+      previewLink: '/cypherblock-preview',
+    }
   ];
 
   return (

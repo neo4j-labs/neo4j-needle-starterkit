@@ -1,6 +1,10 @@
 /* eslint-disable no-console */
 import neo4j, { Driver } from 'neo4j-driver';
 import { nvlResultTransformer } from '@neo4j-nvl/base';
+import { calcWordColor } from '@neo4j-devtools/word-color';
+import { graphResultTransformer } from './GraphResultTransformer';
+
+import { extractGraphEntitiesFromField } from './RecordUtils';
 
 export let driver: Driver;
 
@@ -12,7 +16,7 @@ export async function setDriver(connectionURI: string, username: string, passwor
       'needleStarterKit-neo4j.connection',
       JSON.stringify({ uri: connectionURI, user: username, password: password })
     );
-    return true;
+    return driver;
   } catch (err) {
     console.error(`Connection error\n${err}\nCause: ${err as Error}`);
     return false;
@@ -39,9 +43,9 @@ export async function runRAGQuery(sources: Array<string>) {
     return {
       ...node,
       caption: properties.name ?? labels[0],
+      color: calcWordColor(properties.name ?? labels[0]),
     };
   });
-  console.log(nodes);
   const relationships = nvlGraph.relationships.map((rel) => {
     const or = nvlGraph.recordObjectMap.get(rel.id);
     return {
@@ -50,6 +54,90 @@ export async function runRAGQuery(sources: Array<string>) {
     };
   });
   return { nodes, relationships };
+}
+
+export async function runQuery(query: string, driver: Driver, limit: number | boolean) {
+  try {
+    // Customize the RETRIEVAL_QUERY to match your needs
+    let formattedQuery = `${query}`;
+    if (typeof limit === 'number') {
+      if (formattedQuery.trim().endsWith(';')) {
+        formattedQuery = `${formattedQuery.trim().slice(0, -1)  } LIMIT ${limit};`;
+      } else {
+        formattedQuery += ` LIMIT ${limit}`;
+      }
+    }
+    runQueryAndExtractEntities(formattedQuery, driver, limit);
+    const nvlGraph = await driver.executeQuery(formattedQuery, {}, { resultTransformer: nvlResultTransformer });
+    const nodes = nvlGraph.nodes.map((node) => {
+      const { properties, labels } = nvlGraph.recordObjectMap.get(node.id);
+      return {
+        ...node,
+        caption: properties.name ?? labels[0],
+        color: calcWordColor(properties.name ?? labels[0]),
+      };
+    });
+    const relationships = nvlGraph.relationships.map((rel) => {
+      const or = nvlGraph.recordObjectMap.get(rel.id);
+      return {
+        ...rel,
+        caption: or.type,
+      };
+    });
+    return { nodes, relationships };
+  } catch (err) {
+    console.error(`Query error\n${err}\nCause: ${err as Error}`);
+    return { error: (err as Error).message };
+  }
+}
+
+export async function runQueryAndExtractEntities(query: string, driver: Driver, limit: number | boolean) {
+try{
+  const resultTest = await driver.executeQuery(query, {}, {resultTransformer: graphResultTransformer});
+  console.log("resultTest");
+  console.log(resultTest.records);
+  console.log(resultTest.summary);
+  console.log(resultTest);
+  console.log(resultTest.nodes, resultTest.relationships);
+  const res = await driver.executeQuery(query, {}, { }).then((result) => {
+    const nodes = [];
+    const links = [];
+    const nodeLabels = {};
+    const linkTypes = {};
+    const nodePositions = {};
+    const { records } = result;
+    for (let record of records) {
+      for (let key in record) {
+        extractGraphEntitiesFromField(
+          record[key],
+          nodes,
+          links,
+          nodeLabels,
+          linkTypes,
+          false,
+          'size',
+          10,
+          'width',
+          1,
+          'color',
+          '#000000',
+          nodePositions
+        );
+      }
+    }
+    console.log('nodes', nodes);
+    console.log('links', links);
+    console.log('nodeLabels', nodeLabels);
+    console.log('linkTypes', linkTypes);
+    console.log('nodePositions', nodePositions);
+    return { nodes, links, nodeLabels, linkTypes, nodePositions };
+  }
+  );
+
+} catch (err) {
+    console.error(`Query error\n${err}\nCause: ${err as Error}`);
+    return { error: (err as Error).message };
+  }
 }
 
 /*

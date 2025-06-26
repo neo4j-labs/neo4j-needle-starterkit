@@ -1,6 +1,7 @@
 import { Button, Dialog, TextInput, Select, Banner, Dropzone } from '@neo4j-ndl/react';
 import { useState } from 'react';
 import { setDriver } from '../utils/Driver';
+import { Driver } from 'neo4j-driver';
 
 interface Message {
   type: 'success' | 'info' | 'warning' | 'danger' | 'neutral';
@@ -78,13 +79,16 @@ export default function ConnectionModal({
   function submitConnection() {
     const connectionURI = `${protocol}://${URI}${URI.split(':')[1] ? '' : `:${port}`}`;
     setDriver(connectionURI, username, password).then((isSuccessful) => {
-      setConnectionStatus(isSuccessful);
-      isSuccessful
-        ? setOpenConnection(false)
-        : setMessage({
-            type: 'danger',
-            content: 'Connection failed, please check the developer console logs for more informations',
-          });
+      setConnectionStatus(isSuccessful instanceof Driver);
+      if (isSuccessful instanceof Driver) {
+        setOpenConnection(false);
+        setMessage({ type: 'success', content: `Connected to ${connectionURI}` });
+      } else {
+        setMessage({
+          type: 'danger',
+          content: 'Connection failed, please check the developer console logs for more informations',
+        });
+      }
     });
   }
 
@@ -93,10 +97,10 @@ export default function ConnectionModal({
       <Dialog
         size='small'
         isOpen={open}
-        hasDisabledCloseButton
         htmlAttributes={{
           'aria-labelledby': 'form-dialog-title',
         }}
+        onClose={() => setOpenConnection(false)}
       >
         <Dialog.Header
           htmlAttributes={{
