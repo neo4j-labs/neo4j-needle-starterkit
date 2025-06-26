@@ -6,7 +6,7 @@ import { CypherEditor } from '@neo4j-cypher/react-codemirror';
 import type { NVL, HitTargets, Node, Relationship } from '@neo4j-nvl/base';
 import { InteractiveNvlWrapper } from '@neo4j-nvl/react';
 import type { MouseEventCallbacks } from '@neo4j-nvl/react';
-import { Box, Flex, IconButton, StatusIndicator, toast, Toaster, Tooltip, Typography } from '@neo4j-ndl/react';
+import { Box, Flex, IconButton, LoadingSpinner, StatusIndicator, toast, Toaster, Tooltip, Typography } from '@neo4j-ndl/react';
 import { Cog6ToothIconOutline, FitToScreenIcon, PlayCircleIconOutline, ResetZoomIcon } from '@neo4j-ndl/react/icons';
 
 import { Driver } from 'neo4j-driver';
@@ -34,6 +34,7 @@ export default function CypherBlock(props: CypherBlockProps) {
     autocomplete: true,
     theme: themeMode,
     onValueChanged: (value: string) => setQuery(value),
+    autofocus: true,
   };
   const nvl = useRef<NVL | null>(null);
 
@@ -108,9 +109,13 @@ export default function CypherBlock(props: CypherBlockProps) {
           } else {
             if (nvlGraph.nodes.length === 0 && nvlGraph.relationships.length === 0) {
               toast.neutral('Query returned no results', { isCloseable: true, shouldAutoClose: true });
+              console.log('Query returned no results');
+              console.log(nvlGraph);
             }
             setNodes(nvlGraph.nodes);
             setRels(nvlGraph.relationships);
+            nvl.current?.addAndUpdateElementsInGraph(nvlGraph.nodes, nvlGraph.relationships);
+            nvl.current?.fit(nvlGraph.nodes.map((n) => n.id));
           }
         });
       });
@@ -155,14 +160,16 @@ export default function CypherBlock(props: CypherBlockProps) {
             backgroundColor: themeMode === 'dark' ? '#002b36' : '#ffffff',
           }}
         >
-          <Typography variant='h5' className='mb-2'>
-            {' '}
-            Cypher Query{' '}
-          </Typography>
-          <Flex flexDirection='row'>
-            <StatusIndicator type={connectionStatus ? 'success' : 'danger'} className='mt-1' />
-            <Typography variant='body-small'>{connectionStatus ? `Connected` : 'Disconnected'}</Typography>
+          <Flex flexDirection='row' className=''>
+            <Typography variant='h5' className=''>
+              Cypher Query
+            </Typography>
+              <Flex flexDirection='row' className='mt-1'>
+              <StatusIndicator type={connectionStatus ? 'success' : 'danger'} className='mt-1' />
+              <Typography variant='body-small'>{connectionStatus ? `Connected` : 'Not connected'}</Typography>
+            </Flex>
           </Flex>
+          
           <Flex
             flexDirection='row'
             style={{
@@ -236,6 +243,18 @@ export default function CypherBlock(props: CypherBlockProps) {
               <IconButton className='n-size-token-7' ariaLabel='Reset zoom' onClick={resetZoom}>
                 <ResetZoomIcon />
               </IconButton>
+            </Flex>
+            <Flex
+              justifyContent='center'
+              alignItems='center'
+              style={{
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                zIndex: 500,
+              }}
+            >
+              {/* <LoadingSpinner size='large' /> */}
             </Flex>
             <InteractiveNvlWrapper
               ref={nvl}

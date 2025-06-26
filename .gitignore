@@ -133,3 +133,5 @@ package-lock.json
 docs/build
 vite.config.ts
 yarn.lock
+
+.early.coverage
