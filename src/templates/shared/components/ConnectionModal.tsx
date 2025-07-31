@@ -57,12 +57,12 @@ export default function ConnectionModal({
         const lines = text.split(/\r?\n/);
         const configObject = lines.reduce((acc: Record<string, string>, line: string) => {
           if (line.startsWith('#') || line.trim() === '') {
-            return acc;
+        return acc;
           }
 
           const [key, value] = line.split('=');
           if (['NEO4J_URI', 'NEO4J_USERNAME', 'NEO4J_PASSWORD', 'NEO4J_DATABASE'].includes(key)) {
-            acc[key] = value;
+            acc[key] = value.trim().replace(/^"(.*)"$/, '$1');
           }
           return acc;
         }, {});

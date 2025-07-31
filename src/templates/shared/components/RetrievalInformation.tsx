@@ -85,7 +85,7 @@ function RetrievalInformation(props: RetrievalProps) {
             margin: 10,
             borderRadius: 25,
             border: '2px solid #2AADA5',
-            height: 800,
+            height: '60vh',
             background: `rgb(var(--theme-palette-primary-bg-weaker))`,
             boxShadow: `2px -2px 10px grey`,
             position: 'relative',
