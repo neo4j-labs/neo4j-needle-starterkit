@@ -14,8 +14,7 @@ import Movie from './templates/movie/Home';
 import ECommerce from './templates/ecommerce/Home';
 
 import DemoCards from './templates/shared/components/DemoCards';
-import Chatbot from './templates/shared/components/Chatbot';
-import messagesData from './templates/shared/assets/ChatbotMessages.json';
+import ChatbotDemo from './templates/shared/components/ChatbotDemo';
 import ConnectionModal from './templates/shared/components/ConnectionModal';
 import Header from './templates/shared/components/Header';
 import User from './templates/shared/components/User';
@@ -25,7 +24,6 @@ import { FileContextProvider } from './context/connectionFile';
 import './ConnectionModal.css';
 
 function App() {
-  const messages = messagesData.listMessages;
   const [activeTab, setActiveTab] = useState<string>('Home');
   return (
     <BrowserRouter>
@@ -44,7 +42,7 @@ function App() {
               </FileContextProvider>
             }
           />
-          <Route path='/chat-widget-preview' element={<Chatbot messages={messages} />} />
+          <Route path='/chat-widget-preview' element={<ChatbotDemo />} />
           <Route
             path='/header-preview'
             element={

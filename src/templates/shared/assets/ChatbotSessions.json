@@ -1,0 +1,144 @@
+{
+  "sessions": [
+    {
+      "id": "session-1",
+      "title": "Cypher Query Help",
+      "createdAt": "2025-07-01T10:00:00.000Z",
+      "updatedAt": "2025-07-01T10:30:00.000Z",
+      "messages": [
+        {
+          "id": 1,
+          "message": "Hi, I need help with creating a Cypher query for Neo4j.",
+          "user": "user",
+          "datetime": "01/01/2025 00:00:00"
+        },
+        {
+          "id": 2,
+          "message": "Sure, I can help with that. What specific data are you looking to retrieve?",
+          "user": "chatbot",
+          "datetime": "01/01/2025 00:00:00"
+        },
+        {
+          "id": 3,
+          "message": "I need to find all employees who work in the IT department.",
+          "user": "user",
+          "datetime": "01/01/2025 00:00:00"
+        },
+        {
+          "id": 4,
+          "message": "Alright, you can use the following query: `MATCH (e:Employee)-[:WORKS_IN]->(d:Department {name: 'IT'}) RETURN e.name`. This query matches nodes labeled 'Employee' related to the 'IT' department and returns their names.",
+          "user": "chatbot",
+          "datetime": "01/01/2025 00:00:00"
+        },
+        {
+          "id": 5,
+          "message": "Thanks! And how do I get the total number of such employees?",
+          "user": "user",
+          "datetime": "01/01/2025 00:00:00"
+        },
+        {
+          "id": 6,
+          "message": "To get the count, use: `MATCH (e:Employee)-[:WORKS_IN]->(d:Department {name: 'IT'}) RETURN count(e)`. This counts all the distinct 'Employee' nodes related to the 'IT' department.",
+          "user": "chatbot",
+          "datetime": "01/01/2025 00:00:00"
+        }
+      ]
+    },
+    {
+      "id": "session-2",
+      "title": "Graph Database Design",
+      "createdAt": "2025-08-02T14:00:00.000Z",
+      "updatedAt": "2025-08-02T15:45:00.000Z",
+      "messages": [
+        {
+          "id": 7,
+          "message": "What are the best practices for designing a graph database schema?",
+          "user": "user",
+          "datetime": "02/01/2025 14:00:00"
+        },
+        {
+          "id": 8,
+          "message": "Great question! Here are some key best practices for graph database design: 1) Start with your questions - what queries will you need to run? 2) Model your entities as nodes and relationships as edges 3) Use specific relationship types rather than generic ones 4) Consider performance implications of your model",
+          "user": "chatbot",
+          "datetime": "02/01/2025 14:01:00"
+        },
+        {
+          "id": 9,
+          "message": "Can you give me an example of a good vs bad relationship design?",
+          "user": "user",
+          "datetime": "02/01/2025 14:15:00"
+        },
+        {
+          "id": 10,
+          "message": "Certainly! Bad: `(person)-[:RELATED_TO]->(person)` - too generic. Good: `(person)-[:MARRIED_TO]->(person)` or `(person)-[:WORKS_WITH]->(person)` - specific and meaningful. The specific relationships make queries more efficient and your graph more expressive.",
+          "user": "chatbot",
+          "datetime": "02/01/2025 14:16:00"
+        }
+      ]
+    },
+    {
+      "id": "session-3",
+      "title": "Performance Optimization",
+      "createdAt": "2025-08-03T09:00:00.000Z",
+      "updatedAt": "2025-08-03T09:30:00.000Z",
+      "messages": [
+        {
+          "id": 11,
+          "message": "My Cypher queries are running slowly. How can I optimize them?",
+          "user": "user",
+          "datetime": "03/01/2025 09:00:00"
+        },
+        {
+          "id": 12,
+          "message": "There are several ways to optimize Cypher queries: 1) Use indexes on frequently queried properties 2) Use PROFILE to understand query execution 3) Limit results with LIMIT clause 4) Use more specific patterns 5) Consider using parameters for repeated queries",
+          "user": "chatbot",
+          "datetime": "03/01/2025 09:01:00"
+        },
+        {
+          "id": 13,
+          "message": "How do I create an index in Neo4j?",
+          "user": "user",
+          "datetime": "03/01/2025 09:20:00"
+        },
+        {
+          "id": 14,
+          "message": "To create an index, use: `CREATE INDEX FOR (n:Label) ON (n.property)`. For example: `CREATE INDEX FOR (p:Person) ON (p.name)`. You can also create composite indexes: `CREATE INDEX FOR (p:Person) ON (p.firstName, p.lastName)`.",
+          "user": "chatbot",
+          "datetime": "03/01/2025 09:21:00"
+        }
+      ]
+    },
+    {
+      "id": "session-4",
+      "title": "Data Import Questions",
+      "createdAt": "2025-08-04T11:00:00.000Z",
+      "updatedAt": "2025-08-04T11:20:00.000Z",
+      "messages": [
+        {
+          "id": 15,
+          "message": "What's the best way to import large datasets into Neo4j?",
+          "user": "user",
+          "datetime": "04/01/2025 11:00:00"
+        },
+        {
+          "id": 16,
+          "message": "For large datasets, I recommend using `neo4j-admin import` for initial bulk imports, or `LOAD CSV` with `USING PERIODIC COMMIT` for ongoing imports. The admin import tool is fastest for one-time imports of millions of records.",
+          "user": "chatbot",
+          "datetime": "04/01/2025 11:05:00"
+        },
+        {
+          "id": 17,
+          "message": "Can you show me a LOAD CSV example?",
+          "user": "user",
+          "datetime": "04/01/2025 11:15:00"
+        },
+        {
+          "id": 18,
+          "message": "Sure! Here's an example: `USING PERIODIC COMMIT 1000 LOAD CSV WITH HEADERS FROM 'file:///data.csv' AS row CREATE (p:Person {name: row.name, age: toInteger(row.age)})`. The PERIODIC COMMIT helps with memory management for large files.",
+          "user": "chatbot",
+          "datetime": "04/01/2025 11:16:00"
+        }
+      ]
+    }
+  ]
+}
