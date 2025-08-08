@@ -1,0 +1,240 @@
+= Card Component
+
+[cols="1a,1a"]
+|===
+| Light | Dark
+
+| image::Components/CardLight.png[CardLight,width=600,height=600]
+| image::Components/CardDark.png[CardDark,width=600,height=600]
+|===
+
+The Card component is a flexible and versatile UI element designed using a compound component pattern. It supports both vertical and horizontal layouts, optional images or icons, and structured content sections. The component provides a clean, modern interface for displaying organized information.
+
+https://needle-starterkit.graphapp.io/card-preview[Link to the live preview,window=_blank]
+
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.1/src/templates/shared/components/Card.tsx[Link to the component code,window=_blank]
+
+== Pre-requisite
+
+- Ensure you have the `@neo4j-ndl` library installed in your project to use this `Card` component.
+
+== Usage
+
+To use the Card component in your application, follow these steps:
+
+. Import the component and required assets:
++
+[source,tsx]
+----
+import Card from './path/to/Card';
+import testImg from './assets/cardImg.png';
+import { Button, Typography } from '@neo4j-ndl/react';
+import { AcademicCapIconOutline, RocketLaunchIconOutline } from '@neo4j-ndl/react/icons';
+----
+
+. Use the compound component pattern to build your card:
++
+[source,tsx]
+----
+// Vertical card with image and full content
+<Card layout='vertical' imageSrc={testImg} imageSize='full' className='h-auto w-96'>
+  <Card.Header>Header text</Card.Header>
+  <Card.Subheader>Subtitle or description</Card.Subheader>
+  <Card.Content>
+    <p>Some description about relatively important things.</p>
+    <ul className='list-disc list-inside'>
+      <li>Key information item 1</li>
+      <li>Key information item 2</li>
+      <li>Key information item 3</li>
+    </ul>
+    <div className='flex flex-row min-w-full justify-between'>
+      <Button size='small' color='danger' className='w-2/5 mx-2.5'>
+        <Typography variant='body-small'>Cancel</Typography>
+      </Button>
+      <Button size='small' color='primary' className='w-2/5 mx-2.5'>
+        <Typography variant='body-small'>Confirm</Typography>
+      </Button>
+    </div>
+  </Card.Content>
+</Card>
+
+// Horizontal card with icon
+<Card layout='horizontal' iconSystem={AcademicCapIconOutline}>
+  <Card.Header>Header text</Card.Header>
+  <Card.Content>
+    <p>Content for horizontal layout card.</p>
+  </Card.Content>
+</Card>
+----
+
+== Component Props
+
+The main Card component accepts the following props:
+
+[cols="1,2,1"]
+|===
+| Name | Description | Required
+
+| `layout`
+| Layout orientation: `'vertical'` or `'horizontal'`
+| Yes
+| `imageSrc`
+| Path to the image to display in the card
+| No
+| `imageSize`
+| Size of the image: `'full'` or `'small'` (default: `'small'`)
+| No
+| `iconSystem`
+| React component for an icon from `@neo4j-ndl/react/icons`
+| No
+| `children`
+| Child components (Card.Header, Card.Subheader, Card.Content)
+| Yes
+| `className`
+| Additional CSS classes for styling
+| No
+|===
+
+== Compound Components
+
+The Card component uses a compound component pattern with three sub-components:
+
+=== Card.Header
+Displays the main title of the card using `Typography variant='h5'`.
+
+[source,tsx]
+----
+<Card.Header>Your Card Title</Card.Header>
+----
+
+=== Card.Subheader
+Displays a subtitle or secondary information using `Typography variant='subheading-large'`.
+
+[source,tsx]
+----
+<Card.Subheader>Subtitle or description</Card.Subheader>
+----
+
+=== Card.Content
+Contains the main content of the card using `Typography variant='body-small'` with flex layout.
+
+[source,tsx]
+----
+<Card.Content>
+  <p>Your main content here...</p>
+  <ul>...</ul>
+  <div>Buttons or other elements</div>
+</Card.Content>
+----
+
+== Key components
+
+=== Layout System
+
+The Card component supports two layout orientations that automatically adjust the content flow:
+
+**Vertical Layout**: Content stacks vertically with image/icon at the top
+[source,tsx]
+----
+<Card layout='vertical' imageSrc={testImg} imageSize='full'>
+  {/* Content flows vertically */}
+</Card>
+----
+
+**Horizontal Layout**: Content flows horizontally with image/icon on the left
+[source,tsx]
+----
+<Card layout='horizontal' imageSrc={testImg} imageSize='full' className='h-72'>
+  {/* Content flows horizontally */}
+</Card>
+----
+
+=== Image and Icon Support
+
+The component supports either images or system icons, but not both simultaneously:
+
+**Image Support**: 
+- `imageSize='full'`: Full-width/height image that adapts to layout
+- `imageSize='small'`: Small 16x16 image for minimal presence
+
+[source,tsx]
+----
+// Full-size image
+<Card layout='vertical' imageSrc={testImg} imageSize='full'>
+  {/* Content */}
+</Card>
+
+// Small image
+<Card layout='horizontal' imageSrc={testImg} imageSize='small'>
+  {/* Content */}
+</Card>
+----
+
+**Icon Support**: Uses Neo4j Design Language icons
+[source,tsx]
+----
+<Card layout='vertical' iconSystem={RocketLaunchIconOutline}>
+  {/* Content */}
+</Card>
+----
+
+=== Compound Component Architecture
+
+The Card uses React's compound component pattern, allowing flexible content composition:
+
+[source,tsx]
+----
+const Card: React.FC<CardProps> & {
+  Header: React.FC<CardHeaderProps>;
+  Subheader: React.FC<CardSubheaderProps>;
+  Content: React.FC<CardContentProps>;
+} = ({ layout, imageSrc, imageSize, iconSystem, children, className }) => {
+  // Component implementation
+};
+
+Card.Header = Header;
+Card.Subheader = Subheader;
+Card.Content = Content;
+----
+
+=== Responsive Design
+
+The component automatically adapts to different layouts:
+
+- **Horizontal layout**: Image takes 1/3 width, content takes 2/3 width
+- **Vertical layout**: Image takes full width, content stacks below
+- **Flexible styling**: Supports custom className for additional styling
+
+[source,tsx]
+----
+// Grid layout for multiple cards
+<div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8'>
+  {cards.map((card, index) => (
+    <Card key={index} layout='vertical' className='h-auto w-96'>
+      {/* Card content */}
+    </Card>
+  ))}
+</div>
+----
+
+=== Content Flexibility
+
+Each compound component provides semantic structure:
+
+- **Header**: Main title with `h5` typography
+- **Subheader**: Secondary information with `subheading-large` typography  
+- **Content**: Flexible container supporting any React content (text, lists, buttons, etc.)
+
+[source,tsx]
+----
+<Card.Content>
+  <p>Text content</p>
+  <ul className='list-disc list-inside'>
+    <li>List items</li>
+  </ul>
+  <div className='flex justify-between'>
+    <Button>Action 1</Button>
+    <Button>Action 2</Button>
+  </div>
+</Card.Content>
+----

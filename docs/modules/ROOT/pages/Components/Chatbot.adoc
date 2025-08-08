@@ -1,4 +1,4 @@
-= Chatbot Component
+= Chatbot Component with Session Management
 
 [cols="1a,1a"]
 |===
@@ -16,33 +16,70 @@
 | image::Components/MobileChatbotDark.png[MobileChatbotDark,width=150,height=150]
 |===
 
-The `Chatbot` component provides a dynamic and interactive chat interface for users to communicate with an AI chatbot. It renders chat messages between a user and a chatbot, including features like typing simulation for the chatbot's responses and automatic scrolling to the latest message.
+The `Chatbot` component provides a dynamic and interactive chat interface with advanced session management capabilities. It renders chat messages between a user and a chatbot, including features like typing simulation, automatic scrolling, persistent chat sessions, and a collapsible session history drawer using the Neo4j Needle Design Library.
+
+== Key Features
+
+* **Session Management**: Create, switch between, edit, and delete multiple chat sessions
+* **Persistent Storage**: Sessions are automatically saved to localStorage and restored on page reload  
+* **Interactive UI**: Collapsible drawer with session history and intuitive hover effects
+* **Typing Simulation**: Realistic character-by-character typing effect for chatbot responses
+* **Source Integration**: Support for message sources and retrieval information
+* **Responsive Design**: Full-screen layout optimized for desktop and mobile devices
+* **Neo4j Needle Integration**: Uses official Neo4j Needle Design Library components
 
 https://needle-starterkit.graphapp.io/chat-widget-preview[Link to the live preview,window=_blank]
 
-https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.0/src/templates/shared/components/Chatbot.tsx[Link to the component code,window=_blank]
+https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/2.1/src/templates/shared/components/Chatbot.tsx[Link to the component code,window=_blank]
 
 == Pre-requisite
 
 Ensure you have the `@neo4j-ndl` library installed in your project to use this `Chatbot` component.
 
+You also need to set up the `ChatSessionContext` provider to enable session management functionality.
+
 == Usage
 
-To integrate the `Chatbot` component into your application, you will first need to import it:
+To integrate the `Chatbot` component into your application, you will first need to import both the component and the context provider:
 
 [source,tsx]
 ----
 import Chatbot from './path/to/Chatbot';
+import { ChatSessionProvider } from './path/to/ChatSessionContext';
 ----
 
-Next, render the `Chatbot` component in your application's component tree, providing the necessary props:
+Next, wrap your application (or the part that uses the chatbot) with the `ChatSessionProvider` and render the `Chatbot` component:
 
 [source,tsx]
 ----
-<Chatbot messages={listMessages} />
+<ChatSessionProvider>
+  <Chatbot messages={listMessages} />
+</ChatSessionProvider>
 ----
 
-`listMessages` should be an array of message objects that you want to display initially.
+`listMessages` should be an array of message objects that you want to display initially. If not provided, the component will create an empty session.
+
+== Context Provider Setup
+
+The `ChatSessionProvider` must wrap any component that uses `Chatbot`. This provider handles:
+
+* Session state management
+* localStorage persistence
+* Session CRUD operations
+* Message management within sessions
+
+[source,tsx]
+----
+import { ChatSessionProvider } from './context/ChatSessionContext';
+
+function App() {
+  return (
+    <ChatSessionProvider>
+      <Chatbot />
+    </ChatSessionProvider>
+  );
+}
+----
 
 == Component Props
 
@@ -53,9 +90,20 @@ The `Chatbot` component accepts the following props:
 | Name | Description | Required
 
 | `messages`
-| An array of message objects that the chatbot will render. Each message object should contain `id`, `user`, `message`, and `datetime` fields. An optional `isTyping` boolean can also be included to simulate the chatbot typing a response.
-| Yes
+| An array of message objects that the chatbot will render initially. Each message object should contain `id`, `user`, `message`, `datetime`, and optionally `isTyping` and `src` fields. These messages will be used to populate the first session if no sessions exist in localStorage.
+| No (defaults to empty array)
 |===
+
+== Session Management Features
+
+=== Chat Sessions
+The component automatically manages multiple chat sessions with the following capabilities:
+
+* **Create New Session**: Start a fresh conversation
+* **Switch Between Sessions**: Navigate between different chat histories
+* **Edit Session Titles**: Rename sessions for better organization
+* **Delete Sessions**: Remove unwanted conversations
+* **Persistent Storage**: All sessions are saved to localStorage and restored on page load
 
 == Message Object Structure
 
@@ -69,34 +117,47 @@ Each message object in the `messages` array prop should follow this structure:
   message: string; // The message text
   datetime: string; // Timestamp of the message
   isTyping?: boolean; // Optional, simulates typing effect for chatbot messages
+  src?: Array<string>; // Optional, source references for chatbot responses
+}
+----
+
+== Session Object Structure
+
+Sessions are managed internally by the `ChatSessionContext` and follow this structure:
+
+[source,typescript]
+----
+{
+  id: string; // Unique session identifier
+  title: string; // Display name for the session
+  messages: ChatMessage[]; // Array of messages in this session
+  createdAt: string; // ISO timestamp when session was created
+  updatedAt: string; // ISO timestamp when session was last modified
 }
 ----
 
 == Key components
 
+=== Session Management Context
 
-=== Handling State and Effects
+The component uses the `useChatSession` hook to access session management functionality:
 
-The component uses React's `useState` hook to manage:
+- `sessions`: Array of all available chat sessions
+- `currentSession`: Currently active session
+- `createNewSession()`: Create a new chat session
+- `switchSession(id)`: Switch to a different session
+- `deleteSession(id)`: Remove a session
+- `updateSessionTitle(id, title)`: Rename a session
+- `addMessageToCurrentSession(message)`: Add a message to the active session
 
-- `listMessages`: The current list of messages to be displayed.
-- `inputMessage`: The current text input by the user.
+=== Session Persistence
 
-It also uses the `useEffect` hook to automatically scroll to the bottom of the message list whenever a new message is added thansk to the `messagesEndRef` reference.
+All sessions are automatically persisted to localStorage with the following keys:
 
-=== Submitting Messages
+- `neo4j-chat-sessions`: Stores the array of all sessions
+- `neo4j-current-session`: Stores the ID of the currently active session
 
-When a user submits a message:
-
-1. It prevents the default form submission behavior.
-2. It checks if the message is not empty.
-3. It adds the user's message to the `listMessages` state.
-4. It clears the input field.
-5. It simulates a chatbot response using `simulateTypingEffect`.
-
-=== Simulating Typing Effect
-
-The `simulateTypingEffect` function simulates the chatbot typing a response, displaying one character at a time. Once the message is fully "typed out," it updates the message to indicate the chatbot has finished typing.
+Sessions are restored when the application loads, providing a seamless user experience across browser sessions.
 
 == Example
 
@@ -104,29 +165,60 @@ Here is a basic example of using the `Chatbot` component with initial messages:
 
 [source,tsx]
 ----
-const listMessages = [
+import { ChatSessionProvider } from './context/ChatSessionContext';
+import Chatbot from './components/Chatbot';
+
+const initialMessages = [
   {
     id: 1,
-    user: 'user',
-    message: 'Hello, chatbot!',
-    datetime: '01/01/2024 00:00:00',
-  },
-  {
-    id: 2,
     user: 'chatbot',
     message: 'Hello! How can I assist you today?',
-    datetime: '01/01/2024 00:00:00',
+    datetime: '01/01/2025 00:00:00',
+  }
+];
+
+function App() {
+  return (
+    <ChatSessionProvider>
+      <Chatbot messages={initialMessages} />
+    </ChatSessionProvider>
+  );
+}
+----
+
+This will render a full-screen chat interface with session management capabilities. If no sessions exist in localStorage, it will create an initial session with the provided messages.
+
+== Advanced Usage with Custom Sessions
+
+You can also initialize the provider with predefined sessions:
+
+[source,tsx]
+----
+const predefinedSessions = [
+  {
+    id: 'session-1',
+    title: 'Technical Support',
+    messages: [/* array of messages */],
+    createdAt: '2024-01-01T00:00:00.000Z',
+    updatedAt: '2024-01-01T01:00:00.000Z',
+  },
+  {
+    id: 'session-2', 
+    title: 'Product Questions',
+    messages: [/* array of messages */],
+    createdAt: '2024-01-01T02:00:00.000Z',
+    updatedAt: '2024-01-01T03:00:00.000Z',
   },
 ];
 
-<Chatbot messages={listMessages} />
+<ChatSessionProvider initialSessions={predefinedSessions}>
+  <Chatbot />
+</ChatSessionProvider>
 ----
-
-This will render a chat interface with two initial messages, one from the user and one from the chatbot.
 
 == Component Integration
 
-Integrating the `Chatbot` component into an existing application is straightforward. Make sure to provide it with the necessary `messages` prop to initialize the chat history. The component handles user inputs and chatbot responses internally, offering a complete chat interface experience out of the box.
+=== Backend Integration
 
 Here is an example if you already have a backend application taking care of generating the chatbot's responses and you want to integrate it with this `Chatbot` component:
 
@@ -144,7 +236,8 @@ Then, we will define a new function `fetchResponseFromAPI` that will be responsi
 const fetchResponseFromAPI = async () => {
     setGettingResponse(true);
     const requestBody = {
-      message: inputMessage
+      message: inputMessage,
+      sessionId: currentSession?.id, // Include session context
     };
 
     try {
@@ -158,10 +251,16 @@ const fetchResponseFromAPI = async () => {
       });
       const data = await response.json();
       setGettingResponse(false);
-      return data.content;
+      return {
+        response: data.content,
+        src: data.sources || [], // Include source references
+      };
     } catch (error) {
       console.error("API call failed:", error);
-      return "Sorry, something went wrong.";
+      return {
+        response: "Sorry, something went wrong.",
+        src: [],
+      };
     } finally {
       setGettingResponse(false);
     }
@@ -179,4 +278,21 @@ const chatbotReply = await fetchResponseFromAPI();
 simulateTypingEffect(chatbotReply);
 ----
 
-https://github.com/neo4j-labs/neo4j-needle-starterkit/blob/development-openaichatbot/src/templates/shared/components/Chatbot.tsx[The full example can be found here,window=_blank]
+=== Session-Aware Backend Integration
+
+For more advanced use cases, you can send session context to your backend to maintain conversation history and provide more contextual responses:
+
+[source, tsx]
+----
+const fetchContextualResponse = async () => {
+  const requestBody = {
+    message: inputMessage,
+    sessionId: currentSession?.id,
+    conversationHistory: currentSession?.messages.slice(-5), // Last 5 messages for context
+  };
+  
+  // ... API call logic
+};
+----
+
+Or even store the sessions and messages history in your Neo4j database.
