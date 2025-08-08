@@ -1,6 +1,16 @@
 /* eslint-disable no-confusing-arrow */
 import { useEffect, useRef, useState } from 'react';
-import { Button, Widget, Typography, Avatar, TextInput, IconButton, useCopyToClipboard, Modal, Drawer } from '@neo4j-ndl/react';
+import {
+  Button,
+  Widget,
+  Typography,
+  Avatar,
+  TextInput,
+  IconButton,
+  useCopyToClipboard,
+  Modal,
+  Drawer,
+} from '@neo4j-ndl/react';
 
 import ChatBotAvatar from '../assets/chatbot-ai.png';
 import {
@@ -38,14 +48,14 @@ type ChatbotResponse = {
 
 export default function Chatbot(props: ChatbotProps) {
   const { messages = [] } = props;
-  const { 
-    currentSession, 
-    sessions, 
-    createNewSession, 
-    switchSession, 
-    deleteSession, 
+  const {
+    currentSession,
+    sessions,
+    createNewSession,
+    switchSession,
+    deleteSession,
     addMessageToCurrentSession,
-    updateSessionTitle 
+    updateSessionTitle,
   } = useChatSession();
 
   const hasInitialized = useRef(false);
@@ -91,7 +101,7 @@ export default function Chatbot(props: ChatbotProps) {
     const date = new Date();
     const datetime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
     const messageId = Date.now();
-    
+
     setTypingMessageId(messageId);
     setCurrentTypingText('');
 
@@ -105,7 +115,7 @@ export default function Chatbot(props: ChatbotProps) {
         setCurrentTypingText('');
         setTypingMessageId(null);
         clearInterval(typingInterval);
-        
+
         const finalMessage: ChatMessage = {
           id: messageId,
           user: 'chatbot',
@@ -124,16 +134,16 @@ export default function Chatbot(props: ChatbotProps) {
     if (!inputMessage.trim() || !currentSession) {
       return;
     }
-    
+
     const date = new Date();
     const datetime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    const userMessage: ChatMessage = { 
-      id: Date.now(), 
-      user: 'user', 
-      message: inputMessage, 
-      datetime: datetime 
+    const userMessage: ChatMessage = {
+      id: Date.now(),
+      user: 'user',
+      message: inputMessage,
+      datetime: datetime,
     };
-    
+
     addMessageToCurrentSession(userMessage);
     setInputMessage('');
 
@@ -142,7 +152,7 @@ export default function Chatbot(props: ChatbotProps) {
         'Hello, here is an example response with sources. To use the chatbot, plug this to your backend with a fetch containing an object response of type: {response: string, src: Array<string>}',
       src: ['1:1234-abcd-efgh-ijkl-5678:2', '3:8765-zyxw-vuts-rqpo-4321:4'],
     }; // Replace with getting a response from your chatbot through your APIs
-    
+
     simulateTypingEffect(chatbotReply);
   };
 
@@ -194,13 +204,13 @@ export default function Chatbot(props: ChatbotProps) {
 
     if (diffDays === 1) {
       return 'Today';
-    } 
+    }
     if (diffDays === 2) {
       return 'Yesterday';
-    } 
+    }
     if (diffDays < 7) {
       return `${diffDays - 1} days ago`;
-    } 
+    }
     return date.toLocaleDateString();
   };
 
@@ -208,39 +218,31 @@ export default function Chatbot(props: ChatbotProps) {
 
   return (
     <div className='h-screen flex relative overflow-hidden n-bg-palette-neutral-bg-default'>
-      <Drawer
-        isExpanded={isDrawerOpen}
-        onExpandedChange={setIsDrawerOpen}
-        type="push"
-        isCloseable={false}
-      >
+      <Drawer isExpanded={isDrawerOpen} onExpandedChange={setIsDrawerOpen} type='push' isCloseable={false}>
         <Drawer.Header>
-            <div className="flex items-center w-full">
-                <Button color='neutral' onClick={handleNewSession} fill="outlined"><PencilSquareIconOutline className="w-4 h-4 mr-4" /> New chat</Button>
-            </div>
+          <div className='flex items-center w-full'>
+            <Button color='neutral' onClick={handleNewSession} fill='outlined'>
+              <PencilSquareIconOutline className='w-4 h-4 mr-4' /> New chat
+            </Button>
+          </div>
         </Drawer.Header>
         <Drawer.Body>
-            
           {sessions.length === 0 ? (
-            <div className="flex  flex-col p-4 text-center">
-              <Typography variant="body-medium" className="n-text-palette-neutral-text-weak">
+            <div className='flex  flex-col p-4 text-center'>
+              <Typography variant='body-medium' className='n-text-palette-neutral-text-weak'>
                 No chat sessions yet.
               </Typography>
-              <Button 
-                onClick={handleNewSession}
-                className="mt-3"
-                size="small"
-              >
+              <Button onClick={handleNewSession} className='mt-3' size='small'>
                 Start New Chat
               </Button>
             </div>
           ) : (
-            <div className="space-y-1">
-                <div className="text-left">
-                    <Typography variant="body-medium" className="n-text-palette-neutral-text-weak">
-                        Chats
-                    </Typography>
-                </div>
+            <div className='space-y-1'>
+              <div className='text-left'>
+                <Typography variant='body-medium' className='n-text-palette-neutral-text-weak'>
+                  Chats
+                </Typography>
+              </div>
               {sessions.map((session) => (
                 <div
                   key={session.id}
@@ -252,7 +254,7 @@ export default function Chatbot(props: ChatbotProps) {
                   onClick={() => handleSwitchSession(session.id)}
                 >
                   {editingSessionId === session.id ? (
-                    <div className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                    <div className='flex items-center gap-2' onClick={(e) => e.stopPropagation()}>
                       <TextInput
                         value={editTitle}
                         onChange={(e) => setEditTitle(e.target.value)}
@@ -266,65 +268,52 @@ export default function Chatbot(props: ChatbotProps) {
                           },
                           autoFocus: true,
                         }}
-                        className="flex-1"
-                        size="small"
+                        className='flex-1'
+                        size='small'
                       />
-                      <IconButton
-                        isClean
-                        ariaLabel="Save"
-                        onClick={() => handleSaveEdit(session.id)}
-                        size="small"
-                      >
-                        <CheckIconOutline className="w-3 h-3" />
+                      <IconButton isClean ariaLabel='Save' onClick={() => handleSaveEdit(session.id)} size='small'>
+                        <CheckIconOutline className='w-3 h-3' />
                       </IconButton>
-                      <IconButton
-                        isClean
-                        ariaLabel="Cancel"
-                        onClick={handleCancelEdit}
-                        size="small"
-                      >
-                        <XMarkIconOutline className="w-3 h-3" />
+                      <IconButton isClean ariaLabel='Cancel' onClick={handleCancelEdit} size='small'>
+                        <XMarkIconOutline className='w-3 h-3' />
                       </IconButton>
                     </div>
                   ) : (
                     <>
-                      <div className="flex items-start justify-between">
-                        <div className="flex flex-col min-w-0">
-                          <Typography 
-                            variant="body-medium" 
+                      <div className='flex items-start justify-between'>
+                        <div className='flex flex-col min-w-0'>
+                          <Typography
+                            variant='body-medium'
                             className={`truncate ${
-                              session.id === currentSession?.id 
-                                ? 'n-text-palette-primary-text' 
+                              session.id === currentSession?.id
+                                ? 'n-text-palette-primary-text'
                                 : 'n-text-palette-neutral-text'
                             }`}
                           >
                             {session.title}
                           </Typography>
-                          <Typography 
-                            variant="body-small" 
-                            className="n-text-palette-neutral-text-weak mt-1"
-                          >
+                          <Typography variant='body-small' className='n-text-palette-neutral-text-weak mt-1'>
                             {formatDate(session.updatedAt)} • {session.messages.length} messages
                           </Typography>
                         </div>
-                        
-                        <div className="flex ml-4 items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+
+                        <div className='flex ml-4 items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity'>
                           <IconButton
                             isClean
-                            ariaLabel="Edit"
+                            ariaLabel='Edit'
                             onClick={(e) => handleEditSession(session.id, session.title, e)}
-                            size="small"
+                            size='small'
                           >
-                            <PencilSquareIconOutline className="w-3 h-3" />
+                            <PencilSquareIconOutline className='w-3 h-3' />
                           </IconButton>
                           <IconButton
                             isClean
-                            ariaLabel="Delete"
+                            ariaLabel='Delete'
                             onClick={(e) => handleDeleteSession(session.id, e)}
-                            size="small"
-                            className="n-text-palette-danger-text hover:n-bg-palette-danger-bg-weak"
+                            size='small'
+                            className='n-text-palette-danger-text hover:n-bg-palette-danger-bg-weak'
                           >
-                            <TrashIconOutline className="w-3 h-3" />
+                            <TrashIconOutline className='w-3 h-3' />
                           </IconButton>
                         </div>
                       </div>
@@ -341,23 +330,27 @@ export default function Chatbot(props: ChatbotProps) {
         <div className='n-bg-palette-neutral-bg-weak p-4 flex items-center gap-4'>
           <IconButton
             isClean
-            ariaLabel="Open Chat History"
+            ariaLabel='Open Chat History'
             onClick={() => setIsDrawerOpen(!isDrawerOpen)}
-            className="group relative hover:n-bg-palette-neutral-bg transition-all duration-200"
+            className='group relative hover:n-bg-palette-neutral-bg transition-all duration-200'
           >
-            <SidebarLineLeftIcon className="w-6 h-6 opacity-100 group-hover:opacity-0 transition-opacity duration-200" />
-            <ArrowRightIconOutline className={`absolute inset-0 w-6 h-6 m-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
-              isDrawerOpen ? 'hidden' : 'block'
-            }`} />
-            <ArrowLeftIconOutline className={`absolute inset-0 w-6 h-6 m-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
-              isDrawerOpen ? 'block' : 'hidden'
-            }`} />
+            <SidebarLineLeftIcon className='w-6 h-6 opacity-100 group-hover:opacity-0 transition-opacity duration-200' />
+            <ArrowRightIconOutline
+              className={`absolute inset-0 w-6 h-6 m-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
+                isDrawerOpen ? 'hidden' : 'block'
+              }`}
+            />
+            <ArrowLeftIconOutline
+              className={`absolute inset-0 w-6 h-6 m-auto opacity-0 group-hover:opacity-100 transition-opacity duration-200 ${
+                isDrawerOpen ? 'block' : 'hidden'
+              }`}
+            />
           </IconButton>
           <div>
-            <Typography variant="h6" className="n-text-palette-neutral-text">
+            <Typography variant='h6' className='n-text-palette-neutral-text'>
               {currentSession?.title || 'New Chat'}
             </Typography>
-            <Typography variant="body-small" className="n-text-palette-neutral-text-weak">
+            <Typography variant='body-small' className='n-text-palette-neutral-text-weak'>
               {currentMessages.length} messages
             </Typography>
           </div>
@@ -455,12 +448,9 @@ export default function Chatbot(props: ChatbotProps) {
                 </Widget>
               </div>
             ))}
-            
+
             {typingMessageId && currentTypingText && (
-              <div
-                ref={messagesEndRef}
-                className="flex gap-2.5 items-end flex-row"
-              >
+              <div ref={messagesEndRef} className='flex gap-2.5 items-end flex-row'>
                 <div className='w-8 h-8 mr-4 ml-4'>
                   <Avatar
                     className='-ml-4'
@@ -473,11 +463,7 @@ export default function Chatbot(props: ChatbotProps) {
                     shape='square'
                   />
                 </div>
-                <Widget
-                  header=''
-                  isElevated={true}
-                  className="p-4 self-start max-w-[55%] n-bg-palette-neutral-bg-weak"
-                >
+                <Widget header='' isElevated={true} className='p-4 self-start max-w-[55%] n-bg-palette-neutral-bg-weak'>
                   <div>
                     {currentTypingText.split(/`(.+?)`/).map((part, index) =>
                       index % 2 === 1 ? (
@@ -488,7 +474,7 @@ export default function Chatbot(props: ChatbotProps) {
                         part
                       )
                     )}
-                    <span className="animate-pulse">|</span>
+                    <span className='animate-pulse'>|</span>
                   </div>
                   <div className='text-right align-bottom pt-3'>
                     <Typography variant='body-small'>Typing...</Typography>

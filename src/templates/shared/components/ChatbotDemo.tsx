@@ -3,9 +3,9 @@ import { ChatSessionProvider } from '../../../context/ChatSessionContext';
 import Chatbot from './Chatbot';
 import sessionData from '../assets/ChatbotSessions.json';
 
-const initSessions = sessionData.sessions.map(session => ({
+const initSessions = sessionData.sessions.map((session) => ({
   ...session,
-  messages: session.messages.map(msg => ({
+  messages: session.messages.map((msg) => ({
     ...msg,
   })),
 }));

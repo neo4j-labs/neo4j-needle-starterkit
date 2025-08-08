@@ -57,7 +57,7 @@ export default function ConnectionModal({
         const lines = text.split(/\r?\n/);
         const configObject = lines.reduce((acc: Record<string, string>, line: string) => {
           if (line.startsWith('#') || line.trim() === '') {
-        return acc;
+            return acc;
           }
 
           const [key, value] = line.split('=');

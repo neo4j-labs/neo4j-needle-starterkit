@@ -4,7 +4,7 @@ import { Box, Flex, IconButton, Typography } from '@neo4j-ndl/react';
 import { ClockIconOutline, FitToScreenIcon, ResetZoomIcon } from '@neo4j-ndl/react/icons';
 import retrievalIllustration from '../assets/retrieval.png';
 
-import type { NVL, HitTargets, Node, Relationship } from '@neo4j-nvl/base';
+import type { HitTargets, Node, Relationship } from '@neo4j-nvl/base';
 import { InteractiveNvlWrapper } from '@neo4j-nvl/react';
 import type { MouseEventCallbacks } from '@neo4j-nvl/react';
 // import { runRAGQuery, setDriver } from '../utils/Driver';
@@ -16,7 +16,7 @@ type RetrievalProps = {
 };
 
 function RetrievalInformation(props: RetrievalProps) {
-  const nvl = useRef<NVL | null>(null);
+  const nvl = useRef<any>(null);
 
   const [nodes, setNodes] = useState<Node[]>([]);
   const [rels, setRels] = useState<Relationship[]>([]);
