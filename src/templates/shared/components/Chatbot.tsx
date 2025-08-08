@@ -1,5 +1,8 @@
 /* eslint-disable no-confusing-arrow */
 import { useEffect, useRef, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
 import {
   Button,
   Widget,
@@ -10,6 +13,8 @@ import {
   useCopyToClipboard,
   Modal,
   Drawer,
+  LoadingSpinner,
+  TextLink,
 } from '@neo4j-ndl/react';
 
 import ChatBotAvatar from '../assets/chatbot-ai.png';
@@ -86,6 +91,7 @@ export default function Chatbot(props: ChatbotProps) {
 
   const [typingMessageId, setTypingMessageId] = useState<number | null>(null);
   const [currentTypingText, setCurrentTypingText] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleCloseModal = () => setIsOpenModal(false);
 
@@ -129,23 +135,29 @@ export default function Chatbot(props: ChatbotProps) {
     }, 20);
   };
 
-  const handleSubmit = (e: { preventDefault: () => void }) => {
+  const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (!inputMessage.trim() || !currentSession) {
       return;
     }
-
+    
     const date = new Date();
     const datetime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    const userMessage: ChatMessage = {
-      id: Date.now(),
-      user: 'user',
-      message: inputMessage,
-      datetime: datetime,
+    const userMessage: ChatMessage = { 
+      id: Date.now(), 
+      user: 'user', 
+      message: inputMessage, 
+      datetime: datetime 
     };
-
+    
     addMessageToCurrentSession(userMessage);
     setInputMessage('');
+
+    setIsLoading(true);
+
+    // Simulate API delay (~2 seconds)
+    // This is where you would call your backend API to get the chatbot response
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
     const chatbotReply = {
       response:
@@ -153,6 +165,8 @@ export default function Chatbot(props: ChatbotProps) {
       src: ['1:1234-abcd-efgh-ijkl-5678:2', '3:8765-zyxw-vuts-rqpo-4321:4'],
     }; // Replace with getting a response from your chatbot through your APIs
 
+    setIsLoading(false);
+    
     simulateTypingEffect(chatbotReply);
   };
 
@@ -162,7 +176,7 @@ export default function Chatbot(props: ChatbotProps) {
 
   useEffect(() => {
     scrollToBottom();
-  }, [currentSession?.messages, typingMessageId, currentTypingText]);
+  }, [currentSession?.messages, typingMessageId, currentTypingText, isLoading]);
 
   const handleNewSession = () => {
     createNewSession();
@@ -355,7 +369,6 @@ export default function Chatbot(props: ChatbotProps) {
             </Typography>
           </div>
         </div>
-
         <div className='flex-1 overflow-y-auto pb-6 n-bg-palette-neutral-bg-default'>
           <div className='flex flex-col gap-3 p-3 min-h-full'>
             {currentMessages.map((chat) => (
@@ -396,15 +409,22 @@ export default function Chatbot(props: ChatbotProps) {
                   }`}
                 >
                   <div>
-                    {chat.message.split(/`(.+?)`/).map((part, index) =>
-                      index % 2 === 1 ? (
-                        <span key={index} style={formattedTextStyle}>
-                          {part}
-                        </span>
-                      ) : (
-                        part
-                      )
-                    )}
+                    <ReactMarkdown
+                      components={{
+                        code: ({ children }) => (
+                          <span style={formattedTextStyle}>
+                            {children}
+                          </span>
+                        ),
+                        a: ({ ...props }) => (
+                                <TextLink type="external" href={props.href} target="_blank" >{props.children}</TextLink>
+                              )
+                      }}
+                      remarkPlugins={[remarkGfm]} 
+                      rehypePlugins={[rehypeRaw]}
+                    >
+                      {chat.message}
+                    </ReactMarkdown>
                   </div>
                   <div className='text-right align-bottom pt-3'>
                     <Typography variant='body-small'>{chat.datetime}</Typography>
@@ -449,6 +469,29 @@ export default function Chatbot(props: ChatbotProps) {
               </div>
             ))}
 
+            {isLoading && (
+              <div ref={messagesEndRef} className='flex gap-2.5 items-end flex-row'>
+                <div className='w-8 h-8 mr-4 ml-4'>
+                  <Avatar
+                    className='-ml-4'
+                    hasStatus
+                    name='KM'
+                    size='x-large'
+                    source={ChatBotAvatar}
+                    status='online'
+                    type='image'
+                    shape='square'
+                  />
+                </div>
+                <Widget header='' isElevated={true} className='p-4 self-start max-w-[55%] n-bg-palette-neutral-bg-weak'>
+                  <div className='flex items-center gap-2'>
+                    <LoadingSpinner size='small' />
+                    <Typography variant='body-medium'>Thinking...</Typography>
+                  </div>
+                </Widget>
+              </div>
+            )}
+
             {typingMessageId && currentTypingText && (
               <div ref={messagesEndRef} className='flex gap-2.5 items-end flex-row'>
                 <div className='w-8 h-8 mr-4 ml-4'>
@@ -465,16 +508,22 @@ export default function Chatbot(props: ChatbotProps) {
                 </div>
                 <Widget header='' isElevated={true} className='p-4 self-start max-w-[55%] n-bg-palette-neutral-bg-weak'>
                   <div>
-                    {currentTypingText.split(/`(.+?)`/).map((part, index) =>
-                      index % 2 === 1 ? (
-                        <span key={index} style={formattedTextStyle}>
-                          {part}
-                        </span>
-                      ) : (
-                        part
-                      )
-                    )}
-                    <span className='animate-pulse'>|</span>
+                    <ReactMarkdown
+                      components={{
+                        code: ({ children }) => (
+                          <span style={formattedTextStyle}>
+                            {children}
+                          </span>
+                        ),
+                        a: ({ ...props }) => (
+                          <TextLink type="external" href={props.href} target="_blank" >{props.children}</TextLink>
+                        )
+                      }}
+                      remarkPlugins={[remarkGfm]} 
+                      rehypePlugins={[rehypeRaw]}
+                    >
+                      {currentTypingText}
+                    </ReactMarkdown>
                   </div>
                   <div className='text-right align-bottom pt-3'>
                     <Typography variant='body-small'>Typing...</Typography>
