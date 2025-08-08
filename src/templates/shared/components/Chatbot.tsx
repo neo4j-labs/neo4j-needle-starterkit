@@ -1,4 +1,3 @@
-/* eslint-disable no-confusing-arrow */
 import { useEffect, useRef, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
@@ -140,34 +139,57 @@ export default function Chatbot(props: ChatbotProps) {
     if (!inputMessage.trim() || !currentSession) {
       return;
     }
-    
+
     const date = new Date();
     const datetime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
-    const userMessage: ChatMessage = { 
-      id: Date.now(), 
-      user: 'user', 
-      message: inputMessage, 
-      datetime: datetime 
+    const userMessage: ChatMessage = {
+      id: Date.now(),
+      user: 'user',
+      message: inputMessage,
+      datetime: datetime,
     };
-    
+
     addMessageToCurrentSession(userMessage);
     setInputMessage('');
 
     setIsLoading(true);
 
-    // Simulate API delay (~2 seconds)
-    // This is where you would call your backend API to get the chatbot response
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Call your backend API
+      const response = await fetch('/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          question: inputMessage,
+          session_id: currentSession?.id, // Optional: include session context
+        }),
+      });
 
-    const chatbotReply = {
-      response:
-        'Hello, here is an example response with sources. To use the chatbot, plug this to your backend with a fetch containing an object response of type: {response: string, src: Array<string>}',
-      src: ['1:1234-abcd-efgh-ijkl-5678:2', '3:8765-zyxw-vuts-rqpo-4321:4'],
-    }; // Replace with getting a response from your chatbot through your APIs
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
-    setIsLoading(false);
-    
-    simulateTypingEffect(chatbotReply);
+      const data = await response.json();
+
+      const chatbotReply = {
+        response: data.response, // Your API should return { response: string, src: string[] }
+        src: data.src || [], // Sources array from your API
+      };
+
+      setIsLoading(false);
+      simulateTypingEffect(chatbotReply);
+    } catch (error) {
+      // Fallback response in case of error
+      const errorReply = {
+        response: 'Sorry, I encountered an error while processing your request. Please try again.',
+        src: [],
+      };
+
+      setIsLoading(false);
+      simulateTypingEffect(errorReply);
+    }
   };
 
   const scrollToBottom = () => {
@@ -411,16 +433,14 @@ export default function Chatbot(props: ChatbotProps) {
                   <div>
                     <ReactMarkdown
                       components={{
-                        code: ({ children }) => (
-                          <span style={formattedTextStyle}>
-                            {children}
-                          </span>
-                        ),
+                        code: ({ children }) => <span style={formattedTextStyle}>{children}</span>,
                         a: ({ ...props }) => (
-                                <TextLink type="external" href={props.href} target="_blank" >{props.children}</TextLink>
-                              )
+                          <TextLink type='external' href={props.href} target='_blank'>
+                            {props.children}
+                          </TextLink>
+                        ),
                       }}
-                      remarkPlugins={[remarkGfm]} 
+                      remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw]}
                     >
                       {chat.message}
@@ -510,16 +530,14 @@ export default function Chatbot(props: ChatbotProps) {
                   <div>
                     <ReactMarkdown
                       components={{
-                        code: ({ children }) => (
-                          <span style={formattedTextStyle}>
-                            {children}
-                          </span>
-                        ),
+                        code: ({ children }) => <span style={formattedTextStyle}>{children}</span>,
                         a: ({ ...props }) => (
-                          <TextLink type="external" href={props.href} target="_blank" >{props.children}</TextLink>
-                        )
+                          <TextLink type='external' href={props.href} target='_blank'>
+                            {props.children}
+                          </TextLink>
+                        ),
                       }}
-                      remarkPlugins={[remarkGfm]} 
+                      remarkPlugins={[remarkGfm]}
                       rehypePlugins={[rehypeRaw]}
                     >
                       {currentTypingText}

@@ -32,7 +32,10 @@ export async function disconnect() {
 export async function runRAGQuery(sources: Array<string>) {
   // Customize the RETRIEVAL_QUERY to match your needs
   const formattedSources = sources.map((source) => `'${source}'`).join(', ');
-  const RETRIEVAL_QUERY = `MATCH (a)-[r]->(b) WHERE elementId(a) IN [${formattedSources}] RETURN a, r, b LIMIT 25`;
+  const RETRIEVAL_QUERY = `MATCH (a:Chunk)-[r2:PART_OF]-(d:Document) WHERE elementId(a) in [${formattedSources}]
+    MATCH (a)-[r]-(b)
+    WHERE elementId(b) IN [${formattedSources}]
+    RETURN a, r, b, r2, d LIMIT 1000`;
   const nvlGraph = await driver.executeQuery(RETRIEVAL_QUERY, {}, { resultTransformer: nvlResultTransformer });
   const nodes = nvlGraph.nodes.map((node) => {
     const { properties, labels } = nvlGraph.recordObjectMap.get(node.id);

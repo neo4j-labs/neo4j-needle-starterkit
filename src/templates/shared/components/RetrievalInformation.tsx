@@ -7,7 +7,7 @@ import retrievalIllustration from '../assets/retrieval.png';
 import type { HitTargets, Node, Relationship } from '@neo4j-nvl/base';
 import { InteractiveNvlWrapper } from '@neo4j-nvl/react';
 import type { MouseEventCallbacks } from '@neo4j-nvl/react';
-// import { runRAGQuery, setDriver } from '../utils/Driver';
+import { runRAGQuery, setDriver } from '../utils/Driver';
 
 type RetrievalProps = {
   sources: Array<string>;
@@ -47,11 +47,11 @@ function RetrievalInformation(props: RetrievalProps) {
   function retrieveSources() {
     // This is only for rendering the sources nodes. Ideally, for each of the sources, you would use your retrieval query to get the nodes and relationships
     // Example:
-    // setDriver('bolt://localhost:7687', 'neo4j', 'password');
-    // runRAGQuery(props.sources).then((nvlGraph) => {
-    //     setNodes(nvlGraph.nodes);
-    //     setRels(nvlGraph.relationships);
-    // });
+    setDriver('neo4j+s://cccf9c3f.databases.neo4j.io', 'neo4j', '12yyXtPc_ulPBiacGie-VfmKm51LSk-ebH63k6Rq4o8');
+    runRAGQuery(props.sources).then((nvlGraph) => {
+      setNodes(nvlGraph.nodes);
+      setRels(nvlGraph.relationships);
+    });
     const retrievedNodes = props.sources.map((source, index) => ({
       id: `${index}`,
       color: '#0A6190',
