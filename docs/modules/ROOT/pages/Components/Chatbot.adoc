@@ -220,63 +220,148 @@ const predefinedSessions = [
 
 === Backend Integration
 
-Here is an example if you already have a backend application taking care of generating the chatbot's responses and you want to integrate it with this `Chatbot` component:
+Here is a complete example of how to set up a local running demo with backend integration for the `Chatbot` component:
 
-First, we will set a new state `gettingResponse` that will indicate us if we are currently fetching a response from the backend:
+==== Step 1: Configure Vite Proxy
+
+First, update your `vite.config.ts` to add a proxy configuration for your backend API:
+
+[source, typescript]
+----
+// vite.config.ts
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  // ... other config
+  server: {
+    proxy: {
+      '/ask': {
+        target: 'http://localhost:8001',
+        changeOrigin: true,
+        secure: false,
+      },
+    },
+  },
+})
+----
+
+This configuration will proxy any requests to `/ask` to your backend server running on `http://localhost:8001`.
+
+==== Step 2: Update handleSubmit Function
+
+Replace the existing `handleSubmit` function in your `Chatbot` component with this implementation that calls your backend API:
 
 [source, tsx]
 ----
-const [gettingResponse, setGettingResponse] = useState(false);
----- 
+const handleSubmit = async (e: { preventDefault: () => void }) => {
+  e.preventDefault();
+  if (!inputMessage.trim() || !currentSession) {
+    return;
+  }
+  
+  const date = new Date();
+  const datetime = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
+  const userMessage: ChatMessage = { 
+    id: Date.now(), 
+    user: 'user', 
+    message: inputMessage, 
+    datetime: datetime 
+  };
+  
+  addMessageToCurrentSession(userMessage);
+  setInputMessage('');
 
-Then, we will define a new function `fetchResponseFromAPI` that will be responsible for fetching the chatbot's response from the backend based on the user's message:
+  setIsLoading(true);
 
-[source, tsx]
-----
-const fetchResponseFromAPI = async () => {
-    setGettingResponse(true);
-    const requestBody = {
-      message: inputMessage,
-      sessionId: currentSession?.id, // Include session context
+  try {
+    // Call your backend API through the Vite proxy
+    const response = await fetch('/ask', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        question: inputMessage,
+        session_id: currentSession?.id,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    
+    const chatbotReply = {
+      response: data.response, // Your API should return { response: string, src: string[] }
+      src: data.src || [], // Sources array from your API
     };
 
-    try {
-      const response = await fetch(`<URI_TO_YOUR_BACKEND_API>`, {
-        method: 'POST',
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      });
-      const data = await response.json();
-      setGettingResponse(false);
-      return {
-        response: data.content,
-        src: data.sources || [], // Include source references
-      };
-    } catch (error) {
-      console.error("API call failed:", error);
-      return {
-        response: "Sorry, something went wrong.",
-        src: [],
-      };
-    } finally {
-      setGettingResponse(false);
-    }
-  };
+    setIsLoading(false);
+    simulateTypingEffect(chatbotReply);
+    
+  } catch (error) {
+    console.error("API call failed:", error);
+    
+    // Fallback response in case of error
+    const errorReply = {
+      response: 'Sorry, I encountered an error while processing your request. Please try again.',
+      src: [],
+    };
+    
+    setIsLoading(false);
+    simulateTypingEffect(errorReply);
+  }
+};
 ----
 
-WARNING: Ideally you will want to consider using a framework to manage the states, caching and hooks like `tanstack/react-query` for example as well as adding an authentication and authorization to your backend API calls
+==== Step 3: Enhanced Source Visualization (Optional)
 
-Then all we need to do is to call this function when the user submits a message, retrieve the response, and simulate the typing effect:
-In our `handleSubmit` function:
+If you want to integrate real Neo4j data visualization for the sources, you can update your `RetrievalInformation.tsx` component:
 
 [source, tsx]
 ----
-const chatbotReply = await fetchResponseFromAPI();
-simulateTypingEffect(chatbotReply);
+// RetrievalInformation.tsx
+import { runRAGQuery, setDriver } from '../utils/Driver';
+
+// In your retrieveSources() function:
+const retrieveSources = () => {
+  // Configure your Neo4j connection
+  setDriver('neo4j+s://your-database-url', 'username', 'password');
+  
+  // Query Neo4j for actual source data
+  runRAGQuery(props.sources).then((nvlGraph) => {
+    setNodes(nvlGraph.nodes);
+    setRels(nvlGraph.relationships);
+  });
+};
 ----
+
+This replaces the mock data with actual Neo4j query results for source visualization.
+
+==== Backend API Requirements
+
+Your backend API endpoint (`/ask`) should accept a POST request with this structure:
+
+[source, json]
+----
+{
+  "question": "User's question text",
+  "session_id": "optional-session-identifier"
+}
+----
+
+And return a response in this format:
+
+[source, json]
+----
+{
+  "response": "Chatbot's response text",
+  "src": ["source1", "source2", "source3"]
+}
+----
+
+WARNING: For production use, consider implementing proper authentication and authorization for your backend API calls, as well as using state management libraries like `@tanstack/react-query` for better caching and error handling.
 
 === Session-Aware Backend Integration
 
