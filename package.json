@@ -11,10 +11,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@neo4j-ndl/base": "^3.7.10",
-    "@neo4j-ndl/react": "^3.8.22",
-    "@neo4j-nvl/react": "^0.3.8",
-    "@tanstack/react-table": "^8.9.3",
+    "@neo4j-ndl/base": "^3.7.36",
+    "@neo4j-ndl/react": "^3.9.26",
+    "@neo4j-nvl/react": "^1.1.0",
+    "@tanstack/react-table": "^8.21.3",
     "autoprefixer": "^10.4.17",
     "eslint-plugin-react": "^7.33.2",
     "neo4j-driver": "^5.14.0",
@@ -32,16 +32,22 @@
     "@types/node": "^20.11.16",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^8.56.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "prettier": "^2.7.1",
     "typescript": "5.3.3",
-    "vite": "^4.4.5"
+    "vite": "^6.4.1"
+  },
+  "resolutions": {
+    "lodash": "4.17.23"
+  },
+  "overrides": {
+    "lodash": "4.17.23"
   },
   "packageManager": "yarn@1.22.22"
 }
