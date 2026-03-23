@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import neo4j, { Driver } from 'neo4j-driver';
+import neo4j, { Driver, Node, Relationship, Integer } from 'neo4j-driver';
 import { nvlResultTransformer } from '@neo4j-nvl/base';
 
 export let driver: Driver;
@@ -35,7 +35,7 @@ export async function runRAGQuery(sources: Array<string>) {
   const RETRIEVAL_QUERY = `MATCH (a)-[r]->(b) WHERE elementId(a) IN [${formattedSources}] RETURN a, r, b LIMIT 25`;
   const nvlGraph = await driver.executeQuery(RETRIEVAL_QUERY, {}, { resultTransformer: nvlResultTransformer });
   const nodes = nvlGraph.nodes.map((node) => {
-    const { properties, labels } = nvlGraph.recordObjectMap.get(node.id);
+    const { properties, labels } = nvlGraph.recordObjectMap.get(node.id) as Node<Integer>;
     return {
       ...node,
       caption: properties.name ?? labels[0],
@@ -43,10 +43,10 @@ export async function runRAGQuery(sources: Array<string>) {
   });
   console.log(nodes);
   const relationships = nvlGraph.relationships.map((rel) => {
-    const or = nvlGraph.recordObjectMap.get(rel.id);
+    const or = nvlGraph.recordObjectMap.get(rel.id) as Relationship<Integer> | undefined;
     return {
       ...rel,
-      caption: or.type,
+      caption: or?.type,
     };
   });
   return { nodes, relationships };
