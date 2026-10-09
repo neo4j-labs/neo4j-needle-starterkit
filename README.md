@@ -1,4 +1,6 @@
 # Neo4j Needle StarterKit
+
+> This is an experimental Neo4j Labs project and not part of Neo4j's supported product lineup. See the [Neo4j Labs disclaimer](./LABS_DISCLAIMER.txt).
 ![Header](docs/modules/ROOT/images/FeaturedImg.jpg)
 
 Reactjs Responsive Starter Kit for building applications using [Neo4j Needle](https://www.neo4j.design/) for accelerating TTV.
